@@ -6,7 +6,6 @@
 
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- Physics + movement controls for collisions -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
 
@@ -114,15 +113,13 @@
         material="src:#floorTex; repeat: 80 80; roughness: 0.7; metalness: 0.0;"
       ></a-plane>
 
-      <!-- Where generated walls + ceilings will go -->
       <a-entity id="world"></a-entity>
 
       <script>
-        // ======= Parameters you can tweak =======
         const WALL_H = 4.0;
-        const WALL_T = 0.55;     // thick walls
+        const WALL_T = 0.55;     // wall thickness
         const CEIL_Y = WALL_H;   // ceiling height
-        const EPS = 0.06;        // overlap to kill seams/gaps
+        const EPS = 0.06;        // overlap seams/gaps
 
         const WALL_MAT = `src:#wallTex; roughness:0.95; metalness:0; repeat: 4 2;`;
         const CEIL_MAT = `src:#ceilingTex; roughness:1.0; metalness:0; repeat: 6 6;`;
@@ -130,7 +127,7 @@
         const world = document.querySelector("#world");
 
 
-        // Helper: create a wall box (axis-aligned)
+        // create a wall box
         function wall(x, y, z, w, h, d, rotY = 0, repeatX = 4, repeatY = 2) {
           const el = document.createElement("a-box");
           el.setAttribute("position", `${x} ${y} ${z}`);
@@ -144,7 +141,7 @@
           return el;
         }
 
-        // Helper: ceiling plane
+        // ceiling plane
         function ceiling(x, z, w, d, repeatX = 6, repeatZ = 6) {
           const el = document.createElement("a-plane");
           el.setAttribute("position", `${x} ${CEIL_Y} ${z}`);
@@ -156,9 +153,7 @@
           return el;
         }
 
-        // Build a rectangular ROOM shell with optional door openings on any side.
-        // Room is defined by its inside bounds: xMin..xMax, zMin..zMax
-        // Doors are gaps on a wall: e.g. { side:"north", center: 0, width: 4 } etc.
+        // Build a rectangular ROOM
         function buildRoom({xMin, xMax, zMin, zMax, doors = [], ceil = true}) {
           const y = WALL_H / 2;
 
@@ -235,7 +230,7 @@
             ceiling((xMin + xMax)/2, (zMin + zMax)/2, W, D, Math.max(4, W/3), Math.max(4, D/3));
           }
 
-          // Interior light (soft)
+          // Interior light
           const light = document.createElement("a-entity");
           light.setAttribute(
             "light",
@@ -257,9 +252,6 @@
         // FLOORPLAN: HUB + 5 WINGS
         // ==========================
 
-        // Central HUB (spacious)
-        // Inside bounds: x[-10,10], z[-10,10]
-        // Doors connect to wings (wide openings)
         buildRoom({
           xMin: -10, xMax: 10,
           zMin: -10, zMax: 10,
@@ -273,13 +265,13 @@
           ceil: true
         });
 
-        // NORTH WING (big)
+        // NORTH WING
         buildRoom({
           xMin: -9, xMax: 9,
           zMin: -34, zMax: -10,
           doors: [
-            { side: "south", center: 0, width: 6 }, // connects to hub north door
-            { side: "south", center: 7, width: 5 }, // connects to NE wing connector (shared zone)
+            { side: "south", center: 0, width: 6 }, // connects to hub
+            { side: "south", center: 7, width: 5 }, // NE door
           ],
           ceil: true,
 
@@ -300,8 +292,8 @@
           xMin: 10, xMax: 34,
           zMin: -9, zMax: 9,
           doors: [
-            { side: "west",  center: 0,  width: 6 },  // to hub
-            { side: "north", center: 22, width: 10 }  // to NE (big doorway)
+            { side: "west",  center: 0,  width: 6 },  // connects to hub
+            { side: "north", center: 22, width: 10 }  // to NE
           ],
           ceil: true
         });
@@ -317,27 +309,22 @@
         });
 
         // NORTHEAST WING (fifth wing)
-        // Connected via a wide door from HUB (north wall, offset) and also from North Wing (south wall, offset).
         buildRoom({
           xMin: 10, xMax: 30,
-          zMin: -32, zMax: -9,          // <-- was -10, now touches EAST
+          zMin: -32, zMax: -9,         
           doors: [
-            { side: "south", center: 22, width: 10 }  // <-- matches EAST north door
+            { side: "south", center: 22, width: 10 }  
           ],
           ceil: true
         });
 
 
         // ==========================
-        // PAINTINGS (FLUSH ON WALLS)
-        // Paste this block AFTER all buildRoom(...) calls
+        // PAINTINGS
         // ==========================
 
-        // Tiny inset avoids precision edge cases, while polygonOffset keeps it visually flush.
         const PAINT_INSET = 0.01;
 
-        // Flat shading keeps it “poster-like” and avoids weird lighting on art.
-        // polygonOffset prevents z-fighting even when co-planar with the wall.
         const PAINT_MAT_BASE =
           "shader: flat; transparent:true; side:double; " +
           "polygonOffset:true; polygonOffsetFactor:-4; polygonOffsetUnits:-10;";
@@ -353,8 +340,7 @@
           return p;
         }
 
-        // Place a painting on the INSIDE face of a given room wall.
-        // along = x position for north/south, z position for east/west.
+  
         function paintOnWall(bounds, side, along, src, w = 2.2, h = 1.6, y = 2.0) {
           const { xMin, xMax, zMin, zMax } = bounds;
 
@@ -377,8 +363,8 @@
           x, y, z, rotY,
           title,
           subtitle = "",
-          plaqueW = 1.05,   // ~50% of previous
-          plaqueH = 0.22    // ~50% of previous
+          plaqueW = 1.05,   
+          plaqueH = 0.22    
         }) {
           const wrap = document.createElement("a-entity");
           wrap.setAttribute("position", `${x} ${y} ${z}`);
@@ -411,7 +397,7 @@
             color: "#000000",
             width: plaqueW * 1.05,
             wrapCount: 26,
-            lineHeight: 40,   // smaller, tighter
+            lineHeight: 40,   
             baseline: "center"
           });
 
@@ -423,11 +409,10 @@
        function paintWithLabel(bounds, side, along, src, w, h, y, title, subtitle = "") {
         paintOnWall(bounds, side, along, src, w, h, y);
 
-        // tighter spacing for smaller placard
+        
         const gap = 0.12;
-        const labelY = y - h / 2 - gap - 0.11; // half of plaqueH
+        const labelY = y - h / 2 - gap - 0.11; // half of plaque
 
-        // smaller plaque proportional to painting
         const plaqueW = Math.min(1.2, Math.max(0.8, w * 0.45));
         const plaqueH = 0.22;
 
@@ -453,9 +438,6 @@
       }
 
 
-
-
-        // Convenience: define your room bounds once (must match your buildRoom calls)
         const HUB   = { xMin:-10, xMax:10,  zMin:-10, zMax:10 };
         const NORTH = { xMin:-9,  xMax:9,   zMin:-34, zMax:-10 };
         const SOUTH = { xMin:-9,  xMax:9,   zMin:10,  zMax:34 };
@@ -463,22 +445,11 @@
         const WEST  = { xMin:-34, xMax:-10, zMin:-9,  zMax:9 };
         const NE    = { xMin:10,  xMax:30,  zMin:-32, zMax:-9 };
 
-        // --------------------------
-        // HUB (avoid door gaps on each side)
-        // Doors:
-        //  - north: center 0 width 6  => x in [-3,3] is open
-        //  - north: center 7 width 5  => x in [4.5,9.5] is open
-        //  - south/east/west: center 0 width 6
-        // So we place art away from those openings.
-        // --------------------------
+        
         // ==========================
-        // CURATED BY STYLE (WINGS)
+        // CURATED WINGS
         // ==========================
 
-        // --------------------------
-        // HUB = light "intro" mix (optional). Keeping it clean + not too busy.
-        // If you want the HUB to be totally neutral, we can remove these entirely.
-        // --------------------------
         paintOnWall(HUB, "west", -7.0, "#cont_mondrian_01", 3.0, 3.0, 2.0);
         paintOnWall(HUB, "east",  7.0, "#rena_da_vinci_monalisa", 2.2, 3.0, 2.0);
 
@@ -576,7 +547,7 @@
         paintWithLabel(
           SOUTH,
           "south",
-          0.0, // centered between the two existing south-wall works
+          0.0, 
           "#fig_van_gogh_pearlearing",
           2.0,
           2.6,
@@ -601,7 +572,7 @@
         paintOnWall(NE, "north", 14.0, "#postimp_redon_cyclops", 3.0, 3.0, 2.0);
         paintOnWall(NE, "north", 26.0, "#postimp_redon_reflection", 2.6, 1.8, 2.0);
 
-        paintOnWall(NE, "east",  -16.0, "#imp_renoir_by_water",      2.2, 1.6, 2.0); // optional overflow
+        paintOnWall(NE, "east",  -16.0, "#imp_renoir_by_water",2.2, 1.6, 2.0); 
 
         // Benches!!
         addBench(0,   0.03, -20, 180, 0.4);  // North wing bench
