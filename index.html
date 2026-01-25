@@ -1,590 +1,517 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <title>5-Wing VR Gallery (Enclosed)</title>
-
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
-
+    <script src="ui/ui-blocks.js"></script>
     <style>
       body { margin: 0; }
     </style>
   </head>
 
   <body>
-    <a-assets>
-      <img id="floorTex" src="assets/galleryfloor.jpg" />
-      <img id="wallTex" src="assets/wall-plaster.jpg" />
-      <img id="ceilingTex" src="assets/galley-ceiling.jpg" />
-      <a-asset-item id="benchModel" src="assets/gallerybench.glb"></a-asset-item>
+    <a-scene renderer="antialias:true">
 
-    <!-- Art -->
+      <a-assets id="assets">
+        <img id="floorTex" src="assets/galleryfloor.jpg" crossorigin="anonymous" />
 
-      <!-- Contemporary / Modern -->
-      <img id="cont_abs_01" src="assets/art/abstract1.jpeg" />
-      <img id="cont_abs_02" src="assets/art/abstract2.jpeg"/>
-      <img id="cont_basquiat_buddha" src="assets/art/basquiatbuddha.jpeg"/>
-      <img id="cont_basquiat_pez" src="assets/art/basquiatpezdispenser.jpeg"/>
-      <img id="cont_blaas" src="assets/art/blaas.jpg"/>
-      <img id="cont_mondrian_01" src="assets/art/pietmondrain1.jpg"/>
-      <img id="cont_mondrian_02" src="assets/art/pietmondrain2.jpg"/>
-      <img id="cont_rain_red_dress" src="assets/art/rainingreddress.jpeg"/>
-      <img id="cont_stargazer_collage" src="assets/art/stargazercollage.jpeg"/>
+        <!-- Art -->
+        <!-- Contemporary / Modern -->
+        <img id="cont_abs_01" src="assets/art/abstract1.jpeg" crossorigin="anonymous"/>
+        <img id="cont_abs_02" src="assets/art/abstract2.jpeg" crossorigin="anonymous"/>
+        <img id="cont_basquiat_buddha" src="assets/art/basquiatbuddha.jpeg" crossorigin="anonymous"/>
+        <img id="cont_basquiat_pez" src="assets/art/basquiatpezdispenser.jpeg" crossorigin="anonymous"/>
+        <img id="cont_blaas" src="assets/art/blaas.jpg" crossorigin="anonymous"/>
+        <img id="cont_mondrian_01" src="assets/art/pietmondrain1.jpg" crossorigin="anonymous"/>
+        <img id="cont_mondrian_02" src="assets/art/pietmondrain2.jpg" crossorigin="anonymous"/>
+        <img id="cont_rain_red_dress" src="assets/art/rainingreddress.jpeg" crossorigin="anonymous"/>
+        <img id="cont_stargazer_collage" src="assets/art/stargazercollage.jpeg" crossorigin="anonymous"/>
 
-      <!-- Impressionist -->
-      <img id="imp_monet_parasol" src="assets/art/monetparasolwoman.jpeg"/>
-      <img id="imp_monet_lilies" src="assets/art/monetwaterlillies.jpeg"/>
-      <img id="imp_renoir_by_water" src="assets/art/renoirbythewater.jpeg"/>
-      <img id="imp_renoir_layole" src="assets/art/renoirlayole.jpg"/>
-      <img id="imp_renoir_promenade" src="assets/art/renoirpromenade.jpeg"/>
-      <img id="imp_renoir_rose_garden" src="assets/art/renoirrosegarden.jpg"/>
-      <img id="imp_renoir_woman_garden" src="assets/art/renoirwomaningarden.jpg"/>
+        <!-- Impressionist -->
+        <img id="imp_monet_parasol" src="assets/art/monetparasolwoman.jpeg" crossorigin="anonymous"/>
+        <img id="imp_monet_lilies" src="assets/art/monetwaterlillies.jpeg" crossorigin="anonymous"/>
+        <img id="imp_renoir_by_water" src="assets/art/renoirbythewater.jpeg" crossorigin="anonymous"/>
+        <img id="imp_renoir_layole" src="assets/art/renoirlayole.jpg" crossorigin="anonymous"/>
+        <img id="imp_renoir_promenade" src="assets/art/renoirpromenade.jpeg" crossorigin="anonymous"/>
+        <img id="imp_renoir_rose_garden" src="assets/art/renoirrosegarden.jpg" crossorigin="anonymous"/>
+        <img id="imp_renoir_woman_garden" src="assets/art/renoirwomaningarden.jpg" crossorigin="anonymous"/>
 
-      <!-- Post-Impressionist / Symbolist -->
-      <img id="postimp_redon_cyclops" src="assets/art/redoncyclops.jpg"/>
-      <img id="postimp_redon_reflection" src="assets/art/redonreflection.jpeg"/>
+        <!-- Post-Impressionist / Symbolist -->
+        <img id="postimp_redon_cyclops" src="assets/art/redoncyclops.jpg" crossorigin="anonymous"/>
+        <img id="postimp_redon_reflection" src="assets/art/redonreflection.jpeg" crossorigin="anonymous"/>
 
-      <!-- Renaissance / Classical -->
-      <img id="rena_da_vinci_monalisa" src="assets/art/davinchimonalisa.jpeg"/>
-      <img id="rena_da_vinci_ladyermine" src="assets/art/rena_da_vinci_ladyermine.jpg"/>
+        <!-- Renaissance / Classical -->
+        <img id="rena_da_vinci_monalisa" src="assets/art/davinchimonalisa.jpeg" crossorigin="anonymous"/>
+        <img id="rena_da_vinci_ladyermine" src="assets/art/rena_da_vinci_ladyermine.jpg" crossorigin="anonymous"/>
 
-      <!-- Rococo -->
-      <img id="roco_fragonard_swing" src="assets/art/fragonardtheswing.jpeg"/>
+        <!-- Rococo -->
+        <img id="roco_fragonard_swing" src="assets/art/fragonardtheswing.jpeg" crossorigin="anonymous"/>
 
-      <!-- Academic / 19th-century classical -->
-      <img id="acad_leighton_accolade" src="assets/art/leightontheaccolade.jpeg"/>
+        <!-- Academic / 19th-century classical -->
+        <img id="acad_leighton_accolade" src="assets/art/leightontheaccolade.jpeg" crossorigin="anonymous"/>
 
-      <!-- Baroque -->
-      <img id="bar_vandyke_cherubs" src="assets/art/vandykecherubs.jpg"/>
-      <img id="bar_vandyke_family" src="assets/art/vandykefamily.jpg"/>
-      <img id="bar_vandyke_head_woman" src="assets/art/vandykeheadofwoman.jpg"/>
+        <!-- Baroque -->
+        <img id="bar_vandyke_cherubs" src="assets/art/vandykecherubs.jpg" crossorigin="anonymous"/>
+        <img id="bar_vandyke_family" src="assets/art/vandykefamily.jpg" crossorigin="anonymous"/>
+        <img id="bar_vandyke_head_woman" src="assets/art/vandykeheadofwoman.jpg" crossorigin="anonymous"/>
 
-      <!-- Pre-Raphaelite / Romantic narrative -->
-      <img id="pre_waterhouse_shalott" src="assets/art/watterhouseshalottlady.jpeg"/>
-      <img id="pre_waterhouse_miranda" src="assets/art/pre_waterhouse_miranda.jpg"/>
-      <img id="pre_waterhouse_souloftherose" src="assets/art/pre_waterhouse_souloftherose.jpg"/>
+        <!-- Pre-Raphaelite / Romantic narrative -->
+        <img id="pre_waterhouse_shalott" src="assets/art/watterhouseshalottlady.jpeg" crossorigin="anonymous"/>
+        <img id="pre_waterhouse_miranda" src="assets/art/pre_waterhouse_miranda.jpg" crossorigin="anonymous"/>
+        <img id="pre_waterhouse_souloftherose" src="assets/art/pre_waterhouse_souloftherose.jpg" crossorigin="anonymous"/>
 
-      <!-- Figurative / Portrait -->
-      <img id="fig_baptiste_head" src="assets/art/baptistehead.jpeg"/>
-      <img id="fig_llanes_poet" src="assets/art/llanesthepoet.jpeg"/>
-      <img id="fig_rossi_boudoir" src="assets/art/rossiboudoir.jpeg"/>
-      <img id="fig_van_gogh_pearlearing" src="assets/art/fig_van_gogh_pearlearing.jpg"/>
+        <!-- Figurative / Portrait -->
+        <img id="fig_baptiste_head" src="assets/art/baptistehead.jpeg" crossorigin="anonymous"/>
+        <img id="fig_llanes_poet" src="assets/art/llanesthepoet.jpeg" crossorigin="anonymous"/>
+        <img id="fig_rossi_boudoir" src="assets/art/rossiboudoir.jpeg" crossorigin="anonymous"/>
+        <img id="fig_van_gogh_pearlearing" src="assets/art/fig_van_gogh_pearlearing.jpg" crossorigin="anonymous"/>
 
+        <!-- Medieval / Religious -->
+        <img id="med_st_jerome" src="assets/art/stjerome.jpeg" crossorigin="anonymous"/>
+      </a-assets>
 
-      <!-- Medieval / Religious (if you want this as "midevil_" instead, say so) -->
-      <img id="med_st_jerome" src="assets/art/stjerome.jpeg"/>
-
-    </a-assets>
-
-    <a-scene renderer="antialias:true" physics="gravity: 0">
       <a-sky color="#DDE3E8"></a-sky>
-
-      <!-- PLAYER (collides with static walls) -->
-      <a-entity
-        id="rig"
-        position="0 0 0"
-        movement-controls="speed: 0.12"
-        kinematic-body
-      >
-        <a-camera position="0 1.6 0" look-controls></a-camera>
-      </a-entity>
 
       <!-- LIGHTING -->
       <a-entity light="type: ambient; color: #FFF2E3; intensity: 0.28"></a-entity>
-      <a-entity light="type: directional;
-         color: #FFF2E3;
-         intensity: 0.6;
-         castShadow: true"
-        position="6 8 4"
-        rotation="-45 35 0">
+      <a-entity light="type: directional; color: #FFF2E3; intensity: 0.6; castShadow: true"
+        position="6 8 4" rotation="-45 35 0">
       </a-entity>
-      <a-entity
-        light="type: hemisphere; skyColor: #FFFFFF; groundColor: #2B2B2B; intensity: 0.35">
+      <a-entity light="type: hemisphere; skyColor: #FFFFFF; groundColor: #2B2B2B; intensity: 0.35">
       </a-entity>
 
-      <!-- FLOOR (big enough for all wings) -->
-      <a-plane
-        rotation="-90 0 0"
-        width="140"
-        height="140"
-        material="src:#floorTex; repeat: 80 80; roughness: 0.7; metalness: 0.0;"
-      ></a-plane>
+      <!-- FLOOR -->
+      <a-plane rotation="-90 0 0" width="140" height="140"
+        material="src:#floorTex; repeat: 80 80; roughness: 0.7; metalness: 0.0;">
+      </a-plane>
 
       <a-entity id="world"></a-entity>
 
       <script>
-        const WALL_H = 4.0;
-        const WALL_T = 0.55;     // wall thickness
-        const CEIL_Y = WALL_H;   // ceiling height
-        const EPS = 0.06;        // overlap seams/gaps
+        function initGallery() {
+          const WALL_H = 4.0;
+          const WALL_T = 0.55;
+          const CEIL_Y = WALL_H;
+          const EPS = 0.06;
+          const PAINT_INSET = 0.01;
 
-        const WALL_MAT = `src:#wallTex; roughness:0.95; metalness:0; repeat: 4 2;`;
-        const CEIL_MAT = `src:#ceilingTex; roughness:1.0; metalness:0; repeat: 6 6;`;
+          const world = document.querySelector("#world");
 
-        const world = document.querySelector("#world");
+          function wall(x, y, z, w, h, d, rotY = 0) {
+            const el = document.createElement("a-box");
+            el.setAttribute("position", `${x} ${y} ${z}`);
+            el.setAttribute("width", w);
+            el.setAttribute("height", h);
+            el.setAttribute("depth", d);
+            el.setAttribute("rotation", `0 ${rotY} 0`);
+            el.setAttribute("material", "color:#EEEEEE; roughness:0.9; metalness:0.0;");
+            world.appendChild(el);
+            return el;
+          }
 
+          function ceiling(x, z, w, d) {
+            const el = document.createElement("a-plane");
+            el.setAttribute("position", `${x} ${CEIL_Y} ${z}`);
+            el.setAttribute("rotation", "90 0 0");
+            el.setAttribute("width", w);
+            el.setAttribute("height", d);
+            el.setAttribute("material", "color:#FFFFFF; roughness:1.0; metalness:0.0; side:double;");
+            world.appendChild(el);
+            return el;
+          }
 
-        // create a wall box
-        function wall(x, y, z, w, h, d, rotY = 0, repeatX = 4, repeatY = 2) {
-          const el = document.createElement("a-box");
-          el.setAttribute("position", `${x} ${y} ${z}`);
-          el.setAttribute("width", w);
-          el.setAttribute("height", h);
-          el.setAttribute("depth", d);
-          el.setAttribute("rotation", `0 ${rotY} 0`);
-          el.setAttribute("material", "color:#000000; roughness:0.9; metalness:0.0;");
-          el.setAttribute("static-body", "");
-          world.appendChild(el);
-          return el;
-        }
+          function buildRoom({xMin, xMax, zMin, zMax, doors = [], ceil = true}) {
+            const y = WALL_H / 2;
+            const W = (xMax - xMin);
+            const D = (zMax - zMin);
 
-        // ceiling plane
-        function ceiling(x, z, w, d, repeatX = 6, repeatZ = 6) {
-          const el = document.createElement("a-plane");
-          el.setAttribute("position", `${x} ${CEIL_Y} ${z}`);
-          el.setAttribute("rotation", "90 0 0");
-          el.setAttribute("width", w);
-          el.setAttribute("height", d);
-          el.setAttribute("material", "color:#FFFFFF; roughness:1.0; metalness:0.0; side:double;");
-          world.appendChild(el);
-          return el;
-        }
+            const bySide = { north: [], south: [], east: [], west: [] };
+            doors.forEach(d => bySide[d.side].push(d));
 
-        // Build a rectangular ROOM
-        function buildRoom({xMin, xMax, zMin, zMax, doors = [], ceil = true}) {
-          const y = WALL_H / 2;
+            function segmentsOnWall(side) {
+              const segs = [];
 
-          const W = (xMax - xMin);
-          const D = (zMax - zMin);
+              if (side === "north" || side === "south") {
+                const fixedZ = (side === "north") ? zMin : zMax;
+                const doorList = (bySide[side] || []).slice().sort((a,b)=>a.center-b.center);
 
-          // Door lookup by side
-          const bySide = { north: [], south: [], east: [], west: [] };
-          doors.forEach(d => bySide[d.side].push(d));
+                let cursor = xMin;
+                doorList.forEach(door => {
+                  const doorL = door.center - door.width/2;
+                  const doorR = door.center + door.width/2;
+                  if (doorL > cursor) segs.push({ x1: cursor, x2: doorL, z: fixedZ });
+                  cursor = Math.max(cursor, doorR);
+                });
+                if (cursor < xMax) segs.push({ x1: cursor, x2: xMax, z: fixedZ });
 
-          // Utility to place wall segments on a side, cutting out door gaps
-          function segmentsOnWall(side) {
-            // For north/south walls: vary x, fixed z
-            // For east/west walls: vary z, fixed x
-            const segs = [];
+                segs.forEach(s => {
+                  const segW = (s.x2 - s.x1) + EPS;
+                  const cx = (s.x1 + s.x2)/2;
+                  const cz = (side === "north") ? (s.z - WALL_T/2) : (s.z + WALL_T/2);
+                  wall(cx, y, cz, segW, WALL_H, WALL_T, 0);
+                });
+              } else {
+                const fixedX = (side === "west") ? xMin : xMax;
+                const doorList = (bySide[side] || []).slice().sort((a,b)=>a.center-b.center);
 
-            if (side === "north" || side === "south") {
-              const fixedZ = (side === "north") ? zMin : zMax;
-              const doorList = (bySide[side] || []).slice().sort((a,b)=>a.center-b.center);
+                let cursor = zMin;
+                doorList.forEach(door => {
+                  const doorL = door.center - door.width/2;
+                  const doorR = door.center + door.width/2;
+                  if (doorL > cursor) segs.push({ z1: cursor, z2: doorL, x: fixedX });
+                  cursor = Math.max(cursor, doorR);
+                });
+                if (cursor < zMax) segs.push({ z1: cursor, z2: zMax, x: fixedX });
 
-              // Start from xMin to xMax and carve door holes
-              let cursor = xMin;
-              doorList.forEach(door => {
-                const doorL = door.center - door.width/2;
-                const doorR = door.center + door.width/2;
+                segs.forEach(s => {
+                  const segD = (s.z2 - s.z1) + EPS;
+                  const cz = (s.z1 + s.z2)/2;
+                  const cx = (side === "west") ? (s.x - WALL_T/2) : (s.x + WALL_T/2);
+                  wall(cx, y, cz, WALL_T, WALL_H, segD, 0);
+                });
+              }
+            }
 
-                // segment before door
-                if (doorL > cursor) segs.push({ x1: cursor, x2: doorL, z: fixedZ });
-                // move cursor after door
-                cursor = Math.max(cursor, doorR);
-              });
-              // final segment after last door
-              if (cursor < xMax) segs.push({ x1: cursor, x2: xMax, z: fixedZ });
+            segmentsOnWall("north");
+            segmentsOnWall("south");
+            segmentsOnWall("west");
+            segmentsOnWall("east");
 
-              // Create boxes with slight overlap
-              segs.forEach(s => {
-                const segW = (s.x2 - s.x1) + EPS;
-                const cx = (s.x1 + s.x2)/2;
-                const cz = (side === "north") ? (s.z - WALL_T/2) : (s.z + WALL_T/2);
-                wall(cx, y, cz, segW, WALL_H, WALL_T, 0, Math.max(2, segW/2), 2);
-              });
+            if (ceil) {
+              ceiling((xMin + xMax)/2, (zMin + zMax)/2, W, D);
+            }
 
-            } else {
-              const fixedX = (side === "west") ? xMin : xMax;
-              const doorList = (bySide[side] || []).slice().sort((a,b)=>a.center-b.center);
+            const light = document.createElement("a-entity");
+            light.setAttribute("light", "type: spot; color: #FFE6C9; intensity: 0.9; angle: 60; penumbra: 0.6; distance: 30");
+            light.setAttribute("position", `${(xMin+xMax)/2} 3.9 ${(zMin+zMax)/2}`);
+            light.setAttribute("rotation", "-90 0 0");
+            world.appendChild(light);
+          }
 
-              let cursor = zMin;
-              doorList.forEach(door => {
-                const doorL = door.center - door.width/2;
-                const doorR = door.center + door.width/2;
+          // Build rooms
+          buildRoom({
+            xMin: -10, xMax: 10, zMin: -10, zMax: 10,
+            doors: [
+              { side: "north", center: 0,  width: 6 },
+              { side: "south", center: 0,  width: 6 },
+              { side: "east",  center: 0,  width: 6 },
+              { side: "west",  center: 0,  width: 6 },
+              { side: "north", center: 10, width: 6 },
+            ],
+            ceil: true
+          });
 
-                if (doorL > cursor) segs.push({ z1: cursor, z2: doorL, x: fixedX });
-                cursor = Math.max(cursor, doorR);
-              });
-              if (cursor < zMax) segs.push({ z1: cursor, z2: zMax, x: fixedX });
+          buildRoom({
+            xMin: -9, xMax: 9, zMin: -34, zMax: -10,
+            doors: [
+              { side: "south", center: 0, width: 6 },
+              { side: "south", center: 7, width: 5 },
+            ],
+            ceil: true,
+          });
 
-              segs.forEach(s => {
-                const segD = (s.z2 - s.z1) + EPS;
-                const cz = (s.z1 + s.z2)/2;
-                const cx = (side === "west") ? (s.x - WALL_T/2) : (s.x + WALL_T/2);
-                wall(cx, y, cz, WALL_T, WALL_H, segD, 0, 2, 2);
-              });
+          buildRoom({
+            xMin: -9, xMax: 9, zMin: 10, zMax: 34,
+            doors: [{ side: "north", center: 0, width: 6 }],
+            ceil: true
+          });
+
+          buildRoom({
+            xMin: 10, xMax: 34, zMin: -9, zMax: 9,
+            doors: [
+              { side: "west",  center: 0,  width: 6 },
+              { side: "north", center: 22, width: 10 }
+            ],
+            ceil: true
+          });
+
+          buildRoom({
+            xMin: -34, xMax: -10, zMin: -9, zMax: 9,
+            doors: [{ side: "east", center: 0, width: 6 }],
+            ceil: true
+          });
+
+          buildRoom({
+            xMin: 10, xMax: 30, zMin: -32, zMax: -9,
+            doors: [{ side: "south", center: 22, width: 10 }],
+            ceil: true
+          });
+
+          // Painting functions
+          const PAINT_MAT_BASE = "shader: flat; transparent:true; side:double; depthTest:true; depthWrite:true;";
+
+          function addPainting({ x, y, z, w, h, rotY, src }) {
+            const p = document.createElement("a-plane");
+            p.setAttribute("position", `${x} ${y} ${z}`);
+            p.setAttribute("rotation", `0 ${rotY} 0`);
+            p.setAttribute("width", w);
+            p.setAttribute("height", h);
+            p.setAttribute("material", `${PAINT_MAT_BASE} src:${src};`);
+            world.appendChild(p);
+            return p;
+          }
+
+          function paintOnWall(bounds, side, along, src, w = 2.2, h = 1.6, y = 2.0) {
+            const { xMin, xMax, zMin, zMax } = bounds;
+
+            if (side === "north") {
+              addPainting({ x: along, y, z: zMin + PAINT_INSET, w, h, rotY: 0, src });
+            } else if (side === "south") {
+              addPainting({ x: along, y, z: zMax - PAINT_INSET, w, h, rotY: 180, src });
+            } else if (side === "west") {
+              addPainting({ x: xMin + PAINT_INSET, y, z: along, w, h, rotY: 90, src });
+            } else if (side === "east") {
+              addPainting({ x: xMax - PAINT_INSET, y, z: along, w, h, rotY: -90, src });
             }
           }
 
-          // Build perimeter walls with door gaps
-          segmentsOnWall("north");
-          segmentsOnWall("south");
-          segmentsOnWall("west");
-          segmentsOnWall("east");
+          function addLabel({ x, y, z, rotY, title, subtitle = "", plaqueW = 1.05, plaqueH = 0.22 }) {
+            const wrap = document.createElement("a-entity");
+            wrap.setAttribute("position", `${x} ${y} ${z}`);
+            wrap.setAttribute("rotation", `0 ${rotY} 0`);
+            world.appendChild(wrap);
 
-          // Ceiling
-          if (ceil) {
-            ceiling((xMin + xMax)/2, (zMin + zMax)/2, W, D, Math.max(4, W/3), Math.max(4, D/3));
+            const plaque = document.createElement("a-plane");
+            plaque.setAttribute("width", plaqueW);
+            plaque.setAttribute("height", plaqueH);
+            plaque.setAttribute("position", `0 0 ${PAINT_INSET}`);
+            plaque.setAttribute("material", "color:#FFFFFF; roughness:1.0; metalness:0.0; side:double; depthTest:true;");
+            wrap.appendChild(plaque);
+
+            const textEl = document.createElement("a-entity");
+            textEl.setAttribute("position", `0 0 ${PAINT_INSET * 2}`);
+            const value = subtitle ? `${title}\n${subtitle}` : title;
+            textEl.setAttribute("text", {
+              value,
+              align: "center",
+              color: "#000000",
+              width: plaqueW * 1.05,
+              wrapCount: 26,
+              lineHeight: 40,
+              baseline: "center"
+            });
+            wrap.appendChild(textEl);
+            return wrap;
           }
 
-          // Interior light
-          const light = document.createElement("a-entity");
-          light.setAttribute(
-            "light",
-            "type: spot; color: #FFE6C9; intensity: 0.9; angle: 60; penumbra: 0.6; distance: 30"
-          );
-          light.setAttribute(
-            "position",
-            `${(xMin+xMax)/2} 3.9 ${(zMin+zMax)/2}`
-          );
-          light.setAttribute(
-            "rotation",
-            "-90 0 0"
-          );
-          world.appendChild(light);
+          function paintWithLabel(bounds, side, along, src, w, h, y, title, subtitle = "") {
+            paintOnWall(bounds, side, along, src, w, h, y);
 
-        }
+            const gap = 0.12;
+            const labelY = y - h / 2 - gap - 0.11;
+            const plaqueW = Math.min(1.2, Math.max(0.8, w * 0.45));
+            const plaqueH = 0.22;
 
-        // ==========================
-        // FLOORPLAN: HUB + 5 WINGS
-        // ==========================
-
-        buildRoom({
-          xMin: -10, xMax: 10,
-          zMin: -10, zMax: 10,
-          doors: [
-            { side: "north", center: 0,  width: 6 },   // to North wing
-            { side: "south", center: 0,  width: 6 },   // to South wing
-            { side: "east",  center: 0,  width: 6 },   // to East wing
-            { side: "west",  center: 0,  width: 6 },   // to West wing
-            { side: "north", center: 10, width: 6 },   // to NE wing (offset)
-          ],
-          ceil: true
-        });
-
-        // NORTH WING
-        buildRoom({
-          xMin: -9, xMax: 9,
-          zMin: -34, zMax: -10,
-          doors: [
-            { side: "south", center: 0, width: 6 }, // connects to hub
-            { side: "south", center: 7, width: 5 }, // NE door
-          ],
-          ceil: true,
-
-        });
-
-        // SOUTH WING
-        buildRoom({
-          xMin: -9, xMax: 9,
-          zMin: 10, zMax: 34,
-          doors: [
-            { side: "north", center: 0, width: 6 } // connects to hub
-          ],
-          ceil: true
-        });
-
-        // EAST WING
-        buildRoom({
-          xMin: 10, xMax: 34,
-          zMin: -9, zMax: 9,
-          doors: [
-            { side: "west",  center: 0,  width: 6 },  // connects to hub
-            { side: "north", center: 22, width: 10 }  // to NE
-          ],
-          ceil: true
-        });
-
-        // WEST WING
-        buildRoom({
-          xMin: -34, xMax: -10,
-          zMin: -9, zMax: 9,
-          doors: [
-            { side: "east", center: 0, width: 6 } // connects to hub
-          ],
-          ceil: true
-        });
-
-        // NORTHEAST WING (fifth wing)
-        buildRoom({
-          xMin: 10, xMax: 30,
-          zMin: -32, zMax: -9,         
-          doors: [
-            { side: "south", center: 22, width: 10 }  
-          ],
-          ceil: true
-        });
-
-
-        // ==========================
-        // PAINTINGS
-        // ==========================
-
-        const PAINT_INSET = 0.01;
-
-        const PAINT_MAT_BASE =
-          "shader: flat; transparent:true; side:double; " +
-          "polygonOffset:true; polygonOffsetFactor:-4; polygonOffsetUnits:-10;";
-
-        function addPainting({ x, y, z, w, h, rotY, src }) {
-          const p = document.createElement("a-plane");
-          p.setAttribute("position", `${x} ${y} ${z}`);
-          p.setAttribute("rotation", `0 ${rotY} 0`);
-          p.setAttribute("width", w);
-          p.setAttribute("height", h);
-          p.setAttribute("material", `${PAINT_MAT_BASE} src:${src};`);
-          world.appendChild(p);
-          return p;
-        }
-
-  
-        function paintOnWall(bounds, side, along, src, w = 2.2, h = 1.6, y = 2.0) {
-          const { xMin, xMax, zMin, zMax } = bounds;
-
-          if (side === "north") {
-            // Inside face of north wall is at zMin, facing +z
-            addPainting({ x: along, y, z: zMin + PAINT_INSET, w, h, rotY: 0, src });
-          } else if (side === "south") {
-            // Inside face of south wall is at zMax, facing -z
-            addPainting({ x: along, y, z: zMax - PAINT_INSET, w, h, rotY: 180, src });
-          } else if (side === "west") {
-            // Inside face of west wall is at xMin, facing +x
-            addPainting({ x: xMin + PAINT_INSET, y, z: along, w, h, rotY: 90, src });
-          } else if (side === "east") {
-            // Inside face of east wall is at xMax, facing -x
-            addPainting({ x: xMax - PAINT_INSET, y, z: along, w, h, rotY: -90, src });
+            if (side === "north") {
+              addLabel({ x: along, y: labelY, z: bounds.zMin + PAINT_INSET, rotY: 0, title, subtitle, plaqueW, plaqueH });
+            } else if (side === "south") {
+              addLabel({ x: along, y: labelY, z: bounds.zMax - PAINT_INSET, rotY: 180, title, subtitle, plaqueW, plaqueH });
+            } else if (side === "west") {
+              addLabel({ x: bounds.xMin + PAINT_INSET, y: labelY, z: along, rotY: 90, title, subtitle, plaqueW, plaqueH });
+            } else if (side === "east") {
+              addLabel({ x: bounds.xMax - PAINT_INSET, y: labelY, z: along, rotY: -90, title, subtitle, plaqueW, plaqueH });
+            }
           }
+
+
+          // Room bounds
+          const HUB   = { xMin:-10, xMax:10,  zMin:-10, zMax:10 };
+          const NORTH = { xMin:-9,  xMax:9,   zMin:-34, zMax:-10 };
+          const SOUTH = { xMin:-9,  xMax:9,   zMin:10,  zMax:34 };
+          const EAST  = { xMin:10,  xMax:34,  zMin:-9,  zMax:9 };
+          const WEST  = { xMin:-34, xMax:-10, zMin:-9,  zMax:9 };
+          const NE    = { xMin:10,  xMax:30,  zMin:-32, zMax:-9 };
+
+          // HUB
+          paintOnWall(HUB, "west", -7.0, "#cont_mondrian_01", 3.0, 3.0, 2.0);
+          paintOnWall(HUB, "east",  7.0, "#rena_da_vinci_monalisa", 2.2, 3.0, 2.0);
+
+          // NORTH WING - Impressionists
+          paintOnWall(NORTH, "north", -6.0, "#imp_monet_parasol", 3.2, 2.2, 2.0);
+          paintWithLabel(NORTH, "north", 6.0, "#imp_monet_lilies", 4.0, 2.6, 2.0, "Water Lilies", "Claude Monet, c. 1916");
+          paintOnWall(NORTH, "west", -26.0, "#imp_renoir_promenade", 2.6, 1.8, 2.0);
+          paintOnWall(NORTH, "east", -26.0, "#imp_renoir_by_water", 2.6, 1.8, 2.0);
+          paintOnWall(NORTH, "west", -18.0, "#imp_renoir_rose_garden", 2.2, 1.6, 2.0);
+          paintOnWall(NORTH, "east", -18.0, "#imp_renoir_woman_garden",2.2, 1.6, 2.0);
+          paintOnWall(NORTH, "west", -12.0, "#imp_renoir_layole", 2.2, 1.6, 2.0);
+
+          // EAST WING - Contemporary
+          paintWithLabel(EAST, "east", -7.0, "#cont_basquiat_buddha", 3.2, 2.2, 2.0, "Buddha", "Jean-Michel Basquiat");
+          paintOnWall(EAST, "north", 14.0, "#cont_abs_01", 2.2, 1.6, 2.0);
+          paintOnWall(EAST, "south", 14.0, "#cont_abs_02", 2.2, 1.6, 2.0);
+          paintOnWall(EAST, "east", 6.0, "#cont_mondrian_02", 3.0, 3.0, 2.0);
+          paintOnWall(EAST, "south", 26.0, "#cont_stargazer_collage",2.2, 1.6, 2.0);
+          paintOnWall(EAST, "east", 0.0, "#cont_rain_red_dress", 2.2, 3.0, 2.0);
+
+          // WEST WING - Classical
+          paintWithLabel(WEST, "west", -7.0, "#rena_da_vinci_monalisa", 2.4, 3.2, 2.0, "Mona Lisa", "Leonardo da Vinci, c. 1503");
+          paintWithLabel(WEST, "west", 0.5, "#rena_da_vinci_ladyermine", 2.2, 3.0, 2.0, "Lady with an Ermine", "Leonardo da Vinci, c. 1489–1490");
+          paintOnWall(WEST, "west", 7.0, "#roco_fragonard_swing", 2.2, 1.6, 2.0);
+          paintOnWall(WEST, "north", -26.0, "#pre_waterhouse_miranda", 2.8, 2.4, 2.0);
+          paintOnWall(WEST, "north", -20.0, "#pre_waterhouse_souloftherose",2.0, 2.6, 2.0);
+          paintOnWall(WEST, "north", -14.0, "#pre_waterhouse_shalott", 2.8, 2.4, 2.0);
+          paintOnWall(WEST, "south", -14.0, "#acad_leighton_accolade", 3.2, 2.2, 2.0);
+
+          // SOUTH WING - Baroque & Portraits
+          paintWithLabel(SOUTH, "south", 0.0, "#fig_van_gogh_pearlearing", 2.0, 2.6, 2.0, "Girl with a Pearl Earring", "Johannes Vermeer, c. 1665");
+          paintOnWall(SOUTH, "south", -6.0, "#med_st_jerome", 2.2, 3.2, 2.0);
+          paintOnWall(SOUTH, "south", 6.0, "#bar_vandyke_cherubs", 2.2, 1.6, 2.0);
+          paintOnWall(SOUTH, "west", 18.0, "#bar_vandyke_family", 3.6, 2.4, 2.0);
+          paintOnWall(SOUTH, "east", 18.0, "#bar_vandyke_head_woman",1.8, 2.2, 2.0);
+          paintOnWall(SOUTH, "west", 26.0, "#fig_baptiste_head", 1.8, 2.2, 2.0);
+          paintOnWall(SOUTH, "east", 26.0, "#fig_rossi_boudoir", 2.2, 1.6, 2.0);
+          paintOnWall(SOUTH, "east", 12.0, "#fig_llanes_poet", 2.2, 1.6, 2.0);
+
+          // NORTHEAST WING - Post-Impressionist
+          paintOnWall(NE, "north", 14.0, "#postimp_redon_cyclops", 3.0, 3.0, 2.0);
+          paintOnWall(NE, "north", 26.0, "#postimp_redon_reflection", 2.6, 1.8, 2.0);
+          paintOnWall(NE, "east", -16.0, "#imp_renoir_by_water",2.2, 1.6, 2.0);
+
         }
-        
-        function addLabel({
-          x, y, z, rotY,
-          title,
-          subtitle = "",
-          plaqueW = 1.05,   
-          plaqueH = 0.22    
-        }) {
-          const wrap = document.createElement("a-entity");
-          wrap.setAttribute("position", `${x} ${y} ${z}`);
-          wrap.setAttribute("rotation", `0 ${rotY} 0`);
-          world.appendChild(wrap);
 
-          // --- White plaque ---
-          const plaque = document.createElement("a-plane");
-          plaque.setAttribute("width", plaqueW);
-          plaque.setAttribute("height", plaqueH);
-          plaque.setAttribute("position", `0 0 ${PAINT_INSET}`);
-
-          plaque.setAttribute(
-            "material",
-            "color:#FFFFFF; roughness:1.0; metalness:0.0; side:double;" +
-            "polygonOffset:true; polygonOffsetFactor:-2; polygonOffsetUnits:-8;"
-          );
-
-          wrap.appendChild(plaque);
-
-          // --- Text ---
-          const textEl = document.createElement("a-entity");
-          textEl.setAttribute("position", `0 0 ${PAINT_INSET * 2}`);
-
-          const value = subtitle ? `${title}\n${subtitle}` : title;
-
-          textEl.setAttribute("text", {
-            value,
-            align: "center",
-            color: "#000000",
-            width: plaqueW * 1.05,
-            wrapCount: 26,
-            lineHeight: 40,   
-            baseline: "center"
-          });
-
-          wrap.appendChild(textEl);
-          return wrap;
-        }
-
-
-       function paintWithLabel(bounds, side, along, src, w, h, y, title, subtitle = "") {
-        paintOnWall(bounds, side, along, src, w, h, y);
-
-        
-        const gap = 0.12;
-        const labelY = y - h / 2 - gap - 0.11; // half of plaque
-
-        const plaqueW = Math.min(1.2, Math.max(0.8, w * 0.45));
-        const plaqueH = 0.22;
-
-        if (side === "north") {
-          addLabel({ x: along, y: labelY, z: bounds.zMin + PAINT_INSET, rotY: 0, title, subtitle, plaqueW, plaqueH });
-        } else if (side === "south") {
-          addLabel({ x: along, y: labelY, z: bounds.zMax - PAINT_INSET, rotY: 180, title, subtitle, plaqueW, plaqueH });
-        } else if (side === "west") {
-          addLabel({ x: bounds.xMin + PAINT_INSET, y: labelY, z: along, rotY: 90, title, subtitle, plaqueW, plaqueH });
-        } else if (side === "east") {
-          addLabel({ x: bounds.xMax - PAINT_INSET, y: labelY, z: along, rotY: -90, title, subtitle, plaqueW, plaqueH });
-        }
-      }
-
-      function addBench(x, y, z, rotY, s = 0.4) {
-        const b = document.createElement("a-entity");
-        b.setAttribute("gltf-model", "#benchModel");
-        b.setAttribute("position", `${x} ${y} ${z}`);
-        b.setAttribute("rotation", `0 ${rotY} 0`);
-        b.setAttribute("scale", "2 2 2");
-        world.appendChild(b);
-        return b;
-      }
-
-
-        const HUB   = { xMin:-10, xMax:10,  zMin:-10, zMax:10 };
-        const NORTH = { xMin:-9,  xMax:9,   zMin:-34, zMax:-10 };
-        const SOUTH = { xMin:-9,  xMax:9,   zMin:10,  zMax:34 };
-        const EAST  = { xMin:10,  xMax:34,  zMin:-9,  zMax:9 };
-        const WEST  = { xMin:-34, xMax:-10, zMin:-9,  zMax:9 };
-        const NE    = { xMin:10,  xMax:30,  zMin:-32, zMax:-9 };
-
-        
-        // ==========================
-        // CURATED WINGS
-        // ==========================
-
-        paintOnWall(HUB, "west", -7.0, "#cont_mondrian_01", 3.0, 3.0, 2.0);
-        paintOnWall(HUB, "east",  7.0, "#rena_da_vinci_monalisa", 2.2, 3.0, 2.0);
-
-        // --------------------------
-        // NORTH WING = IMPRESSIONISTS (Monet + Renoir)
-        // --------------------------
-        paintOnWall(NORTH, "north", -6.0, "#imp_monet_parasol", 3.2, 2.2, 2.0);
-        paintWithLabel(
-          NORTH,
-          "north",
-          6.0,
-          "#imp_monet_lilies",
-          4.0,
-          2.6,
-          2.0,
-          "Water Lilies",
-          "Claude Monet, c. 1916"
-        );
-
-        paintOnWall(NORTH, "west", -26.0, "#imp_renoir_promenade", 2.6, 1.8, 2.0);
-        paintOnWall(NORTH, "east", -26.0, "#imp_renoir_by_water", 2.6, 1.8, 2.0);
-
-        paintOnWall(NORTH, "west",  -18.0, "#imp_renoir_rose_garden", 2.2, 1.6, 2.0);
-        paintOnWall(NORTH, "east",  -18.0, "#imp_renoir_woman_garden",2.2, 1.6, 2.0);
-
-        paintOnWall(NORTH, "west",  -12.0, "#imp_renoir_layole", 2.2, 1.6, 2.0);
-
-        // --------------------------
-        // EAST WING = CONTEMPORARY / MODERN (Abstract, Basquiat, Mondrian, collage)
-        // --------------------------
-        paintWithLabel(
-          EAST,
-          "east",
-          -7.0,
-          "#cont_basquiat_buddha",
-          3.2,
-          2.2,
-          2.0,
-          "Buddha",
-          "Jean-Michel Basquiat"
-        );
-
-        paintOnWall(EAST, "north", 14.0, "#cont_abs_01",          2.2, 1.6, 2.0);
-        paintOnWall(EAST, "south", 14.0, "#cont_abs_02",          2.2, 1.6, 2.0);
-
-        paintOnWall(EAST, "east", 6.0, "#cont_mondrian_02", 3.0, 3.0, 2.0);
-        paintOnWall(EAST, "south", 26.0, "#cont_stargazer_collage",2.2, 1.6, 2.0);
-
-        paintOnWall(EAST, "east",  0.0, "#cont_rain_red_dress", 2.2, 3.0, 2.0);
-
-        // --------------------------
-        // WEST WING = CLASSICAL / ACADEMIC / NARRATIVE (Da Vinci, Fragonard, Leighton, Waterhouse)
-        // --------------------------
-
-        paintWithLabel(
-          WEST,
-          "west",
-          -7.0,
-          "#rena_da_vinci_monalisa",
-          2.4,
-          3.2,
-          2.0,
-          "Mona Lisa",
-          "Leonardo da Vinci, c. 1503"
-        );
-
-        paintWithLabel(
-          WEST,
-          "west",
-          0.5,
-          "#rena_da_vinci_ladyermine",
-          2.2,
-          3.0,
-          2.0,
-          "Lady with an Ermine",
-          "Leonardo da Vinci, c. 1489–1490"
-        );
-
-        paintOnWall(WEST, "west", 7.0, "#roco_fragonard_swing", 2.2, 1.6, 2.0);
-
-
-        // NORTH WALL = WATERHOUSE TRIO (all three together, evenly spaced)
-        paintOnWall(WEST, "north", -26.0, "#pre_waterhouse_miranda",      2.8, 2.4, 2.0);
-        paintOnWall(WEST, "north", -20.0, "#pre_waterhouse_souloftherose",2.0, 2.6, 2.0);
-        paintOnWall(WEST, "north", -14.0, "#pre_waterhouse_shalott",      2.8, 2.4, 2.0);
-
-
-        // SOUTH WALL = academic anchor (moved off north wall so Waterhouse can own it)
-        paintOnWall(WEST, "south", -14.0, "#acad_leighton_accolade", 3.2, 2.2, 2.0);
-
-        // --------------------------
-        // SOUTH WING = BAROQUE + PORTRAIT + RELIGIOUS (Van Dyck, portraits, St. Jerome)
-        // --------------------------
-
-        paintWithLabel(
-          SOUTH,
-          "south",
-          0.0, 
-          "#fig_van_gogh_pearlearing",
-          2.0,
-          2.6,
-          2.0,
-          "Girl with a Pearl Earring",
-          "Johannes Vermeer, c. 1665"
-        );
-
-        paintOnWall(SOUTH, "south", -6.0, "#med_st_jerome", 2.2, 3.2, 2.0);
-        paintOnWall(SOUTH, "south",  6.0, "#bar_vandyke_cherubs",  2.2, 1.6, 2.0);
-
-        paintOnWall(SOUTH, "west", 18.0, "#bar_vandyke_family", 3.6, 2.4, 2.0);
-        paintOnWall(SOUTH, "east",  18.0, "#bar_vandyke_head_woman",1.8, 2.2, 2.0);
-
-        paintOnWall(SOUTH, "west",  26.0, "#fig_baptiste_head",    1.8, 2.2, 2.0);
-        paintOnWall(SOUTH, "east",  26.0, "#fig_rossi_boudoir",    2.2, 1.6, 2.0);
-        paintOnWall(SOUTH, "east",  12.0, "#fig_llanes_poet",      2.2, 1.6, 2.0);
-
-        // --------------------------
-        // NORTHEAST WING = POST-IMPRESSIONIST / SYMBOLIST (Redon) + quiet corner
-        // --------------------------
-        paintOnWall(NE, "north", 14.0, "#postimp_redon_cyclops", 3.0, 3.0, 2.0);
-        paintOnWall(NE, "north", 26.0, "#postimp_redon_reflection", 2.6, 1.8, 2.0);
-
-        paintOnWall(NE, "east",  -16.0, "#imp_renoir_by_water",2.2, 1.6, 2.0); 
-
-        // Benches!!
-        addBench(0,   0.03, -20, 180, 0.4);  // North wing bench
-        addBench(20,  0.03,  0,  -90, 0.4);  // East wing bench
-        addBench(-20, 0.03,  0,   90, 0.4);  // West wing bench
-        addBench(0,   0.03,  20,   0, 0.4);  // South wing bench
-
-
+        // assets to load
+        const sceneEl = document.querySelector('a-scene');
+        sceneEl.addEventListener('loaded', initGallery, { once: true });
       </script>
 
+      <!-- control with cursor for testing -->
+       <a-camera position="0 1.6 0" look-controls>
+        <a-entity
+          cursor="rayOrigin: mouse"
+          raycaster="objects: .clickable"
+        ></a-entity>
+      </a-camera>
 
+      <!-- controll rays for headset -->
+      <a-entity laser-controls="hand: left" raycaster="objects: .clickable"></a-entity>
+      <a-entity laser-controls="hand: right" raycaster="objects: .clickable"></a-entity>
+      <a-entity ui-block></a-entity>
+
+      <!-- break button (manual in both blocks)-->
+      <a-entity id="manualBreakHud" position="0 0 0">
+        <a-entity position="0.95 2.35 -1.6">
+          <a-plane
+            id="manualBreakBtn"
+            class="clickable"
+            width="0.58"
+            height="0.24"
+            color="#222"
+            opacity="0.85"
+          ></a-plane>
+          <a-text
+            value="Break"
+            position="-0.22 -0.06 0.01"
+            width="2"
+            color="#fff"
+          ></a-text>
+        </a-entity>
+      </a-entity>
+
+      <!-- nudge for comfort self report -->
+      <a-entity id="checkInPanel" position="0 1.6 -1.45" visible="false">
+        <a-plane width="3.0" height="1.4" color="#111" opacity="0.92"></a-plane>
+
+        <a-text
+          value="How comfortable do you feel right now?"
+          position="-1.35 0.35 0.01"
+          width="2.8"
+          color="#fff"
+        ></a-text>
+
+        <a-text
+          value="1 = very uncomfortable     5 = very comfortable"
+          position="-1.35 0.05 0.01"
+          width="2.8"
+          color="#bbb"
+        ></a-text>
+
+        <!-- rating buttons 1–5 -->
+        <a-entity position="-1.10 -0.38 0.02">
+          <a-plane id="comfortBtn1" class="clickable" width="0.38" height="0.28" color="#2a2a2a"></a-plane>
+          <a-text value="1" position="-0.03 -0.06 0.01" width="2" color="#fff"></a-text>
+        </a-entity>
+
+        <a-entity position="-0.55 -0.38 0.02">
+          <a-plane id="comfortBtn2" class="clickable" width="0.38" height="0.28" color="#2a2a2a"></a-plane>
+          <a-text value="2" position="-0.03 -0.06 0.01" width="2" color="#fff"></a-text>
+        </a-entity>
+
+        <a-entity position="0.00 -0.38 0.02">
+          <a-plane id="comfortBtn3" class="clickable" width="0.38" height="0.28" color="#2a2a2a"></a-plane>
+          <a-text value="3" position="-0.03 -0.06 0.01" width="2" color="#fff"></a-text>
+        </a-entity>
+
+        <a-entity position="0.55 -0.38 0.02">
+          <a-plane id="comfortBtn4" class="clickable" width="0.38" height="0.28" color="#2a2a2a"></a-plane>
+          <a-text value="4" position="-0.03 -0.06 0.01" width="2" color="#fff"></a-text>
+        </a-entity>
+
+        <a-entity position="1.10 -0.38 0.02">
+          <a-plane id="comfortBtn5" class="clickable" width="0.38" height="0.28" color="#2a2a2a"></a-plane>
+          <a-text value="5" position="-0.03 -0.06 0.01" width="2" color="#fff"></a-text>
+        </a-entity>
+
+      </a-entity>
+
+      <!-- break panel (y/n) set at 9 min -->
+      <a-entity id="breakPromptPanel" position="0 1.6 -1.45" visible="false">
+        <a-plane width="3.0" height="1.15" color="#111" opacity="0.92"></a-plane>
+
+        <a-text
+          value="Would you like to take a short break?"
+          position="-1.35 0.25 0.01"
+          width="2.8"
+          color="#fff"
+        ></a-text>
+
+        <a-entity position="-0.85 -0.32 0.02">
+          <a-plane id="breakYesBtn" class="clickable" width="1.25" height="0.30" color="#2a2a2a"></a-plane>
+          <a-text
+            value="Yes, take a break"
+            position="-0.56 -0.06 0.01"
+            width="2.6"
+            color="#fff"
+          ></a-text>
+        </a-entity>
+
+        <a-entity position="0.75 -0.32 0.02">
+          <a-plane id="breakNoBtn" class="clickable" width="1.10" height="0.30" color="#2a2a2a"></a-plane>
+          <a-text
+            value="No, continue"
+            position="-0.46 -0.06 0.01"
+            width="2.3"
+            color="#fff"
+          ></a-text>
+        </a-entity>
+      </a-entity>
+
+      <!-- break cut scene message -->
       
+      <a-entity id="breakMessagePanel" position="0 1.6 -1.55" visible="false">
+        <a-plane width="3.2" height="1.2" color="#000" opacity="0.9"></a-plane>
+
+        <a-text
+          value="Please remove the headset for 60 seconds."
+          position="-1.45 0.20 0.01"
+          width="3.0"
+          color="#fff"
+        ></a-text>
+
+        <a-text
+          value="Press OK when you are ready to continue."
+          position="-1.45 -0.05 0.01"
+          width="3.0"
+          color="#bbb"
+        ></a-text>
+
+        <a-entity position="0 -0.42 0.02">
+          <a-plane id="breakOkBtn" class="clickable" width="0.62" height="0.30" color="#2a2a2a"></a-plane>
+          <a-text value="OK" position="-0.08 -0.06 0.01" width="2" color="#fff"></a-text>
+        </a-entity>
+      </a-entity>
+
      
     </a-scene>
   </body>
