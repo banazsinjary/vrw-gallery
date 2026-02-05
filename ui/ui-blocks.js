@@ -25,14 +25,14 @@ AFRAME.registerComponent("ui-block", {
     // state
     this.blockStartMs = performance.now();
     this.checkInDone = false;
-    this.checkInShown = false;          // NEW: prevents repeated showCheckIn()
+    this.checkInShown = false;          
     this.breakPromptShown = false;
     this.breakPromptClosed = false;
     this.adjustedBreakAtSec = this.data.defaultBreakAtSec;
     this._ended = false;
 
     // timers
-    this.breakPromptTimer = null;       // NEW: store timeout id
+    this.breakPromptTimer = null;       
 
     // ui refs
     this.checkInPanel = document.querySelector("#checkInPanel");
@@ -61,7 +61,7 @@ AFRAME.registerComponent("ui-block", {
       return;
     }
 
-    // If we're in NO_NUDGE, ensure nothing is visible (prevents “stuck” panels)
+    // If we're in NO_NUDGE, ensure nothing is visible (prevents "stuck" panels)
     if (this.condition === "NO_NUDGE") {
       this.hideAllPanels();
       return;
@@ -93,6 +93,7 @@ AFRAME.registerComponent("ui-block", {
     if (this.breakPromptTimer) {
       clearTimeout(this.breakPromptTimer);
       this.breakPromptTimer = null;
+      console.log("[StudyUI] Break prompt timer cleared");
     }
   },
 
@@ -102,23 +103,30 @@ AFRAME.registerComponent("ui-block", {
     if (this.breakMessagePanel) this.breakMessagePanel.setAttribute("visible", false);
   },
 
-  // NEW: enforce one panel visible at a time
+  // handles null case to hide all panels
   setActivePanel: function (panelName) {
     this.hideAllPanels();
-    if (panelName === "checkIn" && this.checkInPanel) this.checkInPanel.setAttribute("visible", true);
-    if (panelName === "breakPrompt" && this.breakPromptPanel) this.breakPromptPanel.setAttribute("visible", true);
-    if (panelName === "breakMessage" && this.breakMessagePanel) this.breakMessagePanel.setAttribute("visible", true);
+    
+    // Only show a panel if a valid name was provided
+    if (panelName === "checkIn" && this.checkInPanel) {
+      this.checkInPanel.setAttribute("visible", true);
+    } else if (panelName === "breakPrompt" && this.breakPromptPanel) {
+      this.breakPromptPanel.setAttribute("visible", true);
+    } else if (panelName === "breakMessage" && this.breakMessagePanel) {
+      this.breakMessagePanel.setAttribute("visible", true);
+    }
+    
   },
 
   showCheckIn: function () {
-    this.checkInShown = true;                // IMPORTANT: stops repeated showing
-    this.setActivePanel("checkIn");          // IMPORTANT: prevents overlap
+    this.checkInShown = true;                
+    this.setActivePanel("checkIn");          
     this.logEvent("checkin_shown");
   },
 
   onComfort: function (rating) {
     this.checkInDone = true;
-    this.setActivePanel(null);               // hides everything cleanly
+    this.setActivePanel(null);               // NOW WORKS: hides everything cleanly
     this.logEvent("comfort_rating", { value: rating });
 
     // schedule break prompt time
@@ -145,12 +153,13 @@ AFRAME.registerComponent("ui-block", {
     this.setActivePanel("breakPrompt");
     this.logEvent("break_prompt_shown");
 
-    // IMPORTANT: clear any prior timers, then set correct timer (ms = sec * 1000)
+    // FIXED: clear any prior timers, then set correct timer (ms = sec * 1000)
     this.clearBreakPromptTimer();
     this.breakPromptTimer = setTimeout(() => {
-      if (this._ended) return;
+      // Check if block ended or component destroyed
+      if (this._ended || !this.el) return;
 
-      // If still visible, auto-close and mark as ignored
+      // if still visible, auto-close and mark as ignored
       if (this.breakPromptPanel && this.breakPromptPanel.getAttribute("visible")) {
         this.setActivePanel(null);
         this.breakPromptClosed = true;
@@ -160,14 +169,14 @@ AFRAME.registerComponent("ui-block", {
   },
 
   takeBreak: function () {
-    this.clearBreakPromptTimer();           // IMPORTANT: stop ghost timer
+    this.clearBreakPromptTimer();           
     this.breakPromptClosed = true;
     this.setActivePanel("breakMessage");
     this.logEvent("break_taken");
   },
 
   declineBreak: function () {
-    this.clearBreakPromptTimer();           // IMPORTANT: stop ghost timer
+    this.clearBreakPromptTimer();           
     this.breakPromptClosed = true;
     this.setActivePanel(null);
     this.logEvent("break_declined");
@@ -220,6 +229,7 @@ AFRAME.registerComponent("ui-block", {
     if (this._ended) return;
     this._ended = true;
 
+    // clear timer before ending to prevent ghost callbacks
     this.clearBreakPromptTimer();
     this.hideAllPanels();
 
