@@ -25,6 +25,7 @@
         <img id="cont_abs_02" src="assets/art/abstract2.jpeg" crossorigin="anonymous" />
         <img id="cont_basquiat_buddha" src="assets/art/basquiatbuddha.jpeg" crossorigin="anonymous" />
         <img id="cont_basquiat_pez" src="assets/art/basquiatpezdispenser.jpeg" crossorigin="anonymous" />
+        <img id="cont_basquiat_untitled" src="assets/art/basquiatuntitled.jpg" crossorigin="anonymous" />
         <img id="cont_blaas" src="assets/art/blaas.jpg" crossorigin="anonymous" />
         <img id="cont_mondrian_01" src="assets/art/pietmondrain1.jpg" crossorigin="anonymous" />
         <img id="cont_mondrian_02" src="assets/art/pietmondrain2.jpg" crossorigin="anonymous" />
@@ -72,6 +73,20 @@
 
         <!-- Medieval / Religious -->
         <img id="med_st_jerome" src="assets/art/stjerome.jpeg" crossorigin="anonymous" />
+
+        <!-- Bob Ross -->
+        <img id="bobross_cedar_park" src="assets/art/newbobrosscedarpark.jpg" crossorigin="anonymous" />
+        <img id="bobross_country" src="assets/art/newbobrosscountry.jpg" crossorigin="anonymous" />
+        <img id="bobross_mountain_sunset" src="assets/art/newbobrossmountianatsunset.jpeg" crossorigin="anonymous" />
+        <img id="bobross_silver_linings" src="assets/art/newbobrosssilverlinings.jpg" crossorigin="anonymous" />
+
+        <!-- Classic / Figurative additions -->
+        <img id="dicksee_la_belle_dame" src="assets/art/newdickseelabelledame.jpg" crossorigin="anonymous" />
+        <img id="selva_death_of_maiden" src="assets/art/newselvadeathofmaiden.jpg" crossorigin="anonymous" />
+        <img id="stevens_lady_and_skull" src="assets/art/newstevensladyandskull.jpg" crossorigin="anonymous" />
+        <img id="toulmouche_fiancee" src="assets/art/newtoulmouchefiance.jpg" crossorigin="anonymous" />
+
+        
       </a-assets>
 
       <a-sky color="#DDE3E8"></a-sky>
@@ -320,28 +335,28 @@
         <a-entity position="0 -0.14 0.02">
           <a-entity position="-0.84 0 0">
             <a-circle id="comfortBtn1" class="clickable" radius="0.15" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-circle>
-            <a-text position="0 0 0.02"
-              text="value: 1; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.02"
+              text="value: 1; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
           <a-entity position="-0.42 0 0">
             <a-circle id="comfortBtn2" class="clickable" radius="0.15" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-circle>
-            <a-text position="0 0 0.02"
-              text="value: 2; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.02"
+              text="value: 2; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
           <a-entity position="0 0 0">
             <a-circle id="comfortBtn3" class="clickable" radius="0.15" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-circle>
-            <a-text position="0 0 0.02"
-              text="value: 3; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.02"
+              text="value: 3; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
           <a-entity position="0.42 0 0">
             <a-circle id="comfortBtn4" class="clickable" radius="0.15" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-circle>
-            <a-text position="0 0 0.02"
-              text="value: 4; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.02"
+              text="value: 4; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
           <a-entity position="0.84 0 0">
             <a-circle id="comfortBtn5" class="clickable" radius="0.15" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-circle>
-            <a-text position="0 0 0.02"
-              text="value: 5; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.02"
+              text="value: 5; align: center; anchor: center; baseline: center; width: 2.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
         </a-entity>
       </a-entity>
@@ -358,14 +373,14 @@
         <a-entity position="0 -0.18 0.02">
           <a-entity position="-0.68 0 0">
             <a-plane id="breakYesBtn" class="clickable" width="1.15" height="0.28" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-plane>
-            <a-text position="0 0 0.01"
-              text="value: Take break; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.01"
+              text="value: Take break; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
 
           <a-entity position="0.68 0 0">
             <a-plane id="breakNoBtn" class="clickable" width="1.15" height="0.28" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-plane>
-            <a-text position="0 0 0.01"
-              text="value: Keep going; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+            <a-entity position="0 0 0.01"
+              text="value: Keep going; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
           </a-entity>
         </a-entity>
       </a-entity>
@@ -384,8 +399,8 @@
 
         <a-entity position="0 -0.18 0.02">
           <a-circle id="breakOkBtn" class="clickable" radius="0.15" material="color:#FFFFFF; opacity:0.75; transparent:true;"></a-circle>
-          <a-text position="0 0 0.02"
-            text="value: OK; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-text>
+          <a-entity position="0 0 0.02"
+            text="value: OK; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"></a-entity>
         </a-entity>
       </a-entity>
     </a-scene>

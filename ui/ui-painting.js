@@ -1,8 +1,8 @@
 /***
  * Goals
- * painting placement 
+ * painting placement
  * plaque mounted on bottom of paintings
- * interactive hover - information about painting 
+ * interactive hover - information about painting
  ***/
 
 (function () {
@@ -16,7 +16,7 @@
       console.log("[LOG]", entry);
     };
 
-  //  painting informational db 
+  //  painting informational db
   const PAINTING_DATABASE = {
     imp_monet_parasol: {
       title: "Woman with a Parasol",
@@ -92,6 +92,26 @@
         "Basquiat merged Eastern spirituality with Western pop culture and street art aesthetics. His work challenges boundaries between high art and graffiti, creating a unique visual language.",
       technique: "Mixed media with graffiti-inspired elements and collage",
     },
+    cont_basquiat_pez: {
+      title: "Pez Dispenser",
+      artist: "Jean-Michel Basquiat",
+      year: "1984",
+      medium: "Acrylic and oilstick",
+      hoverInfo:
+        "This work references a popular children's candy dispenser, transforming it into a sharp critique of consumerism, power, and cultural symbols. Basquiat often juxtaposed childlike imagery with complex social commentary, blending street culture, history, and art-world critique.",
+      technique:
+        "Expressive line work, symbolic imagery, and layered text with raw, graffiti-inspired marks",
+    },
+    cont_basquiat_untitled: {
+      title: "Untitled",
+      artist: "Jean-Michel Basquiat",
+      year: "1982",
+      medium: "Acrylic, oilstick, spray paint",
+      hoverInfo:
+        "This monumental work exemplifies Basquiat’s mature visual language, combining mask-like faces, anatomical symbols, and aggressive mark-making. The figure recalls African and Caribbean visual traditions while confronting themes of power, identity, and historical erasure.",
+      technique:
+        "Layered brushwork, raw line drawing, symbolic figuration, and expressive color fields",
+    },
     cont_mondrian_01: {
       title: "Composition with Red, Blue and Yellow",
       artist: "Piet Mondrian",
@@ -99,8 +119,7 @@
       medium: "Oil on canvas",
       hoverInfo:
         "Mondrian sought universal harmony through pure abstraction. Using only primary colors, black, and white, he reduced art to its essential elements as part of the De Stijl movement.",
-      technique:
-        "Precise lines and flat color blocks in primary colors only",
+      technique: "Precise lines and flat color blocks in primary colors only",
     },
     cont_mondrian_02: {
       title: "Broadway Boogie Woogie",
@@ -302,6 +321,79 @@
         "Intimate interior scenes were popular in 19th century art. These works explore private moments and the psychology of domestic spaces.",
       technique: "Soft lighting with attention to fabric and texture",
     },
+    bobross_cedar_park: {
+      title: "Cedar Park",
+      artist: "Bob Ross",
+      year: "20th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A calm landscape study with warm light and soft trees. Take a moment to breathe and notice the depth in the background.",
+      technique: "Wet-on-wet landscape painting with soft blending",
+    },
+    bobross_country: {
+      title: "Country Scene",
+      artist: "Bob Ross",
+      year: "20th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A peaceful country view with gentle contrast and open space. Notice how the horizon guides your gaze.",
+      technique: "Wet-on-wet with simple value layering",
+    },
+    bobross_mountain_sunset: {
+      title: "Mountain at Sunset",
+      artist: "Bob Ross",
+      year: "20th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A warm sunset palette with silhouetted forms and atmospheric distance. Let your eyes rest on the gradient sky.",
+      technique: "Soft sky gradients with mountain silhouettes",
+    },
+    bobross_silver_linings: {
+      title: "Silver Linings",
+      artist: "Bob Ross",
+      year: "20th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A bright, hopeful sky study with glowing highlights and layered clouds. Notice the contrast between light and shadow.",
+      technique: "Layered clouds with highlight passes",
+    },
+
+    dicksee_la_belle_dame: {
+      title: "La Belle Dame",
+      artist: "Unknown (file: Dicksee)",
+      year: "19th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A romantic-era figurative work. Observe the focus on expression, fabric detail, and soft lighting.",
+      technique: "Academic portrait technique with controlled edges",
+    },
+    selva_death_of_maiden: {
+      title: "Death of the Maiden",
+      artist: "Unknown (file: Selva)",
+      year: "19th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A dramatic narrative scene. Notice how the composition uses contrast and gesture to create emotion and tension.",
+      technique: "Narrative realism with strong tonal contrast",
+    },
+    stevens_lady_and_skull: {
+      title: "Lady and Skull",
+      artist: "Unknown (file: Stevens)",
+      year: "19th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A symbolic portrait with a reflective mood. Look for visual cues that suggest mortality, time, or contemplation.",
+      technique: "Symbolic portraiture with careful value control",
+    },
+    toulmouche_fiancee: {
+      title: "The Fiancée",
+      artist: "Unknown (file: Toulmouche)",
+      year: "19th Century",
+      medium: "Oil on canvas",
+      hoverInfo:
+        "A refined interior portrait. Notice posture, gaze, and material textures that communicate social tone and character.",
+      technique: "Smooth academic rendering with attention to fabric",
+    },
   };
 
   function clampText(str, maxChars = 520) {
@@ -326,7 +418,7 @@
       const PAINT_MAT_BASE =
         "shader: standard; transparent:true; side:double; depthTest:true; depthWrite:true;";
 
-      // add paintings with info 
+      // add paintings with info
       function addPainting({
         x,
         y,
@@ -348,7 +440,6 @@
         // base material
         const baseMat = `${PAINT_MAT_BASE} src:${src};`;
         p.setAttribute("material", baseMat);
-
 
         p.setAttribute("material", "emissive", "#000000");
         p.setAttribute("material", "emissiveIntensity", 0);
@@ -381,13 +472,12 @@
           if (hoverOn) return;
           hoverOn = true;
 
-
           if (hasInfo) {
             hoverPanel = createHoverPanel(artInfo);
 
             hoverPanel.addEventListener(
               "raycaster-intersection-cleared",
-              cleanupHover
+              cleanupHover,
             );
 
             p.appendChild(hoverPanel);
@@ -417,7 +507,7 @@
         bg.setAttribute("height", 1.25);
         bg.setAttribute(
           "material",
-          "color:#FFFFFF; opacity:0.96; transparent:true; shader:flat; side:double;"
+          "color:#FFFFFF; opacity:0.96; transparent:true; shader:flat; side:double;",
         );
         bg.classList.add("no-ray");
         panel.appendChild(bg);
@@ -428,7 +518,7 @@
         border.setAttribute("position", "0 0 -0.005");
         border.setAttribute(
           "material",
-          "color:#111111; opacity:0.22; transparent:true; shader:flat; side:double;"
+          "color:#111111; opacity:0.22; transparent:true; shader:flat; side:double;",
         );
         border.classList.add("no-ray");
         panel.appendChild(border);
@@ -438,7 +528,7 @@
           : "";
         const textContent = clampText(
           techniqueLine + (artInfo.hoverInfo || ""),
-          520
+          520,
         );
 
         const textEl = document.createElement("a-text");
@@ -447,7 +537,10 @@
         textEl.setAttribute("position", "-0.74 0.56 0.01");
         textEl.setAttribute("width", 1.5);
         textEl.setAttribute("color", "#111111");
-        textEl.setAttribute("font", "https://cdn.aframe.io/fonts/Roboto-msdf.json");
+        textEl.setAttribute(
+          "font",
+          "https://cdn.aframe.io/fonts/Roboto-msdf.json",
+        );
         textEl.setAttribute("wrap-count", 34);
         textEl.setAttribute("line-height", 38);
         textEl.setAttribute("baseline", "top");
@@ -488,7 +581,7 @@
         plaque.setAttribute("position", `0 0 ${PAINT_INSET}`);
         plaque.setAttribute(
           "material",
-          "color:#1F2937; opacity:0.92; transparent:true; roughness:0.35; metalness:0.05; side:double; depthTest:true;"
+          "color:#1F2937; opacity:0.92; transparent:true; roughness:0.35; metalness:0.05; side:double; depthTest:true;",
         );
         wrap.appendChild(plaque);
 
@@ -498,14 +591,14 @@
         frame.setAttribute("position", `0 0 0`);
         frame.setAttribute(
           "material",
-          "color:#D1D5DB; opacity:0.35; transparent:true; side:double;"
+          "color:#D1D5DB; opacity:0.35; transparent:true; side:double;",
         );
         wrap.appendChild(frame);
 
         const textEl = document.createElement("a-entity");
         textEl.setAttribute(
           "position",
-          `${-plaqueW / 2 + 0.06} ${plaqueH / 2 - 0.07} ${PAINT_INSET * 2}`
+          `${-plaqueW / 2 + 0.06} ${plaqueH / 2 - 0.07} ${PAINT_INSET * 2}`,
         );
 
         const lines = [title];
@@ -537,7 +630,7 @@
         h = 1.6,
         y = 2.0,
         id = "",
-        title = ""
+        title = "",
       ) {
         const { xMin, xMax, zMin, zMax } = boundsObj;
 
@@ -583,61 +676,87 @@
           });
         };
 
-        if (side === "north") place({ x: along, z: zMin + PAINT_INSET, rotY: 0 });
-        else if (side === "south") place({ x: along, z: zMax - PAINT_INSET, rotY: 180 });
-        else if (side === "west") place({ x: xMin + PAINT_INSET, z: along, rotY: 90 });
-        else if (side === "east") place({ x: xMax - PAINT_INSET, z: along, rotY: -90 });
+        if (side === "north")
+          place({ x: along, z: zMin + PAINT_INSET, rotY: 0 });
+        else if (side === "south")
+          place({ x: along, z: zMax - PAINT_INSET, rotY: 180 });
+        else if (side === "west")
+          place({ x: xMin + PAINT_INSET, z: along, rotY: 90 });
+        else if (side === "east")
+          place({ x: xMax - PAINT_INSET, z: along, rotY: -90 });
       }
 
       const { HUB, NORTH, SOUTH, EAST, WEST, NE } = bounds;
 
       // painting placements
-      paintOnWall(HUB, "west", -7.0, "#cont_mondrian_01", 3.0, 3.0, 2.0);
-      paintOnWall(HUB, "east", 7.0, "#rena_da_vinci_monalisa", 2.2, 3.0, 2.0);
 
-      paintOnWall(NORTH, "north", -6.0, "#imp_monet_parasol", 3.2, 2.2, 2.0);
-      paintOnWall(NORTH, "north", 6.0, "#imp_monet_lilies", 4.0, 2.6, 2.0);
-      paintOnWall(NORTH, "west", -26.0, "#imp_renoir_promenade", 2.6, 1.8, 2.0);
+      // north
+      paintOnWall(NORTH, "north", -4.5, "#imp_monet_parasol", 3.2, 2.2, 2.0);
+      paintOnWall(NORTH, "north", 4.5, "#imp_monet_lilies", 4.0, 2.6, 2.0);
+
+      paintOnWall(NORTH, "west", -28.0, "#imp_renoir_promenade", 2.6, 1.8, 2.0);
+      paintOnWall(NORTH,"west",-21.0,"#imp_renoir_rose_garden",2.2,1.6,2.0);
+      paintOnWall(NORTH, "west", -15.0, "#imp_renoir_layole", 2.2, 1.6, 2.0);
+
       paintOnWall(NORTH, "east", -26.0, "#imp_renoir_by_water", 2.6, 1.8, 2.0);
-      paintOnWall(NORTH, "west", -18.0, "#imp_renoir_rose_garden", 2.2, 1.6, 2.0);
-      paintOnWall(NORTH, "east", -18.0, "#imp_renoir_woman_garden", 2.2, 1.6, 2.0);
-      paintOnWall(NORTH, "west", -12.0, "#imp_renoir_layole", 2.2, 1.6, 2.0);
+      paintOnWall(NORTH, "east", -18.0, "#imp_renoir_woman_garden", 2.2, 2.0, 2.0);
 
-      paintOnWall(EAST, "east", -7.0, "#cont_basquiat_buddha", 3.2, 2.2, 2.0);
-      paintOnWall(EAST, "north", 14.0, "#cont_abs_01", 2.2, 1.6, 2.0);
-      paintOnWall(EAST, "south", 14.0, "#cont_abs_02", 2.2, 1.6, 2.0);
-      paintOnWall(EAST, "east", 6.0, "#cont_mondrian_02", 3.0, 3.0, 2.0);
-      paintOnWall(EAST, "south", 26.0, "#cont_stargazer_collage", 2.2, 1.6, 2.0);
-      paintOnWall(EAST, "east", 0.0, "#cont_rain_red_dress", 2.2, 3.0, 2.0);
+      // north east
+      paintOnWall(NE, "north", 16.0, "#postimp_redon_cyclops", 3.0, 2.8, 2.0);
+      paintOnWall(NE, "north", 25.0, "#postimp_redon_reflection", 2.6, 2.6, 2.0);
+      paintOnWall(NE, "east", -16.0, "#pre_waterhouse_shalott", 2.8, 2.4, 2.0);
 
-      paintOnWall(WEST, "west", -7.0, "#rena_da_vinci_monalisa", 2.4, 3.2, 2.0);
-      paintOnWall(WEST, "west", 0.5, "#rena_da_vinci_ladyermine", 2.2, 3.0, 2.0);
+      paintOnWall(NE, "west", -16.0, "#fig_llanes_poet", 2.2, 1.6, 2.0);
+
+      paintOnWall(NE, "west", -28.0, "#bobross_cedar_park", 2.6, 1.8, 2.0);
+      paintOnWall(NE, "west", -22.0, "#bobross_country", 2.6, 1.8, 2.0);
+
+      paintOnWall(NE, "east", -28.0, "#bobross_mountain_sunset", 2.6, 1.8, 2.0);
+      paintOnWall(NE, "east", -22.0, "#bobross_silver_linings", 2.6, 1.8, 2.0);
+
+      // west
+      paintOnWall(WEST, "west", -7.0, "#rena_da_vinci_monalisa", 2.4, 2.8, 2.0);
+      paintOnWall(WEST, "west", 0.5, "#rena_da_vinci_ladyermine", 2.2, 2.7, 2.0);
       paintOnWall(WEST, "west", 7.0, "#roco_fragonard_swing", 2.2, 1.6, 2.0);
-      paintOnWall(WEST, "north", -26.0, "#pre_waterhouse_miranda", 2.8, 2.4, 2.0);
-      paintOnWall(WEST, "north", -20.0, "#pre_waterhouse_souloftherose", 2.0, 2.6, 2.0);
-      paintOnWall(WEST, "north", -14.0, "#pre_waterhouse_shalott", 2.8, 2.4, 2.0);
-      paintOnWall(WEST, "south", -14.0, "#acad_leighton_accolade", 3.2, 2.2, 2.0);
 
-      paintOnWall(SOUTH, "south", 0.0, "#fig_van_gogh_pearlearing", 2.0, 2.6, 2.0);
-      paintOnWall(SOUTH, "south", -6.0, "#med_st_jerome", 2.2, 3.2, 2.0);
+      paintOnWall(WEST,"north",-22.0,"#pre_waterhouse_miranda",2.8,2.3,2.0);
+      paintOnWall(WEST,"north",-16.0, "#pre_waterhouse_souloftherose", 2.0, 2.6, 2.0);
+      paintOnWall(WEST, "north", -28.0, "#toulmouche_fiancee", 2.4, 1.8, 2.0);
+
+      paintOnWall(WEST,"south",-28.0,"#acad_leighton_accolade",3.2,2.2,2.0);
+      paintOnWall(WEST,"south",-21.5,"#dicksee_la_belle_dame",2.4,2.6,2.0,);
+      paintOnWall(WEST,"south",-15.0,"#selva_death_of_maiden",2.2,2.8,2.0,);
+
+      
+      // south
+      paintOnWall(SOUTH,"south",0.0,"#fig_van_gogh_pearlearing",2.0,2.6,2.0);
+      paintOnWall(SOUTH, "south", -6.0, "#med_st_jerome", 2.2, 2.6, 2.0);
       paintOnWall(SOUTH, "south", 6.0, "#bar_vandyke_cherubs", 2.2, 1.6, 2.0);
+
       paintOnWall(SOUTH, "west", 18.0, "#bar_vandyke_family", 3.6, 2.4, 2.0);
-      paintOnWall(SOUTH, "east", 18.0, "#bar_vandyke_head_woman", 1.8, 2.2, 2.0);
       paintOnWall(SOUTH, "west", 26.0, "#fig_baptiste_head", 1.8, 2.2, 2.0);
+
+      paintOnWall(SOUTH,"east",18.0,"#bar_vandyke_head_woman",1.8,2.2,2.0);
       paintOnWall(SOUTH, "east", 26.0, "#fig_rossi_boudoir", 2.2, 1.6, 2.0);
-      paintOnWall(SOUTH, "east", 12.0, "#fig_llanes_poet", 2.2, 1.6, 2.0);
 
-      paintOnWall(NE, "north", 14.0, "#postimp_redon_cyclops", 3.0, 3.0, 2.0);
-      paintOnWall(NE, "north", 26.0, "#postimp_redon_reflection", 2.6, 1.8, 2.0);
-      paintOnWall(NE, "east", -16.0, "#imp_renoir_by_water", 2.2, 1.6, 2.0);
+      // east
+      paintOnWall(EAST, "east", -7.0, "#cont_basquiat_buddha", 3.2, 2.2, 2.0);
+      paintOnWall(EAST, "east", 6.0, "#cont_basquiat_untitled", 3.4, 2.6, 2.0);
+      paintOnWall(EAST, "east", 0.0, "#cont_basquiat_pez", 2.2, 2.0, 2.2);
 
-      // ui 
+      paintOnWall(EAST, "north", 14.0, "#cont_abs_01", 2.2, 1.6, 2.0);
+
+      paintOnWall(EAST, "south", 14.0, "#cont_abs_02", 2.6, 2.6, 2.2);
+      paintOnWall(EAST,"south",26.0,"#cont_stargazer_collage",2.6,2.6,2.2,);
+      paintOnWall(EAST, "south", 20.0, "#cont_rain_red_dress", 2.2, 2.8, 2.0);
+
+      // ui
       if (enableUILogging) {
         for (let i = 1; i <= 5; i++) {
           const el = document.getElementById(`comfortBtn${i}`);
           if (!el) continue;
           el.addEventListener("click", () =>
-            vrwLog("comfort_rating", { rating: i })
+            vrwLog("comfort_rating", { rating: i }),
           );
         }
 
@@ -647,23 +766,20 @@
 
         if (yes)
           yes.addEventListener("click", () =>
-            vrwLog("break_choice", { choice: "take_break" })
+            vrwLog("break_choice", { choice: "take_break" }),
           );
         if (no)
           no.addEventListener("click", () =>
-            vrwLog("break_choice", { choice: "keep_going" })
+            vrwLog("break_choice", { choice: "keep_going" }),
           );
         if (ok)
-          ok.addEventListener("click", () =>
-            vrwLog("break_ack", { ok: true })
-          );
+          ok.addEventListener("click", () => vrwLog("break_ack", { ok: true }));
 
         window.addEventListener("keydown", (e) => {
           if (e.key && e.key.toLowerCase() === "l") {
-            const blob = new Blob(
-              [JSON.stringify(window.__vrwLog, null, 2)],
-              { type: "application/json" }
-            );
+            const blob = new Blob([JSON.stringify(window.__vrwLog, null, 2)], {
+              type: "application/json",
+            });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
             a.download = `vrw_log_${new Date()
@@ -682,7 +798,7 @@
         paintingCount: Object.keys(PAINTING_DATABASE).length,
       });
       console.log(
-        `[VRWPaintings] Initialized with ${Object.keys(PAINTING_DATABASE).length} paintings in database`
+        `[VRWPaintings] Initialized with ${Object.keys(PAINTING_DATABASE).length} paintings in database`,
       );
     },
   };
