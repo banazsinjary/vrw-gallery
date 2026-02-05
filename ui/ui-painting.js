@@ -112,25 +112,6 @@
       technique:
         "Layered brushwork, raw line drawing, symbolic figuration, and expressive color fields",
     },
-    cont_mondrian_01: {
-      title: "Composition with Red, Blue and Yellow",
-      artist: "Piet Mondrian",
-      year: "1930",
-      medium: "Oil on canvas",
-      hoverInfo:
-        "Mondrian sought universal harmony through pure abstraction. Using only primary colors, black, and white, he reduced art to its essential elements as part of the De Stijl movement.",
-      technique: "Precise lines and flat color blocks in primary colors only",
-    },
-    cont_mondrian_02: {
-      title: "Broadway Boogie Woogie",
-      artist: "Piet Mondrian",
-      year: "1942-43",
-      medium: "Oil on canvas",
-      hoverInfo:
-        "Mondrian's final completed painting captures the rhythm and energy of Manhattan. Inspired by NYC streets and jazz music, the grid pattern pulses with vibrant color.",
-      technique:
-        "Grid pattern with small, vibrant color blocks creating rhythm",
-    },
     cont_abs_01: {
       title: "Abstract Composition I",
       artist: "Contemporary",
@@ -375,15 +356,6 @@
       hoverInfo:
         "A dramatic narrative scene. Notice how the composition uses contrast and gesture to create emotion and tension.",
       technique: "Narrative realism with strong tonal contrast",
-    },
-    stevens_lady_and_skull: {
-      title: "Lady and Skull",
-      artist: "Unknown (file: Stevens)",
-      year: "19th Century",
-      medium: "Oil on canvas",
-      hoverInfo:
-        "A symbolic portrait with a reflective mood. Look for visual cues that suggest mortality, time, or contemplation.",
-      technique: "Symbolic portraiture with careful value control",
     },
     toulmouche_fiancee: {
       title: "The Fiancée",
