@@ -9,9 +9,9 @@
 /** !!!! THIS IS IN TEST MODE TIME REMEMBER TO CHANGE BACK FOR EXPERIMENT !!!! */
 AFRAME.registerComponent("ui-block", {
   schema: {
-    blockSeconds: { type: "number", default: 30 },       // 15 min real
-    checkInAtSec: { type: "number", default: 3 },        // 5 min real
-    defaultBreakAtSec: { type: "number", default: 12 },  // 9 min real
+    blockSeconds: { type: "number", default: 30 },       // 15 min real (900)
+    checkInAtSec: { type: "number", default: 3 },        // 5 min real (300)
+    defaultBreakAtSec: { type: "number", default: 12 },  // 9 min real (540)
     promptTimeoutSec: { type: "number", default: 20 },
   },
 
@@ -21,38 +21,112 @@ AFRAME.registerComponent("ui-block", {
     this.order = Math.random() < 0.5 ? ["NUDGE", "NO_NUDGE"] : ["NO_NUDGE", "NUDGE"];
     this.blockIndex = 0;
     this.condition = this.order[this.blockIndex];
+    this.inTransition = false;
 
-    // state
-    this.blockStartMs = performance.now();
-    this.checkInDone = false;
-    this.checkInShown = false;          
-    this.breakPromptShown = false;
-    this.breakPromptClosed = false;
-    this.adjustedBreakAtSec = this.data.defaultBreakAtSec;
-    this._ended = false;
+    // wait for scene to be ready before setting up panels
+    const scene = this.el.sceneEl;
+    if (scene.hasLoaded) {
+      this.setupPanels();
+    } else {
+      scene.addEventListener('loaded', () => {
+        this.setupPanels();
+      });
+    }
 
-    // timers
-    this.breakPromptTimer = null;       
+    this.logEvent("session_start", {
+      order: this.order.join("_THEN_"),
+    });
 
+    console.log("[StudyUI] ========================================");
+    console.log("[StudyUI] SESSION STARTED");
+    console.log("[StudyUI] Participant:", this.participantId);
+    console.log("[StudyUI] Order:", this.order.join(" → "));
+    console.log("[StudyUI] Block 1 condition:", this.condition);
+    console.log("[StudyUI] Block 1 will run for:", this.data.blockSeconds, "seconds");
+    console.log("[StudyUI] ========================================");
+  },
+
+  setupPanels: function () {
     // ui refs
     this.checkInPanel = document.querySelector("#checkInPanel");
     this.breakPromptPanel = document.querySelector("#breakPromptPanel");
     this.breakMessagePanel = document.querySelector("#breakMessagePanel");
+    this.blockTransitionPanel = document.querySelector("#blockTransitionPanel");
 
+    // get camera reference for position updates
+    this.camera = document.querySelector("a-camera");
+    if (!this.camera) {
+      console.warn("[StudyUI] Camera not found - panels will be world-fixed");
+    } else {
+      console.log("[StudyUI] Camera found - panels will follow view");
+    }
+
+    // initialize block state
+    this.resetBlockState();
     this.hideAllPanels();
     this.bindUiListeners();
 
     this.logEvent("block_start", {
-      order: this.order.join("_THEN_"),
+      block: this.blockIndex + 1,
       condition: this.condition,
     });
 
-    console.log("[StudyUI] Participant:", this.participantId);
-    console.log("[StudyUI] Order:", this.order);
+    console.log("[StudyUI] Block 1 condition:", this.condition);
+  },
+
+  updatePanelPositions: function () {
+    if (!this.camera) return;
+
+    const cameraWorldPos = new THREE.Vector3();
+    this.camera.object3D.getWorldPosition(cameraWorldPos);
+    
+    const cameraWorldQuaternion = new THREE.Quaternion();
+    this.camera.object3D.getWorldQuaternion(cameraWorldQuaternion);
+
+    // calculate position in front of camera
+    const offset = new THREE.Vector3(0, -0.25, -1.45);
+    offset.applyQuaternion(cameraWorldQuaternion);
+    
+    const panelPos = cameraWorldPos.clone().add(offset);
+
+    // update all panels
+    const panels = [
+      this.checkInPanel,
+      this.breakPromptPanel,
+      this.breakMessagePanel,
+      this.blockTransitionPanel
+    ];
+
+    panels.forEach(panel => {
+      if (panel && panel.object3D) {
+        // only update position if panel is visible
+        if (panel.getAttribute('visible')) {
+          panel.object3D.position.copy(panelPos);
+          panel.object3D.quaternion.copy(cameraWorldQuaternion);
+        } else {
+          // move hidden panels far out of view so they can't be clicked
+          panel.object3D.position.set(0, -1000, 0);
+        }
+      }
+    });
+  },
+
+  resetBlockState: function () {
+    this.blockStartMs = performance.now();
+    this.checkInDone = false;
+    this.checkInShown = false;
+    this.breakPromptShown = false;
+    this.breakPromptClosed = false;
+    this.adjustedBreakAtSec = this.data.defaultBreakAtSec;
+    this._ended = false;
+    this.breakPromptTimer = null;
   },
 
   tick: function () {
-    if (this._ended) return;
+    // update panel positions to follow camera every frame
+    this.updatePanelPositions();
+
+    if (this._ended || this.inTransition) return;
 
     const tSec = this.elapsedSec();
 
@@ -61,19 +135,20 @@ AFRAME.registerComponent("ui-block", {
       return;
     }
 
-    // If we're in NO_NUDGE, ensure nothing is visible (prevents "stuck" panels)
     if (this.condition === "NO_NUDGE") {
       this.hideAllPanels();
       return;
     }
 
-    // Show check-in once
+    //  NUDGE CONDITION ONLY BELOW THIS POINT 
+
+    // show check-in once
     if (!this.checkInDone && !this.checkInShown && tSec >= this.data.checkInAtSec) {
       this.showCheckIn();
       return;
     }
 
-    // Only schedule/show break prompt after check-in is completed
+    // only schedule/show break prompt after check-in is completed
     if (
       this.checkInDone &&
       !this.breakPromptShown &&
@@ -101,47 +176,48 @@ AFRAME.registerComponent("ui-block", {
     if (this.checkInPanel) this.checkInPanel.setAttribute("visible", false);
     if (this.breakPromptPanel) this.breakPromptPanel.setAttribute("visible", false);
     if (this.breakMessagePanel) this.breakMessagePanel.setAttribute("visible", false);
+    if (this.blockTransitionPanel) this.blockTransitionPanel.setAttribute("visible", false);
   },
 
-  // handles null case to hide all panels
   setActivePanel: function (panelName) {
     this.hideAllPanels();
     
-    // Only show a panel if a valid name was provided
     if (panelName === "checkIn" && this.checkInPanel) {
       this.checkInPanel.setAttribute("visible", true);
     } else if (panelName === "breakPrompt" && this.breakPromptPanel) {
       this.breakPromptPanel.setAttribute("visible", true);
     } else if (panelName === "breakMessage" && this.breakMessagePanel) {
       this.breakMessagePanel.setAttribute("visible", true);
+    } else if (panelName === "blockTransition" && this.blockTransitionPanel) {
+      this.blockTransitionPanel.setAttribute("visible", true);
     }
-    
   },
 
   showCheckIn: function () {
-    this.checkInShown = true;                
-    this.setActivePanel("checkIn");          
+    this.checkInShown = true;
+    this.setActivePanel("checkIn");
     this.logEvent("checkin_shown");
+    console.log("[StudyUI] Check-in panel shown");
   },
 
   onComfort: function (rating) {
     this.checkInDone = true;
-    this.setActivePanel(null);               // NOW WORKS: hides everything cleanly
+    this.setActivePanel(null);
     this.logEvent("comfort_rating", { value: rating });
 
-    // schedule break prompt time
     this.adjustedBreakAtSec = this.computeBreakTime(rating);
     this.logEvent("break_prompt_scheduled", { at_sec: this.adjustedBreakAtSec });
+    
+    console.log(`[StudyUI] Comfort rating: ${rating}`);
+    console.log(`[StudyUI] Break prompt scheduled for: ${this.adjustedBreakAtSec}s`);
   },
 
   computeBreakTime: function (rating) {
     const base = this.data.defaultBreakAtSec;
-
-    // NOTE: values are seconds; fine for real study if your base is minutes converted.
     const delta = { 5: 90, 4: 45, 3: 0, 2: -45, 1: -90 };
     const t = base + (delta[rating] || 0);
 
-    const minT = this.data.checkInAtSec + 2;              // was +20; too big for test mode
+    const minT = this.data.checkInAtSec + 2;
     const maxT = Math.max(minT, this.data.blockSeconds - 1);
     return Math.max(minT, Math.min(t, maxT));
   },
@@ -152,39 +228,112 @@ AFRAME.registerComponent("ui-block", {
 
     this.setActivePanel("breakPrompt");
     this.logEvent("break_prompt_shown");
+    console.log("[StudyUI] Break prompt shown");
 
-    // FIXED: clear any prior timers, then set correct timer (ms = sec * 1000)
     this.clearBreakPromptTimer();
     this.breakPromptTimer = setTimeout(() => {
-      // Check if block ended or component destroyed
       if (this._ended || !this.el) return;
 
-      // if still visible, auto-close and mark as ignored
       if (this.breakPromptPanel && this.breakPromptPanel.getAttribute("visible")) {
         this.setActivePanel(null);
         this.breakPromptClosed = true;
         this.logEvent("break_prompt_ignored");
+        console.log("[StudyUI] Break prompt ignored (timeout)");
       }
     }, this.data.promptTimeoutSec * 1000);
   },
 
   takeBreak: function () {
-    this.clearBreakPromptTimer();           
+    this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel("breakMessage");
     this.logEvent("break_taken");
+    console.log("[StudyUI] Break accepted");
   },
 
   declineBreak: function () {
-    this.clearBreakPromptTimer();           
+    this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel(null);
     this.logEvent("break_declined");
+    console.log("[StudyUI] Break declined");
   },
 
   closeBreakMessage: function () {
     this.setActivePanel(null);
     this.logEvent("break_message_closed");
+    console.log("[StudyUI] Break message closed");
+  },
+
+  endBlock: function () {
+    if (this._ended) return;
+    this._ended = true;
+
+    this.clearBreakPromptTimer();
+    this.hideAllPanels();
+
+    this.logEvent("block_end", {
+      block: this.blockIndex + 1,
+      condition: this.condition,
+    });
+
+    console.log("[StudyUI] ========================================");
+    console.log(`[StudyUI] BLOCK ${this.blockIndex + 1} ENDED`);
+    console.log(`[StudyUI] Condition was: ${this.condition}`);
+    console.log("[StudyUI] ========================================");
+
+    // check if there's another block
+    if (this.blockIndex < this.order.length - 1) {
+      this.showBlockTransition();
+    } else {
+      this.endSession();
+    }
+  },
+
+  showBlockTransition: function () {
+    this.inTransition = true;
+    this.setActivePanel("blockTransition");
+    this.logEvent("block_transition_shown");
+    
+    console.log("[StudyUI] ========================================");
+    console.log("[StudyUI] BLOCK TRANSITION");
+    console.log("[StudyUI] Waiting for participant to complete survey");
+    console.log("[StudyUI] Next block will be:", this.order[this.blockIndex + 1]);
+    console.log("[StudyUI] ========================================");
+  },
+
+  continueToNextBlock: function () {
+    this.logEvent("block_transition_continue");
+    
+    console.log("[StudyUI] ========================================");
+    console.log("[StudyUI] CONTINUING TO BLOCK 2");
+    console.log("[StudyUI] ========================================");
+    
+    // move to next block
+    this.blockIndex++;
+    this.condition = this.order[this.blockIndex];
+    this.inTransition = false;
+
+    // reset all block state for new block
+    this.resetBlockState();
+    this.hideAllPanels();
+
+    this.logEvent("block_start", {
+      block: this.blockIndex + 1,
+      condition: this.condition,
+    });
+
+    console.log(`[StudyUI] Block 2 started`);
+    console.log(`[StudyUI] Condition: ${this.condition}`);
+    console.log(`[StudyUI] Block 2 will run for: ${this.data.blockSeconds} seconds`);
+  },
+
+  endSession: function () {
+    this.logEvent("session_end");
+    console.log("[StudyUI] ========================================");
+    console.log("[StudyUI] SESSION COMPLETE!");
+    console.log("[StudyUI] Both blocks finished");
+    console.log("[StudyUI] ========================================");
   },
 
   bindUiListeners: function () {
@@ -198,6 +347,7 @@ AFRAME.registerComponent("ui-block", {
       });
     }
 
+    // break prompt buttons
     const yesBtn = document.querySelector("#breakYesBtn");
     if (yesBtn) yesBtn.addEventListener("click", () => {
       this.flashButton(yesBtn, "#6B7280");
@@ -215,31 +365,32 @@ AFRAME.registerComponent("ui-block", {
       this.flashButton(okBtn, "#374151");
       this.closeBreakMessage();
     });
+
+    // block transition button
+    const continueBtn = document.querySelector("#continueBlockBtn");
+    if (continueBtn) {
+      continueBtn.addEventListener("click", () => {
+        this.flashButton(continueBtn, "#6B7280");
+        this.continueToNextBlock();
+      });
+      console.log("[StudyUI] Continue button listener bound successfully");
+    } else {
+      console.warn("[StudyUI] Continue button not found!");
+    }
   },
 
   flashButton: function (el, pressedColor = "#374151", ms = 300) {
     if (!el) return;
     const mat = el.getAttribute("material") || {};
-    const original = mat.color || "#1F2937";
+    const original = mat.color || "#FFFFFF";
     el.setAttribute("material", { ...mat, color: pressedColor });
     setTimeout(() => el.setAttribute("material", { ...mat, color: original }), ms);
-  },
-
-  endBlock: function () {
-    if (this._ended) return;
-    this._ended = true;
-
-    // clear timer before ending to prevent ghost callbacks
-    this.clearBreakPromptTimer();
-    this.hideAllPanels();
-
-    this.logEvent("block_end");
-    console.log("[StudyUI] Block ended");
   },
 
   logEvent: function (event, extra = {}) {
     console.log("[LOG]", {
       participant: this.participantId,
+      block: this.blockIndex + 1,
       condition: this.condition,
       t_sec: Math.round(this.elapsedSec()),
       event,
