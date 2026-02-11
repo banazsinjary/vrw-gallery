@@ -52,6 +52,7 @@ AFRAME.registerComponent("ui-block", {
     this.breakPromptPanel = document.querySelector("#breakPromptPanel");
     this.breakMessagePanel = document.querySelector("#breakMessagePanel");
     this.blockTransitionPanel = document.querySelector("#blockTransitionPanel");
+    this.thankYouPanel = document.querySelector("#thankYouPanel");
 
     // get camera reference for position updates
     this.camera = document.querySelector("a-camera");
@@ -94,7 +95,8 @@ AFRAME.registerComponent("ui-block", {
       this.checkInPanel,
       this.breakPromptPanel,
       this.breakMessagePanel,
-      this.blockTransitionPanel
+      this.blockTransitionPanel,
+      this.thankYouPanel
     ];
 
     panels.forEach(panel => {
@@ -140,7 +142,7 @@ AFRAME.registerComponent("ui-block", {
       return;
     }
 
-    //  NUDGE CONDITION ONLY BELOW THIS POINT 
+    // === NUDGE CONDITION ONLY BELOW THIS POINT ===
 
     // show check-in once
     if (!this.checkInDone && !this.checkInShown && tSec >= this.data.checkInAtSec) {
@@ -177,6 +179,7 @@ AFRAME.registerComponent("ui-block", {
     if (this.breakPromptPanel) this.breakPromptPanel.setAttribute("visible", false);
     if (this.breakMessagePanel) this.breakMessagePanel.setAttribute("visible", false);
     if (this.blockTransitionPanel) this.blockTransitionPanel.setAttribute("visible", false);
+    if (this.thankYouPanel) this.thankYouPanel.setAttribute("visible", false);
   },
 
   setActivePanel: function (panelName) {
@@ -190,6 +193,8 @@ AFRAME.registerComponent("ui-block", {
       this.breakMessagePanel.setAttribute("visible", true);
     } else if (panelName === "blockTransition" && this.blockTransitionPanel) {
       this.blockTransitionPanel.setAttribute("visible", true);
+    } else if (panelName === "thankYou" && this.thankYouPanel) {
+      this.thankYouPanel.setAttribute("visible", true);
     }
   },
 
@@ -329,10 +334,13 @@ AFRAME.registerComponent("ui-block", {
   },
 
   endSession: function () {
+    this.setActivePanel("thankYou");
     this.logEvent("session_end");
+    
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] SESSION COMPLETE!");
     console.log("[StudyUI] Both blocks finished");
+    console.log("[StudyUI] Thank you panel displayed");
     console.log("[StudyUI] ========================================");
   },
 

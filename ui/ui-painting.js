@@ -27,6 +27,11 @@
         "Monet captured his wife Camille and son on a breezy summer day. The loose brushstrokes and vibrant colors exemplify Impressionism's focus on capturing fleeting moments of light and atmosphere.",
       technique:
         "Quick, visible brushstrokes with emphasis on natural light effects",
+      funFacts: [
+        "Monet painted this in just four hours to capture the fleeting light and wind effects.",
+        "The model is Monet's first wife, Camille, who died just four years after this was painted.",
+        "The painting was completed en plein air (outdoors) in a single session to preserve spontaneity."
+      ]
     },
     imp_monet_lilies: {
       title: "Water Lilies",
@@ -36,6 +41,11 @@
       hoverInfo:
         "Part of Monet's iconic series painted in his Giverny garden. He was fascinated by how light danced across water at different times of day, creating over 250 paintings of this subject.",
       technique: "Thick impasto with layered colors creating depth and texture",
+      funFacts: [
+        "Monet painted over 250 water lily canvases in the last 30 years of his life.",
+        "He had cataracts during this period, which affected his color perception and made his palette more intense.",
+        "The pond in his garden was custom-built - he diverted a river and imported water lilies from Egypt and South America."
+      ]
     },
     imp_renoir_promenade: {
       title: "The Promenade",
@@ -45,6 +55,10 @@
       hoverInfo:
         "Renoir celebrates the leisure of Parisian middle class during the Belle Époque. His soft, feathered brushwork creates a dreamy quality that focuses on beauty and everyday joy.",
       technique: "Soft brushwork with dappled light filtering through foliage",
+      funFacts: [
+        "This was painted the same year Renoir served in the Franco-Prussian War.",
+        "Renoir often painted outdoors alongside Monet, sharing techniques and subjects."
+      ]
     },
     imp_renoir_by_water: {
       title: "By the Water",
@@ -91,6 +105,11 @@
       hoverInfo:
         "Basquiat merged Eastern spirituality with Western pop culture and street art aesthetics. His work challenges boundaries between high art and graffiti, creating a unique visual language.",
       technique: "Mixed media with graffiti-inspired elements and collage",
+      funFacts: [
+        "Basquiat started as a graffiti artist under the tag 'SAMO' in New York City.",
+        "He became the youngest artist to exhibit at Documenta at age 22.",
+        "His paintings now sell for over $100 million at auction."
+      ]
     },
     cont_basquiat_pez: {
       title: "Pez Dispenser",
@@ -101,6 +120,10 @@
         "This work references a popular children's candy dispenser, transforming it into a sharp critique of consumerism, power, and cultural symbols. Basquiat often juxtaposed childlike imagery with complex social commentary, blending street culture, history, and art-world critique.",
       technique:
         "Expressive line work, symbolic imagery, and layered text with raw, graffiti-inspired marks",
+      funFacts: [
+        "Basquiat frequently used text and symbols to create layers of meaning in his work.",
+        "He was friends with Andy Warhol and they collaborated on numerous paintings together."
+      ]
     },
     cont_basquiat_untitled: {
       title: "Untitled",
@@ -108,9 +131,13 @@
       year: "1982",
       medium: "Acrylic, oilstick, spray paint",
       hoverInfo:
-        "This monumental work exemplifies Basquiat’s mature visual language, combining mask-like faces, anatomical symbols, and aggressive mark-making. The figure recalls African and Caribbean visual traditions while confronting themes of power, identity, and historical erasure.",
+        "This monumental work exemplifies Basquiat's mature visual language, combining mask-like faces, anatomical symbols, and aggressive mark-making. The figure recalls African and Caribbean visual traditions while confronting themes of power, identity, and historical erasure.",
       technique:
         "Layered brushwork, raw line drawing, symbolic figuration, and expressive color fields",
+      funFacts: [
+        "Basquiat completed some paintings in a single night-long session.",
+        "He incorporated anatomical imagery from Gray's Anatomy, which he received as a gift while hospitalized as a child."
+      ]
     },
     cont_abs_01: {
       title: "Abstract Composition I",
@@ -156,6 +183,11 @@
       hoverInfo:
         "The world's most famous painting. Da Vinci used sfumato (subtle blending) to create the enigmatic smile. The atmospheric background and psychological depth make this a masterpiece of Renaissance art.",
       technique: "Sfumato technique with subtle transitions between colors",
+      funFacts: [
+        "The Mona Lisa has no eyebrows - it was fashionable in Renaissance Florence to shave them.",
+        "Da Vinci worked on this painting for over 16 years and carried it with him everywhere.",
+        "It was stolen from the Louvre in 1911 and missing for two years, making it even more famous."
+      ]
     },
     rena_da_vinci_ladyermine: {
       title: "Lady with an Ermine",
@@ -165,6 +197,10 @@
       hoverInfo:
         "Portrait of Cecilia Gallerani, mistress of the Duke of Milan. The ermine symbolizes purity and was a clever play on her name. Da Vinci's mastery of light and shadow brings life to her expression.",
       technique: "Careful attention to light, shadow, and realistic detail",
+      funFacts: [
+        "The ermine is a pun - in Greek, 'galè' means ermine, referencing the sitter's surname Gallerani.",
+        "This is one of only four portraits of women painted by Leonardo da Vinci."
+      ]
     },
     pre_waterhouse_shalott: {
       title: "The Lady of Shalott",
@@ -175,6 +211,10 @@
         "Based on Tennyson's poem about a cursed lady who could only view the world through a mirror. The painting captures her tragic moment of leaving the tower, knowing death awaits her.",
       technique:
         "Rich colors and romantic detail characteristic of Pre-Raphaelite art",
+      funFacts: [
+        "Waterhouse painted this subject three times - he was obsessed with the tragic story.",
+        "The three candles represent her fading life force - two are already extinguished."
+      ]
     },
     pre_waterhouse_miranda: {
       title: "Miranda—The Tempest",
@@ -211,6 +251,10 @@
       hoverInfo:
         "Van Dyck revolutionized portrait painting with elegant poses and rich fabrics. His Baroque style emphasizes drama, movement, and psychological depth.",
       technique: "Rich color and detailed fabric rendering",
+      funFacts: [
+        "Van Dyck was knighted by King Charles I and became the leading court painter in England.",
+        "He established the visual style for British portraiture that lasted for over 150 years."
+      ]
     },
     bar_vandyke_head_woman: {
       title: "Head of a Woman",
@@ -229,6 +273,10 @@
       hoverInfo:
         "Redon reimagines Greek mythology through dreamlike symbolism. After years working in dark charcoals, he embraced brilliant, vibrant colors late in his career.",
       technique: "Symbolic use of vibrant, expressive color",
+      funFacts: [
+        "Redon worked exclusively in black and white for his first 30 years as an artist.",
+        "He called his dark charcoal works his 'noirs' - they explored dreams, nightmares, and the subconscious."
+      ]
     },
     postimp_redon_reflection: {
       title: "Reflection",
@@ -247,6 +295,10 @@
       hoverInfo:
         "Epitomizes Rococo focus on pleasure and romance. Painted before the French Revolution, it captures aristocratic leisure and flirtation with light, playful brushwork.",
       technique: "Light, delicate brushwork with pastel color palette",
+      funFacts: [
+        "The man in the bushes commissioned this painting to show himself looking up his lover's skirt - quite scandalous!",
+        "The older man pushing the swing is the woman's husband, unaware of the hidden lover."
+      ]
     },
     acad_leighton_accolade: {
       title: "The Accolade",
@@ -265,6 +317,11 @@
       hoverInfo:
         'Often called the "Mona Lisa of the North." Vermeer\'s masterful use of light creates an intimate, enigmatic portrait. The pearl earring catches light beautifully against the dark background.',
       technique: "Masterful use of light with smooth tonal transitions",
+      funFacts: [
+        "This isn't actually a portrait - it's a 'tronie', a Dutch art form showing imaginary characters in exotic dress.",
+        "The pearl earring is so large it's probably not real - likely polished tin or glass.",
+        "Vermeer used expensive ultramarine blue (made from lapis lazuli) for the turban, showing the subject's high status."
+      ]
     },
     med_st_jerome: {
       title: "Saint Jerome",
@@ -310,6 +367,10 @@
       hoverInfo:
         "A calm landscape study with warm light and soft trees. Take a moment to breathe and notice the depth in the background.",
       technique: "Wet-on-wet landscape painting with soft blending",
+      funFacts: [
+        "Bob Ross completed each painting in under 30 minutes for his TV show 'The Joy of Painting'.",
+        "He painted over 30,000 paintings in his lifetime but gave most away for free."
+      ]
     },
     bobross_country: {
       title: "Country Scene",
@@ -445,7 +506,7 @@
           hoverOn = true;
 
           if (hasInfo) {
-            hoverPanel = createHoverPanel(artInfo);
+            hoverPanel = createHoverPanel(artInfo, id);
 
             hoverPanel.addEventListener(
               "raycaster-intersection-cleared",
@@ -466,7 +527,8 @@
       }
 
       //  hover information panel
-      function createHoverPanel(artInfo) {
+      //  hover information panel with rotating fun facts
+      function createHoverPanel(artInfo, artId) {
         const panel = document.createElement("a-entity");
 
         panel.setAttribute("position", "0 0.55 0.75");
@@ -495,13 +557,44 @@
         border.classList.add("no-ray");
         panel.appendChild(border);
 
-        const techniqueLine = artInfo.technique
-          ? `Technique:\n${artInfo.technique}\n\n`
-          : "";
-        const textContent = clampText(
-          techniqueLine + (artInfo.hoverInfo || ""),
-          520,
-        );
+        // handle rotating fun facts
+        let factIndex = 0;
+        const hasFunFacts = artInfo.funFacts && artInfo.funFacts.length > 0;
+        
+        // track which fact to show next for this painting
+        if (!window.__paintingFactIndex) {
+          window.__paintingFactIndex = {};
+        }
+        if (!window.__paintingFactIndex[artId]) {
+          window.__paintingFactIndex[artId] = 0;
+        }
+        
+        factIndex = window.__paintingFactIndex[artId];
+
+        // build text content
+        // Build text content with clear section titles
+        let textContent = "";
+
+        // Technique section
+        if (artInfo.technique) {
+          textContent += `Technique:\n${artInfo.technique}\n\n`;
+        }
+
+        // Fun Fact section (if available)
+        if (hasFunFacts) {
+          const currentFact = artInfo.funFacts[factIndex];
+          textContent += `Fun Fact:\n${currentFact}\n\n`;
+          
+          // Increment for next hover
+          window.__paintingFactIndex[artId] = (factIndex + 1) % artInfo.funFacts.length;
+        }
+
+        // Painting Details section
+        if (artInfo.hoverInfo) {
+          textContent += `Painting Details:\n${artInfo.hoverInfo}`;
+        }
+
+        textContent = clampText(textContent, 720);
 
         const textEl = document.createElement("a-text");
         textEl.setAttribute("value", textContent);

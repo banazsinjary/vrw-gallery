@@ -478,6 +478,37 @@
           const NE = { xMin: 10, xMax: 30, zMin: -32, zMax: -9 };
 
           // ----------------------------
+          // AMBIENT AUDIO ZONES
+          // ----------------------------
+          function createAudioZone(x, z, radius, audioSrc) {
+            const zone = document.createElement('a-entity');
+            zone.setAttribute('position', `${x} 1.6 ${z}`);
+            zone.setAttribute('sound', `src: ${audioSrc}; loop: true; volume: 0.3; positional: true; refDistance: ${radius}; rolloffFactor: 1;`);
+            world.appendChild(zone);
+            return zone;
+          }
+
+          // Hub - Neutral ambient
+          createAudioZone(0, 0, 15, 'url()');
+
+          // North wing - Classical strings  
+          createAudioZone(0, -22, 15, 'url()');
+
+          // South wing - Modern minimal
+          createAudioZone(0, 22, 15, 'url()');
+
+          // East wing - Soft piano
+          createAudioZone(22, 0, 15, 'url()');
+
+          // West wing - Orchestral/medieval
+          createAudioZone(-22, 0, 15, 'url()');
+
+          // NE wing - Nature sounds
+          createAudioZone(20, -20, 15, 'url()');
+
+          console.log('[Gallery] Ambient audio zones created');
+
+          // ----------------------------
           // PAINTINGS
           // ----------------------------
           VRWPaintings.init({
@@ -536,7 +567,7 @@
         ></a-plane>
 
         <a-text
-          value="rate your level of comfort"
+          value="Rate your level of comfort"
           position="-1.48 0.32 0.01"
           width="3.0"
           color="#111111"
@@ -637,7 +668,7 @@
         ></a-plane>
 
         <a-text
-          value="would you like to take a short break?"
+          value="Would you like to take a short break?"
           position="-1.48 0.20 0.01"
           width="3.0"
           color="#111111"
@@ -727,7 +758,7 @@
       </a-entity>
 
       <!-- block transition panel -->
-      <!-- block transition panel -->
+
 <a-entity
   id="blockTransitionPanel"
   position="0 1.35 -1.45"
@@ -753,15 +784,15 @@
   ></a-plane>
 
   <a-text
-    value="Block 1 Complete"
-    position="-1.48 0.32 0.01"
+    value="Block 1 complete"
+    position="-1.48 0.20 0.01"
     width="3.0"
     color="#111111"
     font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
   ></a-text>
 
   <a-text
-    value="Press Continue when ready for Block 2."
+    value="Press continue when ready for Block 2."
     position="-1.48 0.00 0.01"
     width="3.0"
     color="#6B7280"
@@ -782,7 +813,48 @@
     ></a-entity>
   </a-entity>
 </a-entity>
-      </a-entity>
+
+<!-- thank you panel -->
+<a-entity
+  id="thankYouPanel"
+  position="0 1.35 -1.45"
+  visible="false"
+>
+  <a-plane
+    width="3.4"
+    height="1.1"
+    position="0 -0.025 -0.01"
+    material="color:#000; opacity:0.15; transparent:true;"
+  ></a-plane>
+  <a-plane
+    width="3.32"
+    height="1.02"
+    position="0 0 -0.005"
+    material="color:#FFFFFF; opacity:0.4; transparent:true;"
+  ></a-plane>
+  <a-plane
+    width="3.24"
+    height="0.94"
+    position="0 0 0"
+    material="color:#F5F1E8; opacity:0.35; transparent:true;"
+  ></a-plane>
+
+  <a-text
+    value="Session complete"
+    position="-1.48 0.28 0.01"
+    width="3.0"
+    color="#111111"
+    font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+  ></a-text>
+
+  <a-text
+    value="Thank you for participating!"
+    position="-1.48 0.08 0.01"
+    width="3.0"
+    color="#6B7280"
+    font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+  ></a-text>
+</a-entity>
     </a-scene>
   </body>
 </html>
