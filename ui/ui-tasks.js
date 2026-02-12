@@ -62,7 +62,7 @@
     createGalleryMenuButton() {
       const button = document.createElement("a-entity");
       button.setAttribute("id", "galleryMenuButton");
-      button.setAttribute("position", "0.95 0.68 -1.5"); 
+      button.setAttribute("position", "0.95 0.68 -1.5");
       button.classList.add("clickable");
 
       const bg = document.createElement("a-plane");
@@ -169,7 +169,6 @@
       text.setAttribute("position", "0 0 0.01");
       button.appendChild(text);
 
-      
       button.addEventListener("click", () => {
         this.toggleMyGalleryPanel();
         this.playClickSound();
@@ -275,7 +274,10 @@
       this.myGalleryPanel.setAttribute("visible", !isVisible);
 
       if (!isVisible) {
-        // update title with current count
+        // Reset to first page when opening
+        this.galleryPage = 0;
+
+        // Update title with current count
         const titleEl = this.myGalleryPanel.querySelector("a-text");
         if (titleEl) {
           titleEl.setAttribute(
@@ -283,13 +285,13 @@
             `My Gallery (${this.likedPaintings.size}/38)`,
           );
         }
-        // update content when opening
+        // Update content when opening
         this.updateMyGalleryPanel();
       }
     },
 
     updateMyGalleryPanel() {
-      // clear existing content
+      // Clear existing content
       while (this.galleryPanelContent.firstChild) {
         this.galleryPanelContent.removeChild(
           this.galleryPanelContent.firstChild,
@@ -312,12 +314,20 @@
         return;
       }
 
-      // show liked paintings as a list
+      // Pagination setup
+      if (!this.galleryPage) this.galleryPage = 0;
+      const itemsPerPage = 8;
       const paintingsArray = Array.from(this.likedPaintings);
+      const totalPages = Math.ceil(paintingsArray.length / itemsPerPage);
+      const startIdx = this.galleryPage * itemsPerPage;
+      const endIdx = Math.min(startIdx + itemsPerPage, paintingsArray.length);
+      const pageItems = paintingsArray.slice(startIdx, endIdx);
+
+      // Show items for current page
       const startY = 0.1;
       const lineHeight = 0.15;
 
-      paintingsArray.forEach((paintingData, index) => {
+      pageItems.forEach((paintingData, index) => {
         const yPos = startY - index * lineHeight;
 
         const item = document.createElement("a-text");
@@ -333,6 +343,95 @@
 
         this.galleryPanelContent.appendChild(item);
       });
+
+      // Add navigation buttons if needed
+      if (totalPages > 1) {
+        const navY = startY - itemsPerPage * lineHeight - 0.1;
+
+        // Previous button
+        if (this.galleryPage > 0) {
+          const prevBtn = document.createElement("a-entity");
+          prevBtn.setAttribute("position", `-0.4 ${navY} 0`);
+          prevBtn.classList.add("clickable");
+
+          const prevBg = document.createElement("a-plane");
+          prevBg.setAttribute("width", 0.3);
+          prevBg.setAttribute("height", 0.12);
+          prevBg.setAttribute(
+            "material",
+            "color:#374151; opacity:0.8; transparent:true;",
+          );
+          prevBg.classList.add("clickable");
+          prevBtn.appendChild(prevBg);
+
+          const prevText = document.createElement("a-text");
+          prevText.setAttribute("value", "◀ Prev");
+          prevText.setAttribute("align", "center");
+          prevText.setAttribute("anchor", "center");
+          prevText.setAttribute("baseline", "center");
+          prevText.setAttribute("width", 1);
+          prevText.setAttribute("color", "#FFFFFF");
+          prevText.setAttribute("position", "0 0 0.01");
+          prevBtn.appendChild(prevText);
+
+          prevBtn.addEventListener("click", () => {
+            this.galleryPage--;
+            this.updateMyGalleryPanel();
+            this.playClickSound();
+          });
+
+          this.galleryPanelContent.appendChild(prevBtn);
+        }
+
+        // Page indicator
+        const pageIndicator = document.createElement("a-text");
+        pageIndicator.setAttribute(
+          "value",
+          `${this.galleryPage + 1}/${totalPages}`,
+        );
+        pageIndicator.setAttribute("position", `0 ${navY} 0`);
+        pageIndicator.setAttribute("align", "center");
+        pageIndicator.setAttribute("anchor", "center");
+        pageIndicator.setAttribute("baseline", "center");
+        pageIndicator.setAttribute("width", 1);
+        pageIndicator.setAttribute("color", "#6B7280");
+        this.galleryPanelContent.appendChild(pageIndicator);
+
+        // Next button
+        if (this.galleryPage < totalPages - 1) {
+          const nextBtn = document.createElement("a-entity");
+          nextBtn.setAttribute("position", `0.4 ${navY} 0`);
+          nextBtn.classList.add("clickable");
+
+          const nextBg = document.createElement("a-plane");
+          nextBg.setAttribute("width", 0.3);
+          nextBg.setAttribute("height", 0.12);
+          nextBg.setAttribute(
+            "material",
+            "color:#374151; opacity:0.8; transparent:true;",
+          );
+          nextBg.classList.add("clickable");
+          nextBtn.appendChild(nextBg);
+
+          const nextText = document.createElement("a-text");
+          nextText.setAttribute("value", "Next ▶");
+          nextText.setAttribute("align", "center");
+          nextText.setAttribute("anchor", "center");
+          nextText.setAttribute("baseline", "center");
+          nextText.setAttribute("width", 1);
+          nextText.setAttribute("color", "#FFFFFF");
+          nextText.setAttribute("position", "0 0 0.01");
+          nextBtn.appendChild(nextText);
+
+          nextBtn.addEventListener("click", () => {
+            this.galleryPage++;
+            this.updateMyGalleryPanel();
+            this.playClickSound();
+          });
+
+          this.galleryPanelContent.appendChild(nextBtn);
+        }
+      }
     },
 
     toggleLike(paintingId, paintingTitle) {
