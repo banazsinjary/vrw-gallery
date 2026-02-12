@@ -6,19 +6,19 @@
  * no nudge: no set break or prompts, participants may take off heaset as a break when they wish
  ***/
 
-/** !!!! THIS IS IN TEST MODE TIME REMEMBER TO CHANGE BACK FOR EXPERIMENT !!!! */
 AFRAME.registerComponent("ui-block", {
   schema: {
-    blockSeconds: { type: "number", default: 30 },       // 15 min real (900)
-    checkInAtSec: { type: "number", default: 3 },        // 5 min real (300)
-    defaultBreakAtSec: { type: "number", default: 12 },  // 9 min real (540)
+    blockSeconds: { type: "number", default: 900 }, // 15 minutes
+    checkInAtSec: { type: "number", default: 300 }, // 5 minutes
+    defaultBreakAtSec: { type: "number", default: 540 }, // 9 minutes
     promptTimeoutSec: { type: "number", default: 20 },
   },
 
   init: function () {
     // session setup
     this.participantId = "P" + Math.floor(Math.random() * 900 + 100);
-    this.order = Math.random() < 0.5 ? ["NUDGE", "NO_NUDGE"] : ["NO_NUDGE", "NUDGE"];
+    this.order =
+      Math.random() < 0.5 ? ["NUDGE", "NO_NUDGE"] : ["NO_NUDGE", "NUDGE"];
     this.blockIndex = 0;
     this.condition = this.order[this.blockIndex];
     this.inTransition = false;
@@ -28,7 +28,7 @@ AFRAME.registerComponent("ui-block", {
     if (scene.hasLoaded) {
       this.setupPanels();
     } else {
-      scene.addEventListener('loaded', () => {
+      scene.addEventListener("loaded", () => {
         this.setupPanels();
       });
     }
@@ -42,7 +42,11 @@ AFRAME.registerComponent("ui-block", {
     console.log("[StudyUI] Participant:", this.participantId);
     console.log("[StudyUI] Order:", this.order.join(" → "));
     console.log("[StudyUI] Block 1 condition:", this.condition);
-    console.log("[StudyUI] Block 1 will run for:", this.data.blockSeconds, "seconds");
+    console.log(
+      "[StudyUI] Block 1 will run for:",
+      this.data.blockSeconds,
+      "seconds",
+    );
     console.log("[StudyUI] ========================================");
   },
 
@@ -80,14 +84,14 @@ AFRAME.registerComponent("ui-block", {
 
     const cameraWorldPos = new THREE.Vector3();
     this.camera.object3D.getWorldPosition(cameraWorldPos);
-    
+
     const cameraWorldQuaternion = new THREE.Quaternion();
     this.camera.object3D.getWorldQuaternion(cameraWorldQuaternion);
 
     // calculate position in front of camera
     const offset = new THREE.Vector3(0, -0.25, -1.45);
     offset.applyQuaternion(cameraWorldQuaternion);
-    
+
     const panelPos = cameraWorldPos.clone().add(offset);
 
     // update all panels
@@ -96,13 +100,13 @@ AFRAME.registerComponent("ui-block", {
       this.breakPromptPanel,
       this.breakMessagePanel,
       this.blockTransitionPanel,
-      this.thankYouPanel
+      this.thankYouPanel,
     ];
 
-    panels.forEach(panel => {
+    panels.forEach((panel) => {
       if (panel && panel.object3D) {
         // only update position if panel is visible
-        if (panel.getAttribute('visible')) {
+        if (panel.getAttribute("visible")) {
           panel.object3D.position.copy(panelPos);
           panel.object3D.quaternion.copy(cameraWorldQuaternion);
         } else {
@@ -145,7 +149,11 @@ AFRAME.registerComponent("ui-block", {
     // === NUDGE CONDITION ONLY BELOW THIS POINT ===
 
     // show check-in once
-    if (!this.checkInDone && !this.checkInShown && tSec >= this.data.checkInAtSec) {
+    if (
+      !this.checkInDone &&
+      !this.checkInShown &&
+      tSec >= this.data.checkInAtSec
+    ) {
       this.showCheckIn();
       return;
     }
@@ -176,15 +184,18 @@ AFRAME.registerComponent("ui-block", {
 
   hideAllPanels: function () {
     if (this.checkInPanel) this.checkInPanel.setAttribute("visible", false);
-    if (this.breakPromptPanel) this.breakPromptPanel.setAttribute("visible", false);
-    if (this.breakMessagePanel) this.breakMessagePanel.setAttribute("visible", false);
-    if (this.blockTransitionPanel) this.blockTransitionPanel.setAttribute("visible", false);
+    if (this.breakPromptPanel)
+      this.breakPromptPanel.setAttribute("visible", false);
+    if (this.breakMessagePanel)
+      this.breakMessagePanel.setAttribute("visible", false);
+    if (this.blockTransitionPanel)
+      this.blockTransitionPanel.setAttribute("visible", false);
     if (this.thankYouPanel) this.thankYouPanel.setAttribute("visible", false);
   },
 
   setActivePanel: function (panelName) {
     this.hideAllPanels();
-    
+
     if (panelName === "checkIn" && this.checkInPanel) {
       this.checkInPanel.setAttribute("visible", true);
     } else if (panelName === "breakPrompt" && this.breakPromptPanel) {
@@ -211,10 +222,14 @@ AFRAME.registerComponent("ui-block", {
     this.logEvent("comfort_rating", { value: rating });
 
     this.adjustedBreakAtSec = this.computeBreakTime(rating);
-    this.logEvent("break_prompt_scheduled", { at_sec: this.adjustedBreakAtSec });
-    
+    this.logEvent("break_prompt_scheduled", {
+      at_sec: this.adjustedBreakAtSec,
+    });
+
     console.log(`[StudyUI] Comfort rating: ${rating}`);
-    console.log(`[StudyUI] Break prompt scheduled for: ${this.adjustedBreakAtSec}s`);
+    console.log(
+      `[StudyUI] Break prompt scheduled for: ${this.adjustedBreakAtSec}s`,
+    );
   },
 
   computeBreakTime: function (rating) {
@@ -239,7 +254,10 @@ AFRAME.registerComponent("ui-block", {
     this.breakPromptTimer = setTimeout(() => {
       if (this._ended || !this.el) return;
 
-      if (this.breakPromptPanel && this.breakPromptPanel.getAttribute("visible")) {
+      if (
+        this.breakPromptPanel &&
+        this.breakPromptPanel.getAttribute("visible")
+      ) {
         this.setActivePanel(null);
         this.breakPromptClosed = true;
         this.logEvent("break_prompt_ignored");
@@ -299,21 +317,24 @@ AFRAME.registerComponent("ui-block", {
     this.inTransition = true;
     this.setActivePanel("blockTransition");
     this.logEvent("block_transition_shown");
-    
+
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] BLOCK TRANSITION");
     console.log("[StudyUI] Waiting for participant to complete survey");
-    console.log("[StudyUI] Next block will be:", this.order[this.blockIndex + 1]);
+    console.log(
+      "[StudyUI] Next block will be:",
+      this.order[this.blockIndex + 1],
+    );
     console.log("[StudyUI] ========================================");
   },
 
   continueToNextBlock: function () {
     this.logEvent("block_transition_continue");
-    
+
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] CONTINUING TO BLOCK 2");
     console.log("[StudyUI] ========================================");
-    
+
     // move to next block
     this.blockIndex++;
     this.condition = this.order[this.blockIndex];
@@ -330,13 +351,15 @@ AFRAME.registerComponent("ui-block", {
 
     console.log(`[StudyUI] Block 2 started`);
     console.log(`[StudyUI] Condition: ${this.condition}`);
-    console.log(`[StudyUI] Block 2 will run for: ${this.data.blockSeconds} seconds`);
+    console.log(
+      `[StudyUI] Block 2 will run for: ${this.data.blockSeconds} seconds`,
+    );
   },
 
   endSession: function () {
     this.setActivePanel("thankYou");
     this.logEvent("session_end");
-    
+
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] SESSION COMPLETE!");
     console.log("[StudyUI] Both blocks finished");
@@ -357,22 +380,25 @@ AFRAME.registerComponent("ui-block", {
 
     // break prompt buttons
     const yesBtn = document.querySelector("#breakYesBtn");
-    if (yesBtn) yesBtn.addEventListener("click", () => {
-      this.flashButton(yesBtn, "#6B7280");
-      this.takeBreak();
-    });
+    if (yesBtn)
+      yesBtn.addEventListener("click", () => {
+        this.flashButton(yesBtn, "#6B7280");
+        this.takeBreak();
+      });
 
     const noBtn = document.querySelector("#breakNoBtn");
-    if (noBtn) noBtn.addEventListener("click", () => {
-      this.flashButton(noBtn, "#6B7280");
-      this.declineBreak();
-    });
+    if (noBtn)
+      noBtn.addEventListener("click", () => {
+        this.flashButton(noBtn, "#6B7280");
+        this.declineBreak();
+      });
 
     const okBtn = document.querySelector("#breakOkBtn");
-    if (okBtn) okBtn.addEventListener("click", () => {
-      this.flashButton(okBtn, "#374151");
-      this.closeBreakMessage();
-    });
+    if (okBtn)
+      okBtn.addEventListener("click", () => {
+        this.flashButton(okBtn, "#374151");
+        this.closeBreakMessage();
+      });
 
     // block transition button
     const continueBtn = document.querySelector("#continueBlockBtn");
@@ -392,7 +418,10 @@ AFRAME.registerComponent("ui-block", {
     const mat = el.getAttribute("material") || {};
     const original = mat.color || "#FFFFFF";
     el.setAttribute("material", { ...mat, color: pressedColor });
-    setTimeout(() => el.setAttribute("material", { ...mat, color: original }), ms);
+    setTimeout(
+      () => el.setAttribute("material", { ...mat, color: original }),
+      ms,
+    );
   },
 
   logEvent: function (event, extra = {}) {
