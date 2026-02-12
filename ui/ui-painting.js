@@ -481,7 +481,6 @@
         if (title) p.setAttribute("data-title", title);
         p.classList.add("clickable");
 
-
         // like indicator
         const likeIndicator = document.createElement("a-image");
         likeIndicator.setAttribute("src", "#heartOutline");
@@ -493,10 +492,47 @@
         );
         likeIndicator.setAttribute("opacity", 0.9);
         likeIndicator.setAttribute("transparent", true);
-        likeIndicator.setAttribute("material", "alphaTest: 0.5; side: double"); 
+        likeIndicator.setAttribute("material", "alphaTest: 0.5; side: double");
         likeIndicator.classList.add("no-ray");
         likeIndicator.classList.add("like-indicator");
         p.appendChild(likeIndicator);
+
+        // create tag button (bottom right corner) - BIGGER
+        const tagButton = document.createElement("a-entity");
+        tagButton.setAttribute(
+          "position",
+          `${w / 2 - 0.35} ${-h / 2 + 0.25} 0.05`,
+        );
+        tagButton.classList.add("clickable");
+
+        const tagBg = document.createElement("a-plane");
+        tagBg.setAttribute("width", 0.5); // bigger width
+        tagBg.setAttribute("height", 0.18); // bigger height
+        tagBg.setAttribute(
+          "material",
+          "color:#374151; opacity:0.85; transparent:true;",
+        );
+        tagBg.classList.add("clickable");
+        tagButton.appendChild(tagBg);
+
+        const tagText = document.createElement("a-text");
+        tagText.setAttribute("value", "Tag");
+        tagText.setAttribute("align", "center");
+        tagText.setAttribute("anchor", "center");
+        tagText.setAttribute("baseline", "center");
+        tagText.setAttribute("width", 1.2); // bigger text
+        tagText.setAttribute("color", "#FFFFFF");
+        tagText.setAttribute("position", "0 0 0.01");
+        tagButton.appendChild(tagText);
+
+        tagButton.addEventListener("click", (e) => {
+          e.stopPropagation(); // prevent click from bubbling to painting
+          if (window.UITasks) {
+            window.UITasks.openTagMenu(id, title);
+          }
+        });
+
+        p.appendChild(tagButton);
 
         // update like indicator
         function updateLikeIndicator() {
@@ -617,7 +653,7 @@
           textContent += `Technique:\n${artInfo.technique}\n\n`;
         }
 
-        // fun fact section 
+        // fun fact section
         if (hasFunFacts) {
           const currentFact = artInfo.funFacts[factIndex];
           textContent += `Fun Fact:\n${currentFact}\n\n`;

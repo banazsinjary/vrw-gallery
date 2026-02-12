@@ -21,14 +21,37 @@
       this.world = world;
       this.likedPaintings = window.__likedPaintings;
 
-      // Create UI elements
-      this.createGalleryMenuButton(); // Small button in corner
-      this.createMyGalleryPanel(); // Full panel (hidden by default)
+      if (!window.__paintingTags) {
+        window.__paintingTags = {};
+      }
+      this.paintingTags = window.__paintingTags;
 
-      // Load click sound
+      // create UI elements
+      this.createGalleryMenuButton();
+      this.createMyGalleryPanel();
+      this.createTagMenu();
+
+      // load click sound
       this.loadClickSound();
 
       console.log("[UITasks] Initialized");
+    },
+
+    getTagCategories() {
+      return [
+        "Calm",
+        "Energetic",
+        "Natural",
+        "Mysterious",
+        "Joyful",
+        "Dark/Moody",
+        "Colorful",
+        "Warm",
+        "Cool",
+        "Abstract",
+        "Simple/Minimal",
+        "Elegant",
+      ];
     },
 
     loadClickSound() {
@@ -268,6 +291,265 @@
       this.galleryPanelContent = content;
       console.log("[UITasks] My Gallery panel created");
     },
+
+    createTagMenu() {
+      const menu = document.createElement("a-entity");
+      menu.setAttribute("id", "tagMenu");
+      menu.setAttribute("position", "0 -0.1 -1.5");
+      menu.setAttribute("visible", false);
+
+      // background
+      const bg = document.createElement("a-plane");
+      bg.setAttribute("width", 1.6);
+      bg.setAttribute("height", 1.8);
+      bg.setAttribute(
+        "material",
+        "color:#FFFFFF; opacity:0.95; transparent:true;",
+      );
+      menu.appendChild(bg);
+
+      // border
+      const border = document.createElement("a-plane");
+      border.setAttribute("width", 1.64);
+      border.setAttribute("height", 1.84);
+      border.setAttribute("position", "0 0 -0.005");
+      border.setAttribute(
+        "material",
+        "color:#111111; opacity:0.2; transparent:true;",
+      );
+      menu.appendChild(border);
+
+      // title
+      const title = document.createElement("a-text");
+      title.setAttribute("id", "tagMenuTitle");
+      title.setAttribute("value", "Tag This Painting");
+      title.setAttribute("position", "-0.75 0.82 0.01");
+      title.setAttribute("width", 1.2);
+      title.setAttribute("color", "#111111");
+      title.setAttribute(
+        "font",
+        "https://cdn.aframe.io/fonts/Roboto-msdf.json",
+      );
+      menu.appendChild(title);
+
+      // subtitle
+      const subtitle = document.createElement("a-text");
+      subtitle.setAttribute("value", "Select up to 2 tags");
+      subtitle.setAttribute("position", "-0.75 0.72 0.01");
+      subtitle.setAttribute("width", 0.9);
+      subtitle.setAttribute("color", "#6B7280");
+      subtitle.setAttribute(
+        "font",
+        "https://cdn.aframe.io/fonts/Roboto-msdf.json",
+      );
+      menu.appendChild(subtitle);
+
+      // content area (will be populated dynamically)
+      const content = document.createElement("a-entity");
+      content.setAttribute("id", "tagMenuContent");
+      content.setAttribute("position", "0 0.5 0.01");
+      menu.appendChild(content);
+
+      // close button
+      const closeBtn = document.createElement("a-entity");
+      closeBtn.setAttribute("position", "0.72 0.82 0.01");
+      closeBtn.classList.add("clickable");
+
+      const closeBg = document.createElement("a-circle");
+      closeBg.setAttribute("radius", 0.05);
+      closeBg.setAttribute(
+        "material",
+        "color:#EF4444; opacity:0.8; transparent:true;",
+      );
+      closeBg.classList.add("clickable");
+      closeBtn.appendChild(closeBg);
+
+      const closeX = document.createElement("a-text");
+      closeX.setAttribute("value", "✕");
+      closeX.setAttribute("align", "center");
+      closeX.setAttribute("anchor", "center");
+      closeX.setAttribute("baseline", "center");
+      closeX.setAttribute("width", 0.3);
+      closeX.setAttribute("color", "#FFFFFF");
+      closeX.setAttribute("position", "0 0 0.01");
+      closeBtn.appendChild(closeX);
+
+      closeBtn.addEventListener("click", () => {
+        this.closeTagMenu();
+        this.playClickSound();
+      });
+
+      menu.appendChild(closeBtn);
+
+      // attach to camera
+      const camera = document.querySelector("a-camera");
+      if (camera) {
+        camera.appendChild(menu);
+      }
+
+      this.tagMenu = menu;
+      this.tagMenuContent = content;
+      console.log("[UITasks] Tag menu created");
+    },
+
+    openTagMenu(paintingId, paintingTitle) {
+      this.currentTaggingPaintingId = paintingId;
+      this.currentTaggingPaintingTitle = paintingTitle;
+
+      // update title
+      const titleEl = document.getElementById("tagMenuTitle");
+      if (titleEl) {
+        titleEl.setAttribute("value", paintingTitle);
+      }
+
+      // populate content
+      this.updateTagMenuContent();
+
+      // show menu
+      this.tagMenu.setAttribute("visible", true);
+
+      console.log(`[UITasks] Tag menu opened for: ${paintingTitle}`);
+    },
+
+    closeTagMenu() {
+      this.tagMenu.setAttribute("visible", false);
+      this.currentTaggingPaintingId = null;
+      this.currentTaggingPaintingTitle = null;
+      console.log("[UITasks] Tag menu closed");
+    },
+
+    getCurrentTags(paintingId) {
+      return this.paintingTags[paintingId] || [];
+    },
+
+    toggleTag(paintingId, tag) {
+      if (!this.paintingTags[paintingId]) {
+        this.paintingTags[paintingId] = [];
+      }
+
+      const tags = this.paintingTags[paintingId];
+      const index = tags.indexOf(tag);
+
+      if (index > -1) {
+        // remove tag
+        tags.splice(index, 1);
+        console.log(`[UITasks] Removed tag "${tag}" from ${paintingId}`);
+      } else {
+        // add tag (max 2)
+        if (tags.length < 2) {
+          tags.push(tag);
+          console.log(`[UITasks] Added tag "${tag}" to ${paintingId}`);
+        } else {
+          console.log(
+            `[UITasks] Cannot add "${tag}" - max 2 tags already selected`,
+          );
+          return false; // couldn't add
+        }
+      }
+
+      this.playClickSound();
+      return true;
+    },
+
+    updateTagMenuContent() {
+  // clear existing content
+  while (this.tagMenuContent.firstChild) {
+    this.tagMenuContent.removeChild(this.tagMenuContent.firstChild);
+  }
+  
+  const paintingId = this.currentTaggingPaintingId;
+  const currentTags = this.getCurrentTags(paintingId);
+  const categories = this.getTagCategories();
+  
+  // show like status at top
+  const isLiked = this.isLiked(paintingId);
+  const likeBtn = document.createElement("a-entity");
+  likeBtn.setAttribute("position", "0 0.1 0");
+  likeBtn.classList.add("clickable");
+  
+  const likeBg = document.createElement("a-plane");
+  likeBg.setAttribute("width", 1.3);
+  likeBg.setAttribute("height", 0.15);
+  likeBg.setAttribute("material", `color:${isLiked ? '#EF4444' : '#6B7280'}; opacity:0.8; transparent:true;`);
+  likeBg.classList.add("clickable");
+  likeBtn.appendChild(likeBg);
+  
+  const likeText = document.createElement("a-text");
+  likeText.setAttribute("value", isLiked ? "❤ Added to My Gallery" : "♡ Add to My Gallery");
+  likeText.setAttribute("align", "center");
+  likeText.setAttribute("anchor", "center");
+  likeText.setAttribute("baseline", "center");
+  likeText.setAttribute("width", 1.8);
+  likeText.setAttribute("color", "#FFFFFF");
+  likeText.setAttribute("position", "0 0 0.01");
+  likeBtn.appendChild(likeText);
+  
+  likeBtn.addEventListener("click", () => {
+    window.UITasks.toggleLike(paintingId, this.currentTaggingPaintingTitle);
+    this.updateTagMenuContent(); // refresh to update button
+  });
+  
+  this.tagMenuContent.appendChild(likeBtn);
+  
+  // show tag buttons in a grid
+  const startY = -0.1;
+  const buttonWidth = 0.6;
+  const buttonHeight = 0.14;
+  const spacingX = 0.08;
+  const spacingY = 0.06;
+  const cols = 2;
+  
+  categories.forEach((tag, index) => {
+    const row = Math.floor(index / cols);
+    const col = index % cols;
+    
+    const xPos = -0.34 + (col * (buttonWidth + spacingX));
+    const yPos = startY - (row * (buttonHeight + spacingY));
+    
+    const isSelected = currentTags.includes(tag);
+    
+    const tagBtn = document.createElement("a-entity");
+    tagBtn.setAttribute("position", `${xPos} ${yPos} 0`);
+    tagBtn.classList.add("clickable");
+    
+    const tagBg = document.createElement("a-plane");
+    tagBg.setAttribute("width", buttonWidth);
+    tagBg.setAttribute("height", buttonHeight);
+    tagBg.setAttribute("material", `color:${isSelected ? '#374151' : '#E5E7EB'}; opacity:0.9; transparent:true;`);
+    tagBg.classList.add("clickable");
+    tagBtn.appendChild(tagBg);
+    
+    const tagText = document.createElement("a-text");
+    tagText.setAttribute("value", isSelected ? `✓ ${tag}` : tag);
+    tagText.setAttribute("align", "center");
+    tagText.setAttribute("anchor", "center");
+    tagText.setAttribute("baseline", "center");
+    tagText.setAttribute("width", 1.1);
+    tagText.setAttribute("color", isSelected ? "#FFFFFF" : "#111111");
+    tagText.setAttribute("position", "0 0 0.01");
+    tagBtn.appendChild(tagText);
+    
+    tagBtn.addEventListener("click", () => {
+      const success = this.toggleTag(paintingId, tag);
+      if (success || isSelected) { // refresh if toggled or was already selected
+        this.updateTagMenuContent();
+      }
+    });
+    
+    this.tagMenuContent.appendChild(tagBtn);
+  });
+  
+  // show tag count at bottom
+  const tagCountText = document.createElement("a-text");
+  tagCountText.setAttribute("value", `Tags: ${currentTags.length}/2`);
+  tagCountText.setAttribute("position", "0 -1.35 0");
+  tagCountText.setAttribute("align", "center");
+  tagCountText.setAttribute("anchor", "center");
+  tagCountText.setAttribute("baseline", "center");
+  tagCountText.setAttribute("width", 1.0);
+  tagCountText.setAttribute("color", "#6B7280");
+  this.tagMenuContent.appendChild(tagCountText);
+},
 
     toggleMyGalleryPanel() {
       const isVisible = this.myGalleryPanel.getAttribute("visible");
