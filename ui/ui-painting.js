@@ -30,8 +30,8 @@
       funFacts: [
         "Monet painted this in just four hours to capture the fleeting light and wind effects.",
         "The model is Monet's first wife, Camille, who died just four years after this was painted.",
-        "The painting was completed en plein air (outdoors) in a single session to preserve spontaneity."
-      ]
+        "The painting was completed en plein air (outdoors) in a single session to preserve spontaneity.",
+      ],
     },
     imp_monet_lilies: {
       title: "Water Lilies",
@@ -44,8 +44,8 @@
       funFacts: [
         "Monet painted over 250 water lily canvases in the last 30 years of his life.",
         "He had cataracts during this period, which affected his color perception and made his palette more intense.",
-        "The pond in his garden was custom-built - he diverted a river and imported water lilies from Egypt and South America."
-      ]
+        "The pond in his garden was custom-built - he diverted a river and imported water lilies from Egypt and South America.",
+      ],
     },
     imp_renoir_promenade: {
       title: "The Promenade",
@@ -57,8 +57,8 @@
       technique: "Soft brushwork with dappled light filtering through foliage",
       funFacts: [
         "This was painted the same year Renoir served in the Franco-Prussian War.",
-        "Renoir often painted outdoors alongside Monet, sharing techniques and subjects."
-      ]
+        "Renoir often painted outdoors alongside Monet, sharing techniques and subjects.",
+      ],
     },
     imp_renoir_by_water: {
       title: "By the Water",
@@ -108,8 +108,8 @@
       funFacts: [
         "Basquiat started as a graffiti artist under the tag 'SAMO' in New York City.",
         "He became the youngest artist to exhibit at Documenta at age 22.",
-        "His paintings now sell for over $100 million at auction."
-      ]
+        "His paintings now sell for over $100 million at auction.",
+      ],
     },
     cont_basquiat_pez: {
       title: "Pez Dispenser",
@@ -122,8 +122,8 @@
         "Expressive line work, symbolic imagery, and layered text with raw, graffiti-inspired marks",
       funFacts: [
         "Basquiat frequently used text and symbols to create layers of meaning in his work.",
-        "He was friends with Andy Warhol and they collaborated on numerous paintings together."
-      ]
+        "He was friends with Andy Warhol and they collaborated on numerous paintings together.",
+      ],
     },
     cont_basquiat_untitled: {
       title: "Untitled",
@@ -136,8 +136,8 @@
         "Layered brushwork, raw line drawing, symbolic figuration, and expressive color fields",
       funFacts: [
         "Basquiat completed some paintings in a single night-long session.",
-        "He incorporated anatomical imagery from Gray's Anatomy, which he received as a gift while hospitalized as a child."
-      ]
+        "He incorporated anatomical imagery from Gray's Anatomy, which he received as a gift while hospitalized as a child.",
+      ],
     },
     cont_abs_01: {
       title: "Abstract Composition I",
@@ -186,8 +186,8 @@
       funFacts: [
         "The Mona Lisa has no eyebrows - it was fashionable in Renaissance Florence to shave them.",
         "Da Vinci worked on this painting for over 16 years and carried it with him everywhere.",
-        "It was stolen from the Louvre in 1911 and missing for two years, making it even more famous."
-      ]
+        "It was stolen from the Louvre in 1911 and missing for two years, making it even more famous.",
+      ],
     },
     rena_da_vinci_ladyermine: {
       title: "Lady with an Ermine",
@@ -199,8 +199,8 @@
       technique: "Careful attention to light, shadow, and realistic detail",
       funFacts: [
         "The ermine is a pun - in Greek, 'galè' means ermine, referencing the sitter's surname Gallerani.",
-        "This is one of only four portraits of women painted by Leonardo da Vinci."
-      ]
+        "This is one of only four portraits of women painted by Leonardo da Vinci.",
+      ],
     },
     pre_waterhouse_shalott: {
       title: "The Lady of Shalott",
@@ -213,8 +213,8 @@
         "Rich colors and romantic detail characteristic of Pre-Raphaelite art",
       funFacts: [
         "Waterhouse painted this subject three times - he was obsessed with the tragic story.",
-        "The three candles represent her fading life force - two are already extinguished."
-      ]
+        "The three candles represent her fading life force - two are already extinguished.",
+      ],
     },
     pre_waterhouse_miranda: {
       title: "Miranda—The Tempest",
@@ -253,8 +253,8 @@
       technique: "Rich color and detailed fabric rendering",
       funFacts: [
         "Van Dyck was knighted by King Charles I and became the leading court painter in England.",
-        "He established the visual style for British portraiture that lasted for over 150 years."
-      ]
+        "He established the visual style for British portraiture that lasted for over 150 years.",
+      ],
     },
     bar_vandyke_head_woman: {
       title: "Head of a Woman",
@@ -275,8 +275,8 @@
       technique: "Symbolic use of vibrant, expressive color",
       funFacts: [
         "Redon worked exclusively in black and white for his first 30 years as an artist.",
-        "He called his dark charcoal works his 'noirs' - they explored dreams, nightmares, and the subconscious."
-      ]
+        "He called his dark charcoal works his 'noirs' - they explored dreams, nightmares, and the subconscious.",
+      ],
     },
     postimp_redon_reflection: {
       title: "Reflection",
@@ -297,8 +297,8 @@
       technique: "Light, delicate brushwork with pastel color palette",
       funFacts: [
         "The man in the bushes commissioned this painting to show himself looking up his lover's skirt - quite scandalous!",
-        "The older man pushing the swing is the woman's husband, unaware of the hidden lover."
-      ]
+        "The older man pushing the swing is the woman's husband, unaware of the hidden lover.",
+      ],
     },
     acad_leighton_accolade: {
       title: "The Accolade",
@@ -320,8 +320,8 @@
       funFacts: [
         "This isn't actually a portrait - it's a 'tronie', a Dutch art form showing imaginary characters in exotic dress.",
         "The pearl earring is so large it's probably not real - likely polished tin or glass.",
-        "Vermeer used expensive ultramarine blue (made from lapis lazuli) for the turban, showing the subject's high status."
-      ]
+        "Vermeer used expensive ultramarine blue (made from lapis lazuli) for the turban, showing the subject's high status.",
+      ],
     },
     med_st_jerome: {
       title: "Saint Jerome",
@@ -369,8 +369,8 @@
       technique: "Wet-on-wet landscape painting with soft blending",
       funFacts: [
         "Bob Ross completed each painting in under 30 minutes for his TV show 'The Joy of Painting'.",
-        "He painted over 30,000 paintings in his lifetime but gave most away for free."
-      ]
+        "He painted over 30,000 paintings in his lifetime but gave most away for free.",
+      ],
     },
     bobross_country: {
       title: "Country Scene",
@@ -481,6 +481,32 @@
         if (title) p.setAttribute("data-title", title);
         p.classList.add("clickable");
 
+
+        // like indicator
+        const likeIndicator = document.createElement("a-image");
+        likeIndicator.setAttribute("src", "#heartOutline");
+        likeIndicator.setAttribute("width", 0.3);
+        likeIndicator.setAttribute("height", 0.3);
+        likeIndicator.setAttribute(
+          "position",
+          `${w / 2 - 0.2} ${h / 2 - 0.2} 0.05`,
+        );
+        likeIndicator.setAttribute("opacity", 0.9);
+        likeIndicator.setAttribute("transparent", true);
+        likeIndicator.setAttribute("material", "alphaTest: 0.5; side: double"); 
+        likeIndicator.classList.add("no-ray");
+        likeIndicator.classList.add("like-indicator");
+        p.appendChild(likeIndicator);
+
+        // update like indicator
+        function updateLikeIndicator() {
+          if (window.UITasks && window.UITasks.isLiked(id)) {
+            likeIndicator.setAttribute("src", "#heartFilled");
+          } else {
+            likeIndicator.setAttribute("src", "#heartOutline");
+          }
+        }
+
         let hoverOn = false;
         let hoverPanel = null;
 
@@ -505,6 +531,9 @@
           if (hoverOn) return;
           hoverOn = true;
 
+          likeIndicator.setAttribute("opacity", 1.0);
+          updateLikeIndicator();
+
           if (hasInfo) {
             hoverPanel = createHoverPanel(artInfo, id);
 
@@ -519,15 +548,24 @@
           vrwLog("painting_hover_start", { id, title });
         });
 
-        p.addEventListener("mouseleave", cleanupHover);
+        p.addEventListener("mouseleave", () => {
+          likeIndicator.setAttribute("opacity", 0.7);
+          cleanupHover();
+        });
         p.addEventListener("raycaster-intersection-cleared", cleanupHover);
+
+        p.addEventListener("click", () => {
+          if (window.UITasks) {
+            window.UITasks.toggleLike(id, title);
+            updateLikeIndicator();
+          }
+        });
 
         world.appendChild(p);
         return p;
       }
 
       //  hover information panel
-      //  hover information panel with rotating fun facts
       function createHoverPanel(artInfo, artId) {
         const panel = document.createElement("a-entity");
 
@@ -560,7 +598,7 @@
         // handle rotating fun facts
         let factIndex = 0;
         const hasFunFacts = artInfo.funFacts && artInfo.funFacts.length > 0;
-        
+
         // track which fact to show next for this painting
         if (!window.__paintingFactIndex) {
           window.__paintingFactIndex = {};
@@ -568,28 +606,28 @@
         if (!window.__paintingFactIndex[artId]) {
           window.__paintingFactIndex[artId] = 0;
         }
-        
+
         factIndex = window.__paintingFactIndex[artId];
 
         // build text content
-        // Build text content with clear section titles
         let textContent = "";
 
-        // Technique section
+        // technique section
         if (artInfo.technique) {
           textContent += `Technique:\n${artInfo.technique}\n\n`;
         }
 
-        // Fun Fact section (if available)
+        // fun fact section 
         if (hasFunFacts) {
           const currentFact = artInfo.funFacts[factIndex];
           textContent += `Fun Fact:\n${currentFact}\n\n`;
-          
-          // Increment for next hover
-          window.__paintingFactIndex[artId] = (factIndex + 1) % artInfo.funFacts.length;
+
+          // increment for next hover
+          window.__paintingFactIndex[artId] =
+            (factIndex + 1) % artInfo.funFacts.length;
         }
 
-        // Painting Details section
+        // painting details section
         if (artInfo.hoverInfo) {
           textContent += `Painting Details:\n${artInfo.hoverInfo}`;
         }
@@ -760,15 +798,39 @@
       paintOnWall(NORTH, "north", 4.5, "#imp_monet_lilies", 4.0, 2.6, 2.0);
 
       paintOnWall(NORTH, "west", -28.0, "#imp_renoir_promenade", 2.6, 1.8, 2.0);
-      paintOnWall(NORTH,"west",-21.0,"#imp_renoir_rose_garden",2.2,1.6,2.0);
+      paintOnWall(
+        NORTH,
+        "west",
+        -21.0,
+        "#imp_renoir_rose_garden",
+        2.2,
+        1.6,
+        2.0,
+      );
       paintOnWall(NORTH, "west", -15.0, "#imp_renoir_layole", 2.2, 1.6, 2.0);
 
       paintOnWall(NORTH, "east", -26.0, "#imp_renoir_by_water", 2.6, 1.8, 2.0);
-      paintOnWall(NORTH, "east", -18.0, "#imp_renoir_woman_garden", 2.2, 2.0, 2.0);
+      paintOnWall(
+        NORTH,
+        "east",
+        -18.0,
+        "#imp_renoir_woman_garden",
+        2.2,
+        2.0,
+        2.0,
+      );
 
       // north east
       paintOnWall(NE, "north", 16.0, "#postimp_redon_cyclops", 3.0, 2.8, 2.0);
-      paintOnWall(NE, "north", 25.0, "#postimp_redon_reflection", 2.6, 2.6, 2.0);
+      paintOnWall(
+        NE,
+        "north",
+        25.0,
+        "#postimp_redon_reflection",
+        2.6,
+        2.6,
+        2.0,
+      );
       paintOnWall(NE, "east", -16.0, "#pre_waterhouse_shalott", 2.8, 2.4, 2.0);
 
       paintOnWall(NE, "west", -16.0, "#fig_llanes_poet", 2.2, 1.6, 2.0);
@@ -781,27 +843,90 @@
 
       // west
       paintOnWall(WEST, "west", -7.0, "#rena_da_vinci_monalisa", 2.4, 2.8, 2.0);
-      paintOnWall(WEST, "west", 0.5, "#rena_da_vinci_ladyermine", 2.2, 2.7, 2.0);
+      paintOnWall(
+        WEST,
+        "west",
+        0.5,
+        "#rena_da_vinci_ladyermine",
+        2.2,
+        2.7,
+        2.0,
+      );
       paintOnWall(WEST, "west", 7.0, "#roco_fragonard_swing", 2.2, 1.6, 2.0);
 
-      paintOnWall(WEST,"north",-22.0,"#pre_waterhouse_miranda",2.8,2.3,2.0);
-      paintOnWall(WEST,"north",-16.0, "#pre_waterhouse_souloftherose", 2.0, 2.6, 2.0);
+      paintOnWall(
+        WEST,
+        "north",
+        -22.0,
+        "#pre_waterhouse_miranda",
+        2.8,
+        2.3,
+        2.0,
+      );
+      paintOnWall(
+        WEST,
+        "north",
+        -16.0,
+        "#pre_waterhouse_souloftherose",
+        2.0,
+        2.6,
+        2.0,
+      );
       paintOnWall(WEST, "north", -28.0, "#toulmouche_fiancee", 2.4, 1.8, 2.0);
 
-      paintOnWall(WEST,"south",-28.0,"#acad_leighton_accolade",3.2,2.2,2.0);
-      paintOnWall(WEST,"south",-21.5,"#dicksee_la_belle_dame",2.4,2.6,2.0,);
-      paintOnWall(WEST,"south",-15.0,"#selva_death_of_maiden",2.2,2.8,2.0,);
+      paintOnWall(
+        WEST,
+        "south",
+        -28.0,
+        "#acad_leighton_accolade",
+        3.2,
+        2.2,
+        2.0,
+      );
+      paintOnWall(
+        WEST,
+        "south",
+        -21.5,
+        "#dicksee_la_belle_dame",
+        2.4,
+        2.6,
+        2.0,
+      );
+      paintOnWall(
+        WEST,
+        "south",
+        -15.0,
+        "#selva_death_of_maiden",
+        2.2,
+        2.8,
+        2.0,
+      );
 
-      
       // south
-      paintOnWall(SOUTH,"south",0.0,"#fig_van_gogh_pearlearing",2.0,2.6,2.0);
+      paintOnWall(
+        SOUTH,
+        "south",
+        0.0,
+        "#fig_van_gogh_pearlearing",
+        2.0,
+        2.6,
+        2.0,
+      );
       paintOnWall(SOUTH, "south", -6.0, "#med_st_jerome", 2.2, 2.6, 2.0);
       paintOnWall(SOUTH, "south", 6.0, "#bar_vandyke_cherubs", 2.2, 1.6, 2.0);
 
       paintOnWall(SOUTH, "west", 18.0, "#bar_vandyke_family", 3.6, 2.4, 2.0);
       paintOnWall(SOUTH, "west", 26.0, "#fig_baptiste_head", 1.8, 2.2, 2.0);
 
-      paintOnWall(SOUTH,"east",18.0,"#bar_vandyke_head_woman",1.8,2.2,2.0);
+      paintOnWall(
+        SOUTH,
+        "east",
+        18.0,
+        "#bar_vandyke_head_woman",
+        1.8,
+        2.2,
+        2.0,
+      );
       paintOnWall(SOUTH, "east", 26.0, "#fig_rossi_boudoir", 2.2, 1.6, 2.0);
 
       // east
@@ -812,7 +937,15 @@
       paintOnWall(EAST, "north", 14.0, "#cont_abs_01", 2.2, 1.6, 2.0);
 
       paintOnWall(EAST, "south", 14.0, "#cont_abs_02", 2.6, 2.6, 2.2);
-      paintOnWall(EAST,"south",26.0,"#cont_stargazer_collage",2.6,2.6,2.2,);
+      paintOnWall(
+        EAST,
+        "south",
+        26.0,
+        "#cont_stargazer_collage",
+        2.6,
+        2.6,
+        2.2,
+      );
       paintOnWall(EAST, "south", 20.0, "#cont_rain_red_dress", 2.2, 2.8, 2.0);
 
       // ui

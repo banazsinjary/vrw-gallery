@@ -6,6 +6,7 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="ui/ui-blocks.js"></script>
     <script src="ui/ui-painting.js"></script>
+    <script src="ui/ui-tasks.js"></script>
 
     <style>
       body {
@@ -20,6 +21,18 @@
         <img
           id="floorTex"
           src="assets/galleryfloor.jpg"
+          crossorigin="anonymous"
+        />
+
+        <!-- Heart icons -->
+        <img
+          id="heartOutline"
+          src="assets/heart-outline.svg"
+          crossorigin="anonymous"
+        />
+        <img
+          id="heartFilled"
+          src="assets/heart-filled.svg"
           crossorigin="anonymous"
         />
 
@@ -481,32 +494,35 @@
           // AMBIENT AUDIO ZONES
           // ----------------------------
           function createAudioZone(x, z, radius, audioSrc) {
-            const zone = document.createElement('a-entity');
-            zone.setAttribute('position', `${x} 1.6 ${z}`);
-            zone.setAttribute('sound', `src: ${audioSrc}; loop: true; volume: 0.3; positional: true; refDistance: ${radius}; rolloffFactor: 1;`);
+            const zone = document.createElement("a-entity");
+            zone.setAttribute("position", `${x} 1.6 ${z}`);
+            zone.setAttribute(
+              "sound",
+              `src: ${audioSrc}; loop: true; volume: 0.3; positional: true; refDistance: ${radius}; rolloffFactor: 1;`,
+            );
             world.appendChild(zone);
             return zone;
           }
 
           // Hub - Neutral ambient
-          createAudioZone(0, 0, 15, 'url()');
+          createAudioZone(0, 0, 15, "url()");
 
-          // North wing - Classical strings  
-          createAudioZone(0, -22, 15, 'url()');
+          // North wing - Classical strings
+          createAudioZone(0, -22, 15, "url()");
 
           // South wing - Modern minimal
-          createAudioZone(0, 22, 15, 'url()');
+          createAudioZone(0, 22, 15, "url()");
 
           // East wing - Soft piano
-          createAudioZone(22, 0, 15, 'url()');
+          createAudioZone(22, 0, 15, "url()");
 
           // West wing - Orchestral/medieval
-          createAudioZone(-22, 0, 15, 'url()');
+          createAudioZone(-22, 0, 15, "url()");
 
           // NE wing - Nature sounds
-          createAudioZone(20, -20, 15, 'url()');
+          createAudioZone(20, -20, 15, "url()");
 
-          console.log('[Gallery] Ambient audio zones created');
+          console.log("[Gallery] Ambient audio zones created");
 
           // ----------------------------
           // PAINTINGS
@@ -519,6 +535,13 @@
               enableHoverHighlight: true,
               enableUILogging: true,
             },
+          });
+
+          // ----------------------------
+          // UI TASKS (Like system, Gallery, Tags)
+          // ----------------------------
+          UITasks.init({
+            world,
           });
         }
 
@@ -758,103 +781,98 @@
       </a-entity>
 
       <!-- block transition panel -->
+      <a-entity
+        id="blockTransitionPanel"
+        position="0 1.35 -1.45"
+        visible="false"
+      >
+        <a-plane
+          width="3.4"
+          height="1.1"
+          position="0 -0.025 -0.01"
+          material="color:#000; opacity:0.15; transparent:true;"
+        ></a-plane>
+        <a-plane
+          width="3.32"
+          height="1.02"
+          position="0 0 -0.005"
+          material="color:#FFFFFF; opacity:0.4; transparent:true;"
+        ></a-plane>
+        <a-plane
+          width="3.24"
+          height="0.94"
+          position="0 0 0"
+          material="color:#F5F1E8; opacity:0.35; transparent:true;"
+        ></a-plane>
 
-<a-entity
-  id="blockTransitionPanel"
-  position="0 1.35 -1.45"
-  visible="false"
->
-  <a-plane
-    width="3.4"
-    height="1.1"
-    position="0 -0.025 -0.01"
-    material="color:#000; opacity:0.15; transparent:true;"
-  ></a-plane>
-  <a-plane
-    width="3.32"
-    height="1.02"
-    position="0 0 -0.005"
-    material="color:#FFFFFF; opacity:0.4; transparent:true;"
-  ></a-plane>
-  <a-plane
-    width="3.24"
-    height="0.94"
-    position="0 0 0"
-    material="color:#F5F1E8; opacity:0.35; transparent:true;"
-  ></a-plane>
+        <a-text
+          value="Block 1 complete"
+          position="-1.48 0.20 0.01"
+          width="3.0"
+          color="#111111"
+          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+        ></a-text>
 
-  <a-text
-    value="Block 1 complete"
-    position="-1.48 0.20 0.01"
-    width="3.0"
-    color="#111111"
-    font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-  ></a-text>
+        <a-text
+          value="Press continue when ready for Block 2."
+          position="-1.48 0.00 0.01"
+          width="3.0"
+          color="#6B7280"
+          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+        ></a-text>
 
-  <a-text
-    value="Press continue when ready for Block 2."
-    position="-1.48 0.00 0.01"
-    width="3.0"
-    color="#6B7280"
-    font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-  ></a-text>
+        <a-entity position="0 -0.26 0.02">
+          <a-plane
+            id="continueBlockBtn"
+            class="clickable"
+            width="1.6"
+            height="0.34"
+            material="color:#FFFFFF; opacity:0.75; transparent:true;"
+          ></a-plane>
+          <a-entity
+            position="0 0 0.01"
+            text="value: Continue to Block 2; align: center; anchor: center; baseline: center; width: 2.2; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+          ></a-entity>
+        </a-entity>
+      </a-entity>
 
-  <a-entity position="0 -0.26 0.02">
-    <a-plane
-      id="continueBlockBtn"
-      class="clickable"
-      width="1.6"
-      height="0.34"
-      material="color:#FFFFFF; opacity:0.75; transparent:true;"
-    ></a-plane>
-    <a-entity
-      position="0 0 0.01"
-      text="value: Continue to Block 2; align: center; anchor: center; baseline: center; width: 2.2; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-    ></a-entity>
-  </a-entity>
-</a-entity>
+      <!-- thank you panel -->
+      <a-entity id="thankYouPanel" position="0 1.35 -1.45" visible="false">
+        <a-plane
+          width="3.4"
+          height="1.1"
+          position="0 -0.025 -0.01"
+          material="color:#000; opacity:0.15; transparent:true;"
+        ></a-plane>
+        <a-plane
+          width="3.32"
+          height="1.02"
+          position="0 0 -0.005"
+          material="color:#FFFFFF; opacity:0.4; transparent:true;"
+        ></a-plane>
+        <a-plane
+          width="3.24"
+          height="0.94"
+          position="0 0 0"
+          material="color:#F5F1E8; opacity:0.35; transparent:true;"
+        ></a-plane>
 
-<!-- thank you panel -->
-<a-entity
-  id="thankYouPanel"
-  position="0 1.35 -1.45"
-  visible="false"
->
-  <a-plane
-    width="3.4"
-    height="1.1"
-    position="0 -0.025 -0.01"
-    material="color:#000; opacity:0.15; transparent:true;"
-  ></a-plane>
-  <a-plane
-    width="3.32"
-    height="1.02"
-    position="0 0 -0.005"
-    material="color:#FFFFFF; opacity:0.4; transparent:true;"
-  ></a-plane>
-  <a-plane
-    width="3.24"
-    height="0.94"
-    position="0 0 0"
-    material="color:#F5F1E8; opacity:0.35; transparent:true;"
-  ></a-plane>
+        <a-text
+          value="Session complete"
+          position="-1.48 0.28 0.01"
+          width="3.0"
+          color="#111111"
+          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+        ></a-text>
 
-  <a-text
-    value="Session complete"
-    position="-1.48 0.28 0.01"
-    width="3.0"
-    color="#111111"
-    font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-  ></a-text>
-
-  <a-text
-    value="Thank you for participating!"
-    position="-1.48 0.08 0.01"
-    width="3.0"
-    color="#6B7280"
-    font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-  ></a-text>
-</a-entity>
+        <a-text
+          value="Thank you for participating!"
+          position="-1.48 0.08 0.01"
+          width="3.0"
+          color="#6B7280"
+          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+        ></a-text>
+      </a-entity>
     </a-scene>
   </body>
 </html>
