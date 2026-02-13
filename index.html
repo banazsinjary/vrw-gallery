@@ -7,6 +7,7 @@
     <script src="ui/ui-blocks.js"></script>
     <script src="ui/ui-painting.js"></script>
     <script src="ui/ui-tasks.js"></script>
+    <script src="ui/ui-scavenger.js"></script>
 
     <style>
       body {
@@ -541,6 +542,10 @@
           // UI TASKS (Like system, Gallery, Tags)
           // ----------------------------
           UITasks.init({
+            world,
+          });
+
+          UIScavenger.init({
             world,
           });
         }
