@@ -16,14 +16,14 @@
       console.log("[LOG]", entry);
     };
 
-  //  painting informational db
+  // painting informational database
   const PAINTING_DATABASE = {
     imp_monet_parasol: {
       title: "Woman with a Parasol",
       artist: "Claude Monet",
       year: "1875",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Monet captured his wife Camille and son on a breezy summer day. The loose brushstrokes and vibrant colors exemplify Impressionism's focus on capturing fleeting moments of light and atmosphere.",
       technique:
         "Quick, visible brushstrokes with emphasis on natural light effects",
@@ -38,7 +38,7 @@
       artist: "Claude Monet",
       year: "c. 1916",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Part of Monet's iconic series painted in his Giverny garden. He was fascinated by how light danced across water at different times of day, creating over 250 paintings of this subject.",
       technique: "Thick impasto with layered colors creating depth and texture",
       funFacts: [
@@ -52,7 +52,7 @@
       artist: "Pierre-Auguste Renoir",
       year: "1870",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Renoir celebrates the leisure of Parisian middle class during the Belle Époque. His soft, feathered brushwork creates a dreamy quality that focuses on beauty and everyday joy.",
       technique: "Soft brushwork with dappled light filtering through foliage",
       funFacts: [
@@ -65,7 +65,7 @@
       artist: "Pierre-Auguste Renoir",
       year: "1880",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Renoir loved painting outdoors to capture natural light. This work demonstrates his mastery of rendering how sunlight filters through trees and reflects off water.",
       technique: "Impressionist plein air painting with luminous color palette",
     },
@@ -74,7 +74,7 @@
       artist: "Pierre-Auguste Renoir",
       year: "1876",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Renoir's celebration of natural beauty and gardens. The soft brushwork and luminous colors create an almost dreamlike atmosphere of peace and tranquility.",
       technique: "Soft, blended brushwork with warm, glowing color harmony",
     },
@@ -83,7 +83,7 @@
       artist: "Pierre-Auguste Renoir",
       year: "1873",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Painted entirely outdoors to capture authentic natural light. Renoir explores the interplay between sunlight, shadow, and organic forms in nature.",
       technique:
         "Impressionist outdoor painting with visible, textured brushstrokes",
@@ -93,7 +93,7 @@
       artist: "Pierre-Auguste Renoir",
       year: "1875",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Depicts leisure boating on the Seine, a favorite Impressionist subject. Renoir captures the joy of modern Parisian life and outdoor recreation with vibrant, loose brushwork.",
       technique: "Vibrant colors with energetic, loose brushstrokes",
     },
@@ -102,7 +102,7 @@
       artist: "Jean-Michel Basquiat",
       year: "1982-83",
       medium: "Acrylic & mixed media",
-      hoverInfo:
+      details:
         "Basquiat merged Eastern spirituality with Western pop culture and street art aesthetics. His work challenges boundaries between high art and graffiti, creating a unique visual language.",
       technique: "Mixed media with graffiti-inspired elements and collage",
       funFacts: [
@@ -116,7 +116,7 @@
       artist: "Jean-Michel Basquiat",
       year: "1984",
       medium: "Acrylic and oilstick",
-      hoverInfo:
+      details:
         "This work references a popular children's candy dispenser, transforming it into a sharp critique of consumerism, power, and cultural symbols. Basquiat often juxtaposed childlike imagery with complex social commentary, blending street culture, history, and art-world critique.",
       technique:
         "Expressive line work, symbolic imagery, and layered text with raw, graffiti-inspired marks",
@@ -130,7 +130,7 @@
       artist: "Jean-Michel Basquiat",
       year: "1982",
       medium: "Acrylic, oilstick, spray paint",
-      hoverInfo:
+      details:
         "This monumental work exemplifies Basquiat's mature visual language, combining mask-like faces, anatomical symbols, and aggressive mark-making. The figure recalls African and Caribbean visual traditions while confronting themes of power, identity, and historical erasure.",
       technique:
         "Layered brushwork, raw line drawing, symbolic figuration, and expressive color fields",
@@ -144,7 +144,7 @@
       artist: "Contemporary",
       year: "20th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Modern abstract art emphasizes color, form, and emotion over representational imagery. This piece invites personal interpretation and emotional response.",
       technique: "Bold color fields with gestural marks",
     },
@@ -153,7 +153,7 @@
       artist: "Contemporary",
       year: "20th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Abstract art frees color and form from the need to represent reality, allowing pure visual expression. Each viewer brings their own meaning to the work.",
       technique: "Layered colors with dynamic composition",
     },
@@ -162,7 +162,7 @@
       artist: "Contemporary",
       year: "20th Century",
       medium: "Mixed media",
-      hoverInfo:
+      details:
         "Contemporary figurative work blending realistic and abstract elements. The vivid red creates strong emotional impact and focal point.",
       technique: "Mixed media with bold color contrast",
     },
@@ -171,7 +171,7 @@
       artist: "Contemporary",
       year: "20th Century",
       medium: "Mixed media collage",
-      hoverInfo:
+      details:
         "Collage allows artists to combine disparate elements into unified compositions. This technique gained popularity in modern art for its innovative approach to creating imagery.",
       technique: "Collage with layered imagery and textures",
     },
@@ -180,7 +180,7 @@
       artist: "Leonardo da Vinci",
       year: "c. 1503-1519",
       medium: "Oil on poplar panel",
-      hoverInfo:
+      details:
         "The world's most famous painting. Da Vinci used sfumato (subtle blending) to create the enigmatic smile. The atmospheric background and psychological depth make this a masterpiece of Renaissance art.",
       technique: "Sfumato technique with subtle transitions between colors",
       funFacts: [
@@ -194,7 +194,7 @@
       artist: "Leonardo da Vinci",
       year: "c. 1489-1490",
       medium: "Oil on walnut panel",
-      hoverInfo:
+      details:
         "Portrait of Cecilia Gallerani, mistress of the Duke of Milan. The ermine symbolizes purity and was a clever play on her name. Da Vinci's mastery of light and shadow brings life to her expression.",
       technique: "Careful attention to light, shadow, and realistic detail",
       funFacts: [
@@ -207,7 +207,7 @@
       artist: "John William Waterhouse",
       year: "1888",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Based on Tennyson's poem about a cursed lady who could only view the world through a mirror. The painting captures her tragic moment of leaving the tower, knowing death awaits her.",
       technique:
         "Rich colors and romantic detail characteristic of Pre-Raphaelite art",
@@ -221,7 +221,7 @@
       artist: "John William Waterhouse",
       year: "1916",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Shakespeare's character Miranda watches the storm from shore. Waterhouse was fascinated by literary and mythological subjects, bringing them to life with atmospheric effects.",
       technique: "Dramatic atmospheric effects with detailed naturalism",
     },
@@ -230,7 +230,7 @@
       artist: "John William Waterhouse",
       year: "1908",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A woman lost in the scent and beauty of roses. Waterhouse explores themes of beauty, contemplation, and sensory experience with characteristic Pre-Raphaelite botanical detail.",
       technique: "Meticulous botanical detail with soft, romantic lighting",
     },
@@ -239,7 +239,7 @@
       artist: "Anthony van Dyck",
       year: "1630s",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Van Dyck was court painter to Charles I of England. His cherubs celebrate divine innocence with dramatic Baroque lighting and soft modeling of forms.",
       technique: "Dramatic lighting with soft, rounded forms",
     },
@@ -248,7 +248,7 @@
       artist: "Anthony van Dyck",
       year: "1630s",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Van Dyck revolutionized portrait painting with elegant poses and rich fabrics. His Baroque style emphasizes drama, movement, and psychological depth.",
       technique: "Rich color and detailed fabric rendering",
       funFacts: [
@@ -261,7 +261,7 @@
       artist: "Anthony van Dyck",
       year: "1630s",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Van Dyck's portraits capture both physical likeness and inner character. His fluid brushwork and attention to expression influenced generations of portrait painters.",
       technique: "Fluid brushwork with psychological depth",
     },
@@ -270,7 +270,7 @@
       artist: "Odilon Redon",
       year: "1914",
       medium: "Oil on cardboard",
-      hoverInfo:
+      details:
         "Redon reimagines Greek mythology through dreamlike symbolism. After years working in dark charcoals, he embraced brilliant, vibrant colors late in his career.",
       technique: "Symbolic use of vibrant, expressive color",
       funFacts: [
@@ -283,7 +283,7 @@
       artist: "Odilon Redon",
       year: "Late 19th C.",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Redon bridges Impressionism and Symbolism, creating mysterious, dreamlike works. His art explores the subconscious and spiritual realms through color and form.",
       technique: "Soft, atmospheric color creating mysterious mood",
     },
@@ -292,7 +292,7 @@
       artist: "Jean-Honoré Fragonard",
       year: "1767",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Epitomizes Rococo focus on pleasure and romance. Painted before the French Revolution, it captures aristocratic leisure and flirtation with light, playful brushwork.",
       technique: "Light, delicate brushwork with pastel color palette",
       funFacts: [
@@ -305,7 +305,7 @@
       artist: "Edmund Blair Leighton",
       year: "1901",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Romanticized vision of medieval chivalry. The precise, academic realism shows the moment a knight receives recognition for his honor and bravery.",
       technique: "Precise academic realism with historical detail",
     },
@@ -314,7 +314,7 @@
       artist: "Johannes Vermeer",
       year: "c. 1665",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         'Often called the "Mona Lisa of the North." Vermeer\'s masterful use of light creates an intimate, enigmatic portrait. The pearl earring catches light beautifully against the dark background.',
       technique: "Masterful use of light with smooth tonal transitions",
       funFacts: [
@@ -328,7 +328,7 @@
       artist: "Medieval/Renaissance",
       year: "Medieval Period",
       medium: "Tempera on panel",
-      hoverInfo:
+      details:
         "Religious imagery was central to medieval art. Saint Jerome, translator of the Bible, is typically depicted as a scholar in contemplation or with a lion.",
       technique: "Tempera painting with gold leaf and symbolic imagery",
     },
@@ -337,7 +337,7 @@
       artist: "Jean-Baptiste",
       year: "19th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Academic portrait studies focus on capturing human expression and character. These works demonstrate technical mastery of rendering form and light.",
       technique: "Classical portrait technique with careful modeling",
     },
@@ -346,7 +346,7 @@
       artist: "Llanes",
       year: "19th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Romantic-era portraits of artists and intellectuals celebrated creativity and inner life. The contemplative pose suggests deep thought and artistic inspiration.",
       technique: "Romantic realism with emphasis on character",
     },
@@ -355,7 +355,7 @@
       artist: "Rossi",
       year: "19th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "Intimate interior scenes were popular in 19th century art. These works explore private moments and the psychology of domestic spaces.",
       technique: "Soft lighting with attention to fabric and texture",
     },
@@ -364,7 +364,7 @@
       artist: "Bob Ross",
       year: "20th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A calm landscape study with warm light and soft trees. Take a moment to breathe and notice the depth in the background.",
       technique: "Wet-on-wet landscape painting with soft blending",
       funFacts: [
@@ -377,7 +377,7 @@
       artist: "Bob Ross",
       year: "20th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A peaceful country view with gentle contrast and open space. Notice how the horizon guides your gaze.",
       technique: "Wet-on-wet with simple value layering",
     },
@@ -386,7 +386,7 @@
       artist: "Bob Ross",
       year: "20th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A warm sunset palette with silhouetted forms and atmospheric distance. Let your eyes rest on the gradient sky.",
       technique: "Soft sky gradients with mountain silhouettes",
     },
@@ -395,17 +395,16 @@
       artist: "Bob Ross",
       year: "20th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A bright, hopeful sky study with glowing highlights and layered clouds. Notice the contrast between light and shadow.",
       technique: "Layered clouds with highlight passes",
     },
-
     dicksee_la_belle_dame: {
       title: "La Belle Dame",
       artist: "Unknown (file: Dicksee)",
       year: "19th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A romantic-era figurative work. Observe the focus on expression, fabric detail, and soft lighting.",
       technique: "Academic portrait technique with controlled edges",
     },
@@ -414,7 +413,7 @@
       artist: "Unknown (file: Selva)",
       year: "19th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A dramatic narrative scene. Notice how the composition uses contrast and gesture to create emotion and tension.",
       technique: "Narrative realism with strong tonal contrast",
     },
@@ -423,7 +422,7 @@
       artist: "Unknown (file: Toulmouche)",
       year: "19th Century",
       medium: "Oil on canvas",
-      hoverInfo:
+      details:
         "A refined interior portrait. Notice posture, gaze, and material textures that communicate social tone and character.",
       technique: "Smooth academic rendering with attention to fabric",
     },
@@ -445,13 +444,13 @@
         return;
       }
 
-      const { enableHoverHighlight = true, enableUILogging = true } = options;
+      const { enableUILogging = true } = options;
 
       const PAINT_INSET = paintInset;
       const PAINT_MAT_BASE =
         "shader: standard; transparent:true; side:double; depthTest:true; depthWrite:true;";
 
-      // add paintings with info
+      // create painting with interactive elements
       function addPainting({
         x,
         y,
@@ -470,18 +469,13 @@
         p.setAttribute("width", w);
         p.setAttribute("height", h);
 
-        // base material
         const baseMat = `${PAINT_MAT_BASE} src:${src};`;
         p.setAttribute("material", baseMat);
 
-        p.setAttribute("material", "emissive", "#000000");
-        p.setAttribute("material", "emissiveIntensity", 0);
-
         if (id) p.setAttribute("data-art-id", id);
         if (title) p.setAttribute("data-title", title);
-        p.classList.add("clickable");
 
-        // like indicator
+        // like indicator (heart) - top right of painting
         const likeIndicator = document.createElement("a-image");
         likeIndicator.setAttribute("src", "#heartOutline");
         likeIndicator.setAttribute("width", 0.3);
@@ -493,21 +487,114 @@
         likeIndicator.setAttribute("opacity", 0.9);
         likeIndicator.setAttribute("transparent", true);
         likeIndicator.setAttribute("material", "alphaTest: 0.5; side: double");
-        likeIndicator.classList.add("no-ray");
+        likeIndicator.classList.add("clickable");
         likeIndicator.classList.add("like-indicator");
         p.appendChild(likeIndicator);
 
-        // create tag button (bottom right corner) - BIGGER
-        const tagButton = document.createElement("a-entity");
-        tagButton.setAttribute(
+        // heart tooltip
+        const heartTooltip = document.createElement("a-entity");
+        heartTooltip.setAttribute(
           "position",
-          `${w / 2 - 0.35} ${-h / 2 + 0.25} 0.05`,
+          `${w / 2 - 0.2} ${h / 2 - 0.65} 0.06`,
         );
+
+        const tooltipBg = document.createElement("a-plane");
+        tooltipBg.setAttribute("width", 0.7);
+        tooltipBg.setAttribute("height", 0.25);
+        tooltipBg.setAttribute(
+          "material",
+          "color:#FFFFFF; opacity:0.95; transparent:true;",
+        );
+        tooltipBg.classList.add("no-ray");
+        heartTooltip.appendChild(tooltipBg);
+
+        const tooltipText = document.createElement("a-text");
+        tooltipText.setAttribute("value", "Like to add\nto My Gallery");
+        tooltipText.setAttribute("align", "center");
+        tooltipText.setAttribute("anchor", "center");
+        tooltipText.setAttribute("baseline", "center");
+        tooltipText.setAttribute("width", 1.4);
+        tooltipText.setAttribute("color", "#111111");
+        tooltipText.setAttribute("position", "0 0 0.01");
+        tooltipText.classList.add("no-ray");
+        heartTooltip.appendChild(tooltipText);
+
+        heartTooltip.setAttribute("visible", false);
+        p.appendChild(heartTooltip);
+
+        // show/hide tooltip on heart hover
+        likeIndicator.addEventListener("mouseenter", () => {
+          heartTooltip.setAttribute("visible", true);
+        });
+
+        likeIndicator.addEventListener("mouseleave", () => {
+          heartTooltip.setAttribute("visible", false);
+        });
+
+        // heart click handler - toggle like
+        likeIndicator.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (window.UITasks) {
+            window.UITasks.toggleLike(id, title);
+            updateLikeIndicator();
+          }
+        });
+
+        // details button (bottom right corner, outside painting, top position)
+        const detailsButton = document.createElement("a-entity");
+        detailsButton.setAttribute("position", `${w / 2 + 0.55} ${-h / 2 + 0.35} 0.05`);
+        detailsButton.classList.add("clickable");
+
+        const detailsBg = document.createElement("a-plane");
+        detailsBg.setAttribute("width", 0.9);
+        detailsBg.setAttribute("height", 0.22);
+        detailsBg.setAttribute(
+          "material",
+          "color:#374151; opacity:0.85; transparent:true;",
+        );
+        detailsBg.classList.add("clickable");
+        detailsButton.appendChild(detailsBg);
+
+        const detailsText = document.createElement("a-text");
+        detailsText.setAttribute("value", "Details");
+        detailsText.setAttribute("align", "center");
+        detailsText.setAttribute("anchor", "center");
+        detailsText.setAttribute("baseline", "center");
+        detailsText.setAttribute("width", 2);
+        detailsText.setAttribute("color", "#FFFFFF");
+        detailsText.setAttribute("position", "0 0 0.01");
+        detailsButton.appendChild(detailsText);
+
+        // track details panel state
+        let detailsPanel = null;
+
+        // details button click handler - toggle panel
+        detailsButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+
+          if (detailsPanel) {
+            // close panel
+            if (detailsPanel.parentNode) {
+              detailsPanel.parentNode.removeChild(detailsPanel);
+            }
+            detailsPanel = null;
+          } else if (artInfo) {
+            // open panel
+            detailsPanel = createDetailsPanel(artInfo, id);
+            p.appendChild(detailsPanel);
+          }
+        });
+
+        p.appendChild(detailsButton);
+
+        // tag button (bottom right corner, outside painting, below details)
+        const tagButton = document.createElement("a-entity");
+        tagButton.setAttribute("position", `${w / 2 + 0.55} ${-h / 2} 0.05`);
         tagButton.classList.add("clickable");
 
         const tagBg = document.createElement("a-plane");
-        tagBg.setAttribute("width", 0.5); // bigger width
-        tagBg.setAttribute("height", 0.18); // bigger height
+        tagBg.setAttribute("width", 0.9);
+        tagBg.setAttribute("height", 0.22);
         tagBg.setAttribute(
           "material",
           "color:#374151; opacity:0.85; transparent:true;",
@@ -520,13 +607,13 @@
         tagText.setAttribute("align", "center");
         tagText.setAttribute("anchor", "center");
         tagText.setAttribute("baseline", "center");
-        tagText.setAttribute("width", 1.2); // bigger text
+        tagText.setAttribute("width", 2);
         tagText.setAttribute("color", "#FFFFFF");
         tagText.setAttribute("position", "0 0 0.01");
         tagButton.appendChild(tagText);
 
         tagButton.addEventListener("click", (e) => {
-          e.stopPropagation(); // prevent click from bubbling to painting
+          e.stopPropagation();
           if (window.UITasks) {
             window.UITasks.openTagMenu(id, title);
           }
@@ -534,7 +621,7 @@
 
         p.appendChild(tagButton);
 
-        // update like indicator
+        // update like indicator function
         function updateLikeIndicator() {
           if (window.UITasks && window.UITasks.isLiked(id)) {
             likeIndicator.setAttribute("src", "#heartFilled");
@@ -543,71 +630,15 @@
           }
         }
 
-        let hoverOn = false;
-        let hoverPanel = null;
-
-        const hasInfo = !!(artInfo && artInfo.hoverInfo);
-
-        function cleanupHover() {
-          if (!hoverOn) return;
-          hoverOn = false;
-
-          p.setAttribute("material", "emissive", "#000000");
-          p.setAttribute("material", "emissiveIntensity", 0);
-
-          if (hoverPanel && hoverPanel.parentNode) {
-            hoverPanel.parentNode.removeChild(hoverPanel);
-          }
-          hoverPanel = null;
-
-          vrwLog("painting_hover_end", { id, title });
-        }
-
-        p.addEventListener("mouseenter", () => {
-          if (hoverOn) return;
-          hoverOn = true;
-
-          likeIndicator.setAttribute("opacity", 1.0);
-          updateLikeIndicator();
-
-          if (hasInfo) {
-            hoverPanel = createHoverPanel(artInfo, id);
-
-            hoverPanel.addEventListener(
-              "raycaster-intersection-cleared",
-              cleanupHover,
-            );
-
-            p.appendChild(hoverPanel);
-          }
-
-          vrwLog("painting_hover_start", { id, title });
-        });
-
-        p.addEventListener("mouseleave", () => {
-          likeIndicator.setAttribute("opacity", 0.7);
-          cleanupHover();
-        });
-        p.addEventListener("raycaster-intersection-cleared", cleanupHover);
-
-        p.addEventListener("click", () => {
-          if (window.UITasks) {
-            window.UITasks.toggleLike(id, title);
-            updateLikeIndicator();
-          }
-        });
-
         world.appendChild(p);
         return p;
       }
 
-      //  hover information panel
-      function createHoverPanel(artInfo, artId) {
+      // create details information panel
+      function createDetailsPanel(artInfo, artId) {
         const panel = document.createElement("a-entity");
-
         panel.setAttribute("position", "0 0.55 0.75");
         panel.setAttribute("rotation", "0 0 0");
-
         panel.classList.add("no-ray");
 
         const bg = document.createElement("a-plane");
@@ -658,21 +689,20 @@
           const currentFact = artInfo.funFacts[factIndex];
           textContent += `Fun Fact:\n${currentFact}\n\n`;
 
-          // increment for next hover
+          // increment for next view
           window.__paintingFactIndex[artId] =
             (factIndex + 1) % artInfo.funFacts.length;
         }
 
         // painting details section
-        if (artInfo.hoverInfo) {
-          textContent += `Painting Details:\n${artInfo.hoverInfo}`;
+        if (artInfo.details) {
+          textContent += `Painting Details:\n${artInfo.details}`;
         }
 
         textContent = clampText(textContent, 720);
 
         const textEl = document.createElement("a-text");
         textEl.setAttribute("value", textContent);
-
         textEl.setAttribute("position", "-0.74 0.56 0.01");
         textEl.setAttribute("width", 1.5);
         textEl.setAttribute("color", "#111111");
@@ -683,14 +713,13 @@
         textEl.setAttribute("wrap-count", 34);
         textEl.setAttribute("line-height", 38);
         textEl.setAttribute("baseline", "top");
-
         textEl.classList.add("no-ray");
         panel.appendChild(textEl);
 
         return panel;
       }
 
-      // plaques
+      // create plaque below painting
       function addPlaque({
         x,
         y,
@@ -759,7 +788,7 @@
         return wrap;
       }
 
-      // painting + plaque + hover information
+      // place painting + plaque on wall
       function paintOnWall(
         boundsObj,
         side,
@@ -829,10 +858,9 @@
 
       // painting placements
 
-      // north
+      // north wing
       paintOnWall(NORTH, "north", -4.5, "#imp_monet_parasol", 3.2, 2.2, 2.0);
       paintOnWall(NORTH, "north", 4.5, "#imp_monet_lilies", 4.0, 2.6, 2.0);
-
       paintOnWall(NORTH, "west", -28.0, "#imp_renoir_promenade", 2.6, 1.8, 2.0);
       paintOnWall(
         NORTH,
@@ -844,7 +872,6 @@
         2.0,
       );
       paintOnWall(NORTH, "west", -15.0, "#imp_renoir_layole", 2.2, 1.6, 2.0);
-
       paintOnWall(NORTH, "east", -26.0, "#imp_renoir_by_water", 2.6, 1.8, 2.0);
       paintOnWall(
         NORTH,
@@ -856,7 +883,7 @@
         2.0,
       );
 
-      // north east
+      // north east wing
       paintOnWall(NE, "north", 16.0, "#postimp_redon_cyclops", 3.0, 2.8, 2.0);
       paintOnWall(
         NE,
@@ -868,17 +895,14 @@
         2.0,
       );
       paintOnWall(NE, "east", -16.0, "#pre_waterhouse_shalott", 2.8, 2.4, 2.0);
-
       paintOnWall(NE, "west", -16.0, "#fig_llanes_poet", 2.2, 1.6, 2.0);
-
       paintOnWall(NE, "west", -28.0, "#bobross_cedar_park", 2.6, 1.8, 2.0);
       paintOnWall(NE, "west", -22.0, "#bobross_country", 2.6, 1.8, 2.0);
-
       paintOnWall(NE, "east", -28.0, "#bobross_mountain_sunset", 2.6, 1.8, 2.0);
       paintOnWall(NE, "east", -22.0, "#bobross_silver_linings", 2.6, 1.8, 2.0);
 
-      // west
-      paintOnWall(WEST, "west", -7.0, "#rena_da_vinci_monalisa", 2.4, 2.8, 2.0);
+      // west wing
+      paintOnWall(WEST, "west", -6.0, "#rena_da_vinci_monalisa", 1.8, 2.5, 2.0);
       paintOnWall(
         WEST,
         "west",
@@ -889,7 +913,6 @@
         2.0,
       );
       paintOnWall(WEST, "west", 7.0, "#roco_fragonard_swing", 2.2, 1.6, 2.0);
-
       paintOnWall(
         WEST,
         "north",
@@ -909,7 +932,6 @@
         2.0,
       );
       paintOnWall(WEST, "north", -28.0, "#toulmouche_fiancee", 2.4, 1.8, 2.0);
-
       paintOnWall(
         WEST,
         "south",
@@ -938,7 +960,7 @@
         2.0,
       );
 
-      // south
+      // south wing
       paintOnWall(
         SOUTH,
         "south",
@@ -950,10 +972,8 @@
       );
       paintOnWall(SOUTH, "south", -6.0, "#med_st_jerome", 2.2, 2.6, 2.0);
       paintOnWall(SOUTH, "south", 6.0, "#bar_vandyke_cherubs", 2.2, 1.6, 2.0);
-
       paintOnWall(SOUTH, "west", 18.0, "#bar_vandyke_family", 3.6, 2.4, 2.0);
       paintOnWall(SOUTH, "west", 26.0, "#fig_baptiste_head", 1.8, 2.2, 2.0);
-
       paintOnWall(
         SOUTH,
         "east",
@@ -965,13 +985,11 @@
       );
       paintOnWall(SOUTH, "east", 26.0, "#fig_rossi_boudoir", 2.2, 1.6, 2.0);
 
-      // east
+      // east wing
       paintOnWall(EAST, "east", -7.0, "#cont_basquiat_buddha", 3.2, 2.2, 2.0);
       paintOnWall(EAST, "east", 6.0, "#cont_basquiat_untitled", 3.4, 2.6, 2.0);
       paintOnWall(EAST, "east", 0.0, "#cont_basquiat_pez", 2.2, 2.0, 2.2);
-
       paintOnWall(EAST, "north", 14.0, "#cont_abs_01", 2.2, 1.6, 2.0);
-
       paintOnWall(EAST, "south", 14.0, "#cont_abs_02", 2.6, 2.6, 2.2);
       paintOnWall(
         EAST,
@@ -984,7 +1002,7 @@
       );
       paintOnWall(EAST, "south", 20.0, "#cont_rain_red_dress", 2.2, 2.8, 2.0);
 
-      // ui
+      // ui logging setup
       if (enableUILogging) {
         for (let i = 1; i <= 5; i++) {
           const el = document.getElementById(`comfortBtn${i}`);
@@ -1016,9 +1034,7 @@
             });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
-            a.download = `vrw_log_${new Date()
-              .toISOString()
-              .replace(/[:.]/g, "-")}.json`;
+            a.download = `vrw_log_${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
             document.body.appendChild(a);
             a.click();
             a.remove();
@@ -1027,7 +1043,6 @@
       }
 
       vrwLog("paintings_init", {
-        enableHoverHighlight,
         enableUILogging,
         paintingCount: Object.keys(PAINTING_DATABASE).length,
       });
