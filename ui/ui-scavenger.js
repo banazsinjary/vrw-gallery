@@ -131,83 +131,83 @@
       return [
         {
           id: "rena_da_vinci_monalisa",
-          clue: "Begin with the portrait known as the most famous smile in the world.",
+          clue: "Find the portrait with the world's most scrutinized smile.",
         },
         {
           id: "rena_da_vinci_ladyermine",
-          clue: "In the same spirit of Renaissance portraiture, find the woman holding a small white animal.",
+          clue: "Seek the Renaissance woman cradling a white ermine.",
         },
         {
           id: "bar_vandyke_cherubs",
-          clue: "Now find the painting where angels float with soft, dramatic light.",
+          clue: "Locate the celestial beings bathed in Baroque chiaroscuro.",
         },
         {
           id: "bar_vandyke_family",
-          clue: "Look for a family gathered in elegant Baroque fashion.",
+          clue: "Find the aristocratic family portrait displaying wealth and status through fabric and pose.",
         },
         {
           id: "bar_vandyke_head_woman",
-          clue: "Find the painting that focuses only on the head of a woman, capturing inner character.",
+          clue: "Seek the intimate portrait study that captures psychological depth in a single face.",
         },
         {
           id: "pre_waterhouse_shalott",
-          clue: "Travel forward in time. Find the painting of a woman drifting in a boat, her fate already sealed.",
+          clue: "Find the cursed woman adrift in a boat, three candles marking her fate.",
         },
         {
           id: "pre_waterhouse_miranda",
-          clue: "Now locate the figure watching a violent storm from the shore.",
+          clue: "Locate the figure witnessing a tempest from the safety of shore.",
         },
         {
           id: "pre_waterhouse_souloftherose",
-          clue: "Find the woman lost in the scent of roses.",
+          clue: "Find the woman inhaling deeply from a garden bloom.",
         },
         {
           id: "acad_leighton_accolade",
-          clue: "Seek the moment when a knight receives honor beneath a raised sword.",
+          clue: "Seek the ceremonial moment when blade touches shoulder in medieval ritual.",
         },
         {
           id: "roco_fragonard_swing",
-          clue: "Find the playful scene where a swing reveals more than it should.",
+          clue: "Find the flirtatious scene where physics and desire intersect on a garden swing.",
         },
         {
           id: "imp_monet_parasol",
-          clue: "Move into modern light. Find the woman standing beneath a parasol on a breezy day.",
+          clue: "Locate the wind-swept figure shielding herself from sun on a hilltop.",
         },
         {
           id: "imp_monet_lilies",
-          clue: "Now find water again — but this time, no figures, only reflections.",
+          clue: "Find the aquatic garden where water and sky blur into abstraction.",
         },
         {
           id: "imp_renoir_layole",
-          clue: "Locate the painting that captures leisure boating on a river.",
+          clue: "Seek the small boat gliding across sun-dappled water.",
         },
         {
           id: "imp_renoir_promenade",
-          clue: "Find another scene of leisure, this time walking among trees and filtered light.",
+          clue: "Find the couple strolling beneath a canopy of light-filtered foliage.",
         },
         {
           id: "cont_rain_red_dress",
-          clue: "Seek the painting where a bold red dress dominates the composition.",
+          clue: "Locate the figure whose crimson garment commands the entire canvas.",
         },
         {
           id: "cont_basquiat_pez",
-          clue: "Find the candy dispenser transformed into social commentary.",
+          clue: "Find the childhood candy container reimagined as cultural critique.",
         },
         {
           id: "cont_basquiat_untitled",
-          clue: "Now locate the raw, mask-like face layered with symbols and color.",
+          clue: "Seek the skull-like visage surrounded by symbols, text, and gestural marks.",
         },
         {
           id: "postimp_redon_cyclops",
-          clue: "Find the giant eye peering over a hill toward a sleeping figure.",
+          clue: "Find the mythological giant whose single eye watches over a vulnerable sleeper.",
         },
         {
           id: "postimp_redon_reflection",
-          clue: "Look for the dreamlike painting built on soft, mysterious color.",
+          clue: "Locate the ethereal composition built from color rather than form.",
         },
         {
           id: "bobross_cedar_park",
-          clue: "For your final piece, find the peaceful landscape painted in under 30 minutes, where 'happy little trees' might live.",
+          clue: "Find the landscape completed in a single session using the wet-on-wet technique.",
         },
       ];
     },
