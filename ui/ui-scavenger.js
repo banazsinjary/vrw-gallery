@@ -232,7 +232,7 @@
     createScavengerButton() {
       const button = document.createElement("a-entity");
       button.setAttribute("id", "scavengerButton");
-      button.setAttribute("position", "0.95 0.56 -1.5"); // directly under gallery button
+      button.setAttribute("position", "0.38 0.12 -2.0"); // directly under gallery button
       button.classList.add("clickable");
 
       // background - same color as gallery button

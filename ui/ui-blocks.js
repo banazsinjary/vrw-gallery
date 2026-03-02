@@ -66,16 +66,130 @@ AFRAME.registerComponent("ui-block", {
       console.log("[StudyUI] Camera found - panels will follow view");
     }
 
-    // initialize block state
-    this.resetBlockState();
+    // Create and show start panel
+    this.createStartPanel();
+
+    // Don't initialize block state yet - wait for start button
     this.hideAllPanels();
     this.bindUiListeners();
+
+    console.log("[StudyUI] Waiting for participant to start Block 1");
+  },
+
+  createStartPanel: function () {
+    const panel = document.createElement("a-entity");
+    panel.setAttribute("id", "startPanel");
+    panel.setAttribute("position", "0 -0.1 -2.8");
+
+    const shadow = document.createElement("a-plane");
+    shadow.setAttribute("width", 2.2);
+    shadow.setAttribute("height", 0.75);
+    shadow.setAttribute("position", "0 -0.025 -0.01");
+    shadow.setAttribute(
+      "material",
+      "color:#000; opacity:0.15; transparent:true;",
+    );
+    panel.appendChild(shadow);
+
+    const bg1 = document.createElement("a-plane");
+    bg1.setAttribute("width", 2.14);
+    bg1.setAttribute("height", 0.69);
+    bg1.setAttribute("position", "0 0 -0.005");
+    bg1.setAttribute(
+      "material",
+      "color:#FFFFFF; opacity:0.4; transparent:true;",
+    );
+    panel.appendChild(bg1);
+
+    const bg2 = document.createElement("a-plane");
+    bg2.setAttribute("width", 2.08);
+    bg2.setAttribute("height", 0.63);
+    bg2.setAttribute("position", "0 0 0");
+    bg2.setAttribute(
+      "material",
+      "color:#F5F1E8; opacity:0.35; transparent:true;",
+    );
+    panel.appendChild(bg2);
+
+    const title = document.createElement("a-text");
+    title.setAttribute("value", "VR Art Gallery Study");
+    title.setAttribute("position", "-0.95 0.19 0.01");
+    title.setAttribute("width", 2.0);
+    title.setAttribute("color", "#111111");
+    title.setAttribute("font", "https://cdn.aframe.io/fonts/Roboto-msdf.json");
+    panel.appendChild(title);
+
+    const instructions = document.createElement("a-text");
+    instructions.setAttribute(
+      "value",
+      "When ready, press the button to begin.",
+    );
+    instructions.setAttribute("position", "-0.95 0.05 0.01");
+    instructions.setAttribute("width", 2.0);
+    instructions.setAttribute("color", "#6B7280");
+    instructions.setAttribute(
+      "font",
+      "https://cdn.aframe.io/fonts/Roboto-msdf.json",
+    );
+    panel.appendChild(instructions);
+
+    const startBtn = document.createElement("a-entity");
+    startBtn.setAttribute("position", "0 -0.18 0.02");
+    startBtn.classList.add("clickable");
+
+    const btnBg = document.createElement("a-plane");
+    btnBg.setAttribute("width", 1.1);
+    btnBg.setAttribute("height", 0.25);
+    btnBg.setAttribute(
+      "material",
+      "color:#FFFFFF; opacity:0.75; transparent:true;",
+    );
+    btnBg.classList.add("clickable");
+    startBtn.appendChild(btnBg);
+
+    const btnText = document.createElement("a-text");
+    btnText.setAttribute("value", "Start Block 1");
+    btnText.setAttribute("align", "center");
+    btnText.setAttribute("anchor", "center");
+    btnText.setAttribute("baseline", "center");
+    btnText.setAttribute("width", 1.6);
+    btnText.setAttribute("color", "#111");
+    btnText.setAttribute(
+      "font",
+      "https://cdn.aframe.io/fonts/Roboto-msdf.json",
+    );
+    btnText.setAttribute("position", "0 0 0.01");
+    startBtn.appendChild(btnText);
+
+    startBtn.addEventListener("click", () => {
+      this.flashButton(btnBg, "#6B7280");
+      setTimeout(() => {
+        panel.setAttribute("visible", false);
+        this.startBlock1();
+      }, 300);
+    });
+
+    panel.appendChild(startBtn);
+
+    if (this.camera) {
+      this.camera.appendChild(panel);
+    }
+
+    this.startPanel = panel;
+    console.log("[StudyUI] Start panel created");
+  },
+
+  startBlock1: function () {
+    // Initialize block state
+    this.resetBlockState();
+    this.hideAllPanels();
 
     this.logEvent("block_start", {
       block: this.blockIndex + 1,
       condition: this.condition,
     });
 
+    console.log("[StudyUI] Block 1 started by participant");
     console.log("[StudyUI] Block 1 condition:", this.condition);
   },
 

@@ -87,7 +87,7 @@
     createGalleryMenuButton() {
       const button = document.createElement("a-entity");
       button.setAttribute("id", "galleryMenuButton");
-      button.setAttribute("position", "0.95 0.68 -1.5");
+      button.setAttribute("position", "0.38 0.26 -2.0");
       button.classList.add("clickable");
 
       const bg = document.createElement("a-plane");
