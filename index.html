@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>5-Wing VR Gallery (Enclosed)</title>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-extras@7.4.0/dist/aframe-extras.min.js"></script>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="ui/ui-blocks.js"></script>
     <script src="ui/ui-painting.js"></script>
@@ -555,7 +556,7 @@
       </script>
 
       <!-- Camera rig with controllers -->
-      <a-entity id="rig" position="0 0 0">
+      <a-entity id="rig" position="0 0 0" movement-controls="speed: 0.1">
         <a-camera position="0 1.6 0" look-controls wasd-controls>
           <!-- Desktop cursor for browser testing -->
           <a-entity
@@ -567,11 +568,13 @@
         <!-- VR hand controllers -->
         <a-entity
           laser-controls="hand: left"
-          raycaster="objects: .clickable; far: 10"
+          raycaster="objects: .clickable; far: 10, showLine: true"
+          line="color: #FFFFFF; opacity: 0.5"
         ></a-entity>
         <a-entity
           laser-controls="hand: right"
-          raycaster="objects: .clickable; far: 10"
+          raycaster="objects: .clickable; far: 10, showLine: true"
+          line="color: #FFFFFF; opacity: 0.5"
         ></a-entity>
       </a-entity>
 
