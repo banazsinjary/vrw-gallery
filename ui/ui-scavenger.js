@@ -101,27 +101,7 @@
       const distance = cameraPos.distanceTo(paintingPos);
 
       // show orb if within 5 meters, hide if further
-      const showDistance = 5.0;
-      const isVisible = distance <= showDistance;
-
-      this.currentOrb.setAttribute("visible", isVisible);
-    },
-
-    checkOrbProximity() {
-      if (!this.currentOrb || !this.currentOrbPainting || !this.camera) return;
-
-      // get positions
-      const cameraPos = new THREE.Vector3();
-      this.camera.object3D.getWorldPosition(cameraPos);
-
-      const paintingPos = new THREE.Vector3();
-      this.currentOrbPainting.object3D.getWorldPosition(paintingPos);
-
-      // calculate distance
-      const distance = cameraPos.distanceTo(paintingPos);
-
-      // show orb if within 5 meters, hide if further
-      const showDistance = 5.0;
+      const showDistance = 20.0;
       const isVisible = distance <= showDistance;
 
       this.currentOrb.setAttribute("visible", isVisible);
