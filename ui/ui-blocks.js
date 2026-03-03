@@ -6,6 +6,7 @@
  * no nudge: no set break or prompts, participants may take off heaset as a break when they wish
  ***/
 
+const DEV_MODE = false;
 AFRAME.registerComponent("ui-block", {
   schema: {
     blockSeconds: { type: "number", default: 900 }, // 15 minutes
@@ -539,13 +540,24 @@ AFRAME.registerComponent("ui-block", {
   },
 
   logEvent: function (event, extra = {}) {
-    console.log("[LOG]", {
+    const payload = {
       participant: this.participantId,
       block: this.blockIndex + 1,
       condition: this.condition,
       t_sec: Math.round(this.elapsedSec()),
       event,
-      ...extra,
-    });
+      extra,
+    };
+
+    console.log("[LOG]", payload);
+
+    if (DEV_MODE) return;
+
+    fetch("https://script.google.com/macros/s/AKfycbx3XEIMHlsel1Xf-Om09ToUGWdLpKgSbN1qtkKpHAPU_cqSoSocu9i3lwcyosvlXLeV/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    }).catch((err) => console.warn("[LOG] Failed to send:", err));
   },
 });
