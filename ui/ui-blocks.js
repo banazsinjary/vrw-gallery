@@ -15,7 +15,7 @@ AFRAME.registerComponent("ui-block", {
   schema: {
     blockSeconds: { type: "number", default: DEBUG_MODE ? 60 : 900 },
     checkInAtSec: { type: "number", default: DEBUG_MODE ? 10 : 300 },
-    defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 15 : 540 }, 
+    defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 15 : 540 },
     promptTimeoutSec: { type: "number", default: 20 },
   },
 
@@ -27,7 +27,7 @@ AFRAME.registerComponent("ui-block", {
     this.blockIndex = 0;
     this.condition = this.order[this.blockIndex];
     this.inTransition = false;
-     this._setupDone = false;
+    this._setupDone = false;
 
     // wait for scene to be ready before setting up panels
     const scene = this.el.sceneEl;
@@ -197,13 +197,18 @@ AFRAME.registerComponent("ui-block", {
       condition: this.condition,
     });
 
-    console.log("[StudyUI] Block 1 started by participant");
-    console.log("[StudyUI] Block 1 condition:", this.condition);
+    console.log(
+      `[StudyUI] Block ${this.blockIndex + 1} started by participant`,
+    );
+    console.log(
+      `[StudyUI] Block ${this.blockIndex + 1} condition:`,
+      this.condition,
+    );
   },
 
   resetBlockState: function () {
     this.blockStartMs = performance.now();
-    this.blockWallStart = Date.now(); 
+    this.blockWallStart = Date.now();
     this.checkInDone = false;
     this.checkInShown = false;
     this.breakPromptShown = false;
@@ -213,7 +218,6 @@ AFRAME.registerComponent("ui-block", {
     this.breakPromptTimer = null;
     this.firstInteractionMs = null;
   },
-
 
   recordFirstInteraction: function () {
     if (this.firstInteractionMs !== null) return;
@@ -233,7 +237,6 @@ AFRAME.registerComponent("ui-block", {
     }
 
     if (this.condition === "NO_NUDGE") {
-      this.hideAllPanels();
       return;
     }
 
@@ -307,19 +310,19 @@ AFRAME.registerComponent("ui-block", {
   },
 
   onComfort: function (rating) {
-    this.recordFirstInteraction(); 
+    this.recordFirstInteraction();
     this.checkInDone = true;
     this.setActivePanel(null);
 
     this.adjustedBreakAtSec = this.computeBreakTime(rating);
-    const adjustment = this.adjustedBreakAtSec - this.data.defaultBreakAtSec; 
+    const adjustment = this.adjustedBreakAtSec - this.data.defaultBreakAtSec;
 
     this.logEvent("comfort_rating", {
       value: rating,
       break_adjustment_sec: adjustment,
       direction:
-        adjustment > 0 ? "later" : adjustment < 0 ? "earlier" : "unchanged", 
-      break_scheduled_at_sec: this.adjustedBreakAtSec, 
+        adjustment > 0 ? "later" : adjustment < 0 ? "earlier" : "unchanged",
+      break_scheduled_at_sec: this.adjustedBreakAtSec,
     });
 
     console.log(`[StudyUI] Comfort rating: ${rating}`);
@@ -363,7 +366,7 @@ AFRAME.registerComponent("ui-block", {
   },
 
   takeBreak: function () {
-    this.recordFirstInteraction(); 
+    this.recordFirstInteraction();
     this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel("breakMessage");
@@ -372,7 +375,7 @@ AFRAME.registerComponent("ui-block", {
   },
 
   declineBreak: function () {
-    this.recordFirstInteraction(); 
+    this.recordFirstInteraction();
     this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel(null);
@@ -393,7 +396,6 @@ AFRAME.registerComponent("ui-block", {
     this.clearBreakPromptTimer();
     this.hideAllPanels();
 
-    
     const orbsFound = window.__scavengerHunt
       ? window.__scavengerHunt.foundPaintings.size
       : 0;
@@ -406,8 +408,8 @@ AFRAME.registerComponent("ui-block", {
       block: this.blockIndex + 1,
       condition: this.condition,
       actual_duration_sec: actualDurationSec,
-      wall_duration_sec: wallDurationSec, 
-      orbs_found_total: orbsFound, 
+      wall_duration_sec: wallDurationSec,
+      orbs_found_total: orbsFound,
     });
 
     console.log("[StudyUI] ========================================");
@@ -441,11 +443,7 @@ AFRAME.registerComponent("ui-block", {
   continueToNextBlock: function () {
     this.logEvent("block_transition_continue");
 
-    console.log("[StudyUI] ========================================");
-    console.log("[StudyUI] CONTINUING TO BLOCK 2");
-    console.log("[StudyUI] ========================================");
-
-    // move to next block
+    // move to next block FIRST
     this.blockIndex++;
     this.condition = this.order[this.blockIndex];
     this.inTransition = false;
@@ -459,11 +457,13 @@ AFRAME.registerComponent("ui-block", {
       condition: this.condition,
     });
 
-    console.log(`[StudyUI] Block 2 started`);
+    // THEN log with correct values
+    console.log("[StudyUI] ========================================");
+    console.log(`[StudyUI] CONTINUING TO BLOCK ${this.blockIndex + 1}`);
+    console.log(`[StudyUI] Block ${this.blockIndex + 1} started`);
     console.log(`[StudyUI] Condition: ${this.condition}`);
-    console.log(
-      `[StudyUI] Block 2 will run for: ${this.data.blockSeconds} seconds`,
-    );
+    console.log(`[StudyUI] Will run for: ${this.data.blockSeconds} seconds`);
+    console.log("[StudyUI] ========================================");
   },
 
   endSession: function () {
@@ -478,7 +478,7 @@ AFRAME.registerComponent("ui-block", {
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] SESSION COMPLETE!");
     console.log("[StudyUI] Both blocks finished");
-    console.log(`[StudyUI] Total orbs found: ${orbsFound}`); 
+    console.log(`[StudyUI] Total orbs found: ${orbsFound}`);
     console.log("[StudyUI] Thank you panel displayed");
     console.log("[StudyUI] ========================================");
   },
