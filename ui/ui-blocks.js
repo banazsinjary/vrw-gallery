@@ -27,6 +27,7 @@ AFRAME.registerComponent("ui-block", {
     this.blockIndex = 0;
     this.condition = this.order[this.blockIndex];
     this.inTransition = false;
+     this._setupDone = false;
 
     // wait for scene to be ready before setting up panels
     const scene = this.el.sceneEl;
@@ -56,6 +57,8 @@ AFRAME.registerComponent("ui-block", {
   },
 
   setupPanels: function () {
+    if (this._setupDone) return;
+    this._setupDone = true;
     // ui refs
     this.checkInPanel = document.querySelector("#checkInPanel");
     this.breakPromptPanel = document.querySelector("#breakPromptPanel");
