@@ -556,7 +556,11 @@
       </script>
 
       <!-- Camera rig with controllers -->
-      <a-entity id="rig" position="0 0 0" movement-controls="speed: 0.2; controls: gamepad">
+      <a-entity
+        id="rig"
+        position="0 0 0"
+        movement-controls="speed: 0.2; controls: gamepad"
+      >
         <a-camera position="0 2.0 0" look-controls wasd-controls="false">
           <!-- Desktop cursor for browser testing -->
           <a-entity
@@ -580,302 +584,308 @@
 
       <a-entity ui-block></a-entity>
 
-      <!-- check in nudge panel -->
-      <a-entity id="checkInPanel" position="0 1.6 -2.8" visible="false">
-        <a-plane
-          width="2.2"
-          height="0.75"
-          position="0 -0.025 -0.01"
-          material="color:#000; opacity:0.15; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.14"
-          height="0.69"
-          position="0 0 -0.005"
-          material="color:#FFFFFF; opacity:0.4; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.08"
-          height="0.63"
-          position="0 0 0"
-          material="color:#F5F1E8; opacity:0.35; transparent:true;"
-        ></a-plane>
-
-        <a-text
-          value="Rate your current level of wellbeing"
-          position="-0.95 0.22 0.01"
-          width="2.0"
-          color="#111111"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-        <a-text
-          value="1 = Poor  •  5 = Excellent"
-          position="-0.95 0.10 0.01"
-          width="2.0"
-          color="#6B7280"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-
-        <a-entity position="0 -0.14 0.02">
-          <a-entity position="-0.84 0 0">
-            <a-circle
-              id="comfortBtn1"
-              class="clickable"
-              radius="0.12"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-circle>
-            <a-entity
-              position="0 0 0.02"
-              text="value: 1; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-          <a-entity position="-0.42 0 0">
-            <a-circle
-              id="comfortBtn2"
-              class="clickable"
-              radius="0.12"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-circle>
-            <a-entity
-              position="0 0 0.02"
-              text="value: 2; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-          <a-entity position="0 0 0">
-            <a-circle
-              id="comfortBtn3"
-              class="clickable"
-              radius="0.12"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-circle>
-            <a-entity
-              position="0 0 0.02"
-              text="value: 3; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-          <a-entity position="0.42 0 0">
-            <a-circle
-              id="comfortBtn4"
-              class="clickable"
-              radius="0.12"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-circle>
-            <a-entity
-              position="0 0 0.02"
-              text="value: 4; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-          <a-entity position="0.84 0 0">
-            <a-circle
-              id="comfortBtn5"
-              class="clickable"
-              radius="0.12"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-circle>
-            <a-entity
-              position="0 0 0.02"
-              text="value: 5; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-        </a-entity>
-      </a-entity>
-
-      <!-- break prompt panel -->
-      <a-entity id="breakPromptPanel" position="0 1.6 -2.8" visible="false">
-        <a-plane
-          width="2.2"
-          height="0.75"
-          position="0 -0.025 -0.01"
-          material="color:#000; opacity:0.15; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.14"
-          height="0.69"
-          position="0 0 -0.005"
-          material="color:#FFFFFF; opacity:0.4; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.08"
-          height="0.63"
-          position="0 0 0"
-          material="color:#F5F1E8; opacity:0.35; transparent:true;"
-        ></a-plane>
-
-        <a-text
-          value="Would you like to take a short break?"
-          position="-0.95 0.14 0.01"
-          width="2.0"
-          color="#111111"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-
-        <a-entity position="0 -0.18 0.02">
-          <a-entity position="-0.45 0 0">
-            <a-plane
-              id="breakYesBtn"
-              class="clickable"
-              width="0.8"
-              height="0.22"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-plane>
-            <a-entity
-              position="0 0 0.01"
-              text="value: Take break; align: center; anchor: center; baseline: center; width: 1.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-          <a-entity position="0.45 0 0">
-            <a-plane
-              id="breakNoBtn"
-              class="clickable"
-              width="0.8"
-              height="0.22"
-              material="color:#FFFFFF; opacity:0.75; transparent:true;"
-            ></a-plane>
-            <a-entity
-              position="0 0 0.01"
-              text="value: Keep going; align: center; anchor: center; baseline: center; width: 1.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-            ></a-entity>
-          </a-entity>
-        </a-entity>
-      </a-entity>
-
-      <!-- break message panel -->
-      <a-entity id="breakMessagePanel" position="0 1.6 -2.8" visible="false">
-        <a-plane
-          width="2.2"
-          height="0.75"
-          position="0 -0.025 -0.01"
-          material="color:#000; opacity:0.15; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.14"
-          height="0.69"
-          position="0 0 -0.005"
-          material="color:#FFFFFF; opacity:0.4; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.08"
-          height="0.63"
-          position="0 0 0"
-          material="color:#F5F1E8; opacity:0.35; transparent:true;"
-        ></a-plane>
-
-        <a-text
-          value="Break time"
-          position="-0.95 0.20 0.01"
-          width="2.0"
-          color="#111111"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-        <a-text
-          value="Remove the headset for 60 seconds."
-          position="-0.95 0.06 0.01"
-          width="2.0"
-          color="#6B7280"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-
-        <a-entity position="0 -0.18 0.02">
-          <a-circle
-            id="breakOkBtn"
-            class="clickable"
-            radius="0.12"
-            material="color:#FFFFFF; opacity:0.75; transparent:true;"
-          ></a-circle>
-          <a-entity
-            position="0 0 0.02"
-            text="value: OK; align: center; anchor: center; baseline: center; width: 1.6; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-          ></a-entity>
-        </a-entity>
-      </a-entity>
-
-      <!-- block transition panel -->
-      <a-entity id="blockTransitionPanel" position="0 1.6 -2.8" visible="false">
-        <a-plane
-          width="2.2"
-          height="0.75"
-          position="0 -0.025 -0.01"
-          material="color:#000; opacity:0.15; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.14"
-          height="0.69"
-          position="0 0 -0.005"
-          material="color:#FFFFFF; opacity:0.4; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.08"
-          height="0.63"
-          position="0 0 0"
-          material="color:#F5F1E8; opacity:0.35; transparent:true;"
-        ></a-plane>
-
-        <a-text
-          value="Block 1 complete"
-          position="-0.95 0.20 0.01"
-          width="2.0"
-          color="#111111"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-        <a-text
-          value="Press continue when ready for Block 2."
-          position="-0.95 0.04 0.01"
-          width="2.0"
-          color="#6B7280"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-
-        <a-entity position="0 -0.18 0.02">
+      <a-camera position="0 1.8 0" look-controls wasd-controls="false">
+        <a-entity
+          cursor="rayOrigin: mouse"
+          raycaster="objects: .clickable"
+        ></a-entity>
+        <!-- check in nudge panel -->
+        <a-entity id="checkInPanel" position="0 0 -2.8" visible="false">
           <a-plane
-            id="continueBlockBtn"
-            class="clickable"
-            width="1.1"
-            height="0.25"
-            material="color:#FFFFFF; opacity:0.75; transparent:true;"
+            width="2.2"
+            height="0.75"
+            position="0 -0.025 -0.01"
+            material="color:#000; opacity:0.15; transparent:true;"
           ></a-plane>
-          <a-entity
-            position="0 0 0.01"
-            text="value: Continue to Block 2; align: center; anchor: center; baseline: center; width: 1.6; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
-          ></a-entity>
+          <a-plane
+            width="2.14"
+            height="0.69"
+            position="0 0 -0.005"
+            material="color:#FFFFFF; opacity:0.4; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.08"
+            height="0.63"
+            position="0 0 0"
+            material="color:#F5F1E8; opacity:0.35; transparent:true;"
+          ></a-plane>
+
+          <a-text
+            value="Rate your current level of wellbeing"
+            position="-0.95 0.22 0.01"
+            width="2.0"
+            color="#111111"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+          <a-text
+            value="1 = Poor  •  5 = Excellent"
+            position="-0.95 0.10 0.01"
+            width="2.0"
+            color="#6B7280"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+
+          <a-entity position="0 -0.14 0.02">
+            <a-entity position="-0.84 0 0">
+              <a-circle
+                id="comfortBtn1"
+                class="clickable"
+                radius="0.12"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-circle>
+              <a-entity
+                position="0 0 0.02"
+                text="value: 1; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+            <a-entity position="-0.42 0 0">
+              <a-circle
+                id="comfortBtn2"
+                class="clickable"
+                radius="0.12"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-circle>
+              <a-entity
+                position="0 0 0.02"
+                text="value: 2; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+            <a-entity position="0 0 0">
+              <a-circle
+                id="comfortBtn3"
+                class="clickable"
+                radius="0.12"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-circle>
+              <a-entity
+                position="0 0 0.02"
+                text="value: 3; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+            <a-entity position="0.42 0 0">
+              <a-circle
+                id="comfortBtn4"
+                class="clickable"
+                radius="0.12"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-circle>
+              <a-entity
+                position="0 0 0.02"
+                text="value: 4; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+            <a-entity position="0.84 0 0">
+              <a-circle
+                id="comfortBtn5"
+                class="clickable"
+                radius="0.12"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-circle>
+              <a-entity
+                position="0 0 0.02"
+                text="value: 5; align: center; anchor: center; baseline: center; width: 2.0; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+          </a-entity>
         </a-entity>
-      </a-entity>
 
-      <!-- thank you panel -->
-      <a-entity id="thankYouPanel" position="0 1.6 -2.8" visible="false">
-        <a-plane
-          width="2.2"
-          height="0.75"
-          position="0 -0.025 -0.01"
-          material="color:#000; opacity:0.15; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.14"
-          height="0.69"
-          position="0 0 -0.005"
-          material="color:#FFFFFF; opacity:0.4; transparent:true;"
-        ></a-plane>
-        <a-plane
-          width="2.08"
-          height="0.63"
-          position="0 0 0"
-          material="color:#F5F1E8; opacity:0.35; transparent:true;"
-        ></a-plane>
+        <!-- break prompt panel -->
+        <a-entity id="breakPromptPanel" position="0 0 -2.8" visible="false">
+          <a-plane
+            width="2.2"
+            height="0.75"
+            position="0 -0.025 -0.01"
+            material="color:#000; opacity:0.15; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.14"
+            height="0.69"
+            position="0 0 -0.005"
+            material="color:#FFFFFF; opacity:0.4; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.08"
+            height="0.63"
+            position="0 0 0"
+            material="color:#F5F1E8; opacity:0.35; transparent:true;"
+          ></a-plane>
 
-        <a-text
-          value="Session complete"
-          position="-0.95 0.20 0.01"
-          width="2.0"
-          color="#111111"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-        <a-text
-          value="Thank you for participating!"
-          position="-0.95 0.04 0.01"
-          width="2.0"
-          color="#6B7280"
-          font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
-        ></a-text>
-      </a-entity>
+          <a-text
+            value="Would you like to take a short break?"
+            position="-0.95 0.14 0.01"
+            width="2.0"
+            color="#111111"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+
+          <a-entity position="0 -0.18 0.02">
+            <a-entity position="-0.45 0 0">
+              <a-plane
+                id="breakYesBtn"
+                class="clickable"
+                width="0.8"
+                height="0.22"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-plane>
+              <a-entity
+                position="0 0 0.01"
+                text="value: Take break; align: center; anchor: center; baseline: center; width: 1.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+            <a-entity position="0.45 0 0">
+              <a-plane
+                id="breakNoBtn"
+                class="clickable"
+                width="0.8"
+                height="0.22"
+                material="color:#FFFFFF; opacity:0.75; transparent:true;"
+              ></a-plane>
+              <a-entity
+                position="0 0 0.01"
+                text="value: Keep going; align: center; anchor: center; baseline: center; width: 1.5; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+              ></a-entity>
+            </a-entity>
+          </a-entity>
+        </a-entity>
+
+        <!-- break message panel -->
+        <a-entity id="breakMessagePanel" position="0 0 -2.8" visible="false">
+          <a-plane
+            width="2.2"
+            height="0.75"
+            position="0 -0.025 -0.01"
+            material="color:#000; opacity:0.15; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.14"
+            height="0.69"
+            position="0 0 -0.005"
+            material="color:#FFFFFF; opacity:0.4; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.08"
+            height="0.63"
+            position="0 0 0"
+            material="color:#F5F1E8; opacity:0.35; transparent:true;"
+          ></a-plane>
+
+          <a-text
+            value="Break time"
+            position="-0.95 0.20 0.01"
+            width="2.0"
+            color="#111111"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+          <a-text
+            value="Remove the headset for 60 seconds."
+            position="-0.95 0.06 0.01"
+            width="2.0"
+            color="#6B7280"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+
+          <a-entity position="0 -0.18 0.02">
+            <a-circle
+              id="breakOkBtn"
+              class="clickable"
+              radius="0.12"
+              material="color:#FFFFFF; opacity:0.75; transparent:true;"
+            ></a-circle>
+            <a-entity
+              position="0 0 0.02"
+              text="value: OK; align: center; anchor: center; baseline: center; width: 1.6; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+            ></a-entity>
+          </a-entity>
+        </a-entity>
+
+        <!-- block transition panel -->
+        <a-entity id="blockTransitionPanel" position="0 0 -2.8" visible="false">
+          <a-plane
+            width="2.2"
+            height="0.75"
+            position="0 -0.025 -0.01"
+            material="color:#000; opacity:0.15; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.14"
+            height="0.69"
+            position="0 0 -0.005"
+            material="color:#FFFFFF; opacity:0.4; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.08"
+            height="0.63"
+            position="0 0 0"
+            material="color:#F5F1E8; opacity:0.35; transparent:true;"
+          ></a-plane>
+
+          <a-text
+            value="Block 1 complete"
+            position="-0.95 0.20 0.01"
+            width="2.0"
+            color="#111111"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+          <a-text
+            value="Press continue when ready for Block 2."
+            position="-0.95 0.04 0.01"
+            width="2.0"
+            color="#6B7280"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+
+          <a-entity position="0 -0.18 0.02">
+            <a-plane
+              id="continueBlockBtn"
+              class="clickable"
+              width="1.1"
+              height="0.25"
+              material="color:#FFFFFF; opacity:0.75; transparent:true;"
+            ></a-plane>
+            <a-entity
+              position="0 0 0.01"
+              text="value: Continue to Block 2; align: center; anchor: center; baseline: center; width: 1.6; color: #111; font: https://cdn.aframe.io/fonts/Roboto-msdf.json;"
+            ></a-entity>
+          </a-entity>
+        </a-entity>
+
+        <!-- thank you panel -->
+        <a-entity id="thankYouPanel" position="0 0 -2.8" visible="false">
+          <a-plane
+            width="2.2"
+            height="0.75"
+            position="0 -0.025 -0.01"
+            material="color:#000; opacity:0.15; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.14"
+            height="0.69"
+            position="0 0 -0.005"
+            material="color:#FFFFFF; opacity:0.4; transparent:true;"
+          ></a-plane>
+          <a-plane
+            width="2.08"
+            height="0.63"
+            position="0 0 0"
+            material="color:#F5F1E8; opacity:0.35; transparent:true;"
+          ></a-plane>
+
+          <a-text
+            value="Session complete"
+            position="-0.95 0.20 0.01"
+            width="2.0"
+            color="#111111"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+          <a-text
+            value="Thank you for participating!"
+            position="-0.95 0.04 0.01"
+            width="2.0"
+            color="#6B7280"
+            font="https://cdn.aframe.io/fonts/Roboto-msdf.json"
+          ></a-text>
+        </a-entity>
+      </a-camera>
     </a-scene>
   </body>
 </html>

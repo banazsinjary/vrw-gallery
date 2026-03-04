@@ -194,43 +194,7 @@ AFRAME.registerComponent("ui-block", {
     console.log("[StudyUI] Block 1 condition:", this.condition);
   },
 
-  updatePanelPositions: function () {
-    if (!this.camera) return;
-
-    const cameraWorldPos = new THREE.Vector3();
-    this.camera.object3D.getWorldPosition(cameraWorldPos);
-
-    const cameraWorldQuaternion = new THREE.Quaternion();
-    this.camera.object3D.getWorldQuaternion(cameraWorldQuaternion);
-
-    // calculate position in front of camera
-    const offset = new THREE.Vector3(0, -0.25, -1.45);
-    offset.applyQuaternion(cameraWorldQuaternion);
-
-    const panelPos = cameraWorldPos.clone().add(offset);
-
-    // update all panels
-    const panels = [
-      this.checkInPanel,
-      this.breakPromptPanel,
-      this.breakMessagePanel,
-      this.blockTransitionPanel,
-      this.thankYouPanel,
-    ];
-
-    panels.forEach((panel) => {
-      if (panel && panel.object3D) {
-        // only update position if panel is visible
-        if (panel.getAttribute("visible")) {
-          panel.object3D.position.copy(panelPos);
-          panel.object3D.quaternion.copy(cameraWorldQuaternion);
-        } else {
-          // move hidden panels far out of view so they can't be clicked
-          panel.object3D.position.set(0, -1000, 0);
-        }
-      }
-    });
-  },
+  
 
   resetBlockState: function () {
     this.blockStartMs = performance.now();
@@ -244,8 +208,6 @@ AFRAME.registerComponent("ui-block", {
   },
 
   tick: function () {
-    // update panel positions to follow camera every frame
-    this.updatePanelPositions();
 
     if (this._ended || this.inTransition) return;
 
