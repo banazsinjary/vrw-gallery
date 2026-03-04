@@ -443,7 +443,15 @@ AFRAME.registerComponent("ui-block", {
   continueToNextBlock: function () {
     this.logEvent("block_transition_continue");
 
-    // move to next block FIRST
+    console.log("[StudyUI] ========================================");
+    console.log(`[StudyUI] CONTINUING TO BLOCK ${this.blockIndex + 1}`);
+    console.log(`[StudyUI] Block ${this.blockIndex + 1} started`);
+    console.log(
+      `[StudyUI] Block ${this.blockIndex + 1} will run for: ${this.data.blockSeconds} seconds`,
+    );
+    console.log("[StudyUI] ========================================");
+
+    // move to next block
     this.blockIndex++;
     this.condition = this.order[this.blockIndex];
     this.inTransition = false;
@@ -457,13 +465,11 @@ AFRAME.registerComponent("ui-block", {
       condition: this.condition,
     });
 
-    // THEN log with correct values
-    console.log("[StudyUI] ========================================");
-    console.log(`[StudyUI] CONTINUING TO BLOCK ${this.blockIndex + 1}`);
-    console.log(`[StudyUI] Block ${this.blockIndex + 1} started`);
+    console.log(`[StudyUI] Block 2 started`);
     console.log(`[StudyUI] Condition: ${this.condition}`);
-    console.log(`[StudyUI] Will run for: ${this.data.blockSeconds} seconds`);
-    console.log("[StudyUI] ========================================");
+    console.log(
+      `[StudyUI] Block 2 will run for: ${this.data.blockSeconds} seconds`,
+    );
   },
 
   endSession: function () {
