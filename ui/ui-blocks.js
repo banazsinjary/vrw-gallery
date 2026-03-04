@@ -15,7 +15,7 @@ AFRAME.registerComponent("ui-block", {
   schema: {
     blockSeconds: { type: "number", default: DEBUG_MODE ? 60 : 900 },
     checkInAtSec: { type: "number", default: DEBUG_MODE ? 10 : 300 },
-    defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 20 : 540 },
+    defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 15 : 540 }, 
     promptTimeoutSec: { type: "number", default: 20 },
   },
 
@@ -200,6 +200,7 @@ AFRAME.registerComponent("ui-block", {
 
   resetBlockState: function () {
     this.blockStartMs = performance.now();
+    this.blockWallStart = Date.now(); 
     this.checkInDone = false;
     this.checkInShown = false;
     this.breakPromptShown = false;
@@ -207,6 +208,15 @@ AFRAME.registerComponent("ui-block", {
     this.adjustedBreakAtSec = this.data.defaultBreakAtSec;
     this._ended = false;
     this.breakPromptTimer = null;
+    this.firstInteractionMs = null;
+  },
+
+
+  recordFirstInteraction: function () {
+    if (this.firstInteractionMs !== null) return;
+    this.firstInteractionMs = performance.now();
+    const t = Math.round((this.firstInteractionMs - this.blockStartMs) / 1000);
+    this.logEvent("first_interaction", { t_sec_into_block: t });
   },
 
   tick: function () {
@@ -273,7 +283,6 @@ AFRAME.registerComponent("ui-block", {
 
   setActivePanel: function (panelName) {
     this.hideAllPanels();
-
     if (panelName === "checkIn" && this.checkInPanel) {
       this.checkInPanel.setAttribute("visible", true);
     } else if (panelName === "breakPrompt" && this.breakPromptPanel) {
@@ -295,16 +304,25 @@ AFRAME.registerComponent("ui-block", {
   },
 
   onComfort: function (rating) {
+    this.recordFirstInteraction(); 
     this.checkInDone = true;
     this.setActivePanel(null);
-    this.logEvent("comfort_rating", { value: rating });
 
     this.adjustedBreakAtSec = this.computeBreakTime(rating);
-    this.logEvent("break_prompt_scheduled", {
-      at_sec: this.adjustedBreakAtSec,
+    const adjustment = this.adjustedBreakAtSec - this.data.defaultBreakAtSec; 
+
+    this.logEvent("comfort_rating", {
+      value: rating,
+      break_adjustment_sec: adjustment,
+      direction:
+        adjustment > 0 ? "later" : adjustment < 0 ? "earlier" : "unchanged", 
+      break_scheduled_at_sec: this.adjustedBreakAtSec, 
     });
 
     console.log(`[StudyUI] Comfort rating: ${rating}`);
+    console.log(
+      `[StudyUI] Break adjustment: ${adjustment > 0 ? "+" : ""}${adjustment}s`,
+    );
     console.log(
       `[StudyUI] Break prompt scheduled for: ${this.adjustedBreakAtSec}s`,
     );
@@ -314,7 +332,6 @@ AFRAME.registerComponent("ui-block", {
     const base = this.data.defaultBreakAtSec;
     const delta = { 5: 90, 4: 45, 3: 0, 2: -45, 1: -90 };
     const t = base + (delta[rating] || 0);
-
     const minT = this.data.checkInAtSec + 2;
     const maxT = Math.max(minT, this.data.blockSeconds - 1);
     return Math.max(minT, Math.min(t, maxT));
@@ -323,7 +340,6 @@ AFRAME.registerComponent("ui-block", {
   showBreakPrompt: function () {
     this.breakPromptShown = true;
     this.breakPromptClosed = false;
-
     this.setActivePanel("breakPrompt");
     this.logEvent("break_prompt_shown");
     console.log("[StudyUI] Break prompt shown");
@@ -331,7 +347,6 @@ AFRAME.registerComponent("ui-block", {
     this.clearBreakPromptTimer();
     this.breakPromptTimer = setTimeout(() => {
       if (this._ended || !this.el) return;
-
       if (
         this.breakPromptPanel &&
         this.breakPromptPanel.getAttribute("visible")
@@ -345,6 +360,7 @@ AFRAME.registerComponent("ui-block", {
   },
 
   takeBreak: function () {
+    this.recordFirstInteraction(); 
     this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel("breakMessage");
@@ -353,6 +369,7 @@ AFRAME.registerComponent("ui-block", {
   },
 
   declineBreak: function () {
+    this.recordFirstInteraction(); 
     this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel(null);
@@ -373,17 +390,29 @@ AFRAME.registerComponent("ui-block", {
     this.clearBreakPromptTimer();
     this.hideAllPanels();
 
+    
+    const orbsFound = window.__scavengerHunt
+      ? window.__scavengerHunt.foundPaintings.size
+      : 0;
+    const actualDurationSec = Math.round(this.elapsedSec());
+    const wallDurationSec = Math.round(
+      (Date.now() - this.blockWallStart) / 1000,
+    );
+
     this.logEvent("block_end", {
       block: this.blockIndex + 1,
       condition: this.condition,
+      actual_duration_sec: actualDurationSec,
+      wall_duration_sec: wallDurationSec, 
+      orbs_found_total: orbsFound, 
     });
 
     console.log("[StudyUI] ========================================");
     console.log(`[StudyUI] BLOCK ${this.blockIndex + 1} ENDED`);
     console.log(`[StudyUI] Condition was: ${this.condition}`);
+    console.log(`[StudyUI] Orbs found so far: ${orbsFound}`);
     console.log("[StudyUI] ========================================");
 
-    // check if there's another block
     if (this.blockIndex < this.order.length - 1) {
       this.showBlockTransition();
     } else {
@@ -435,18 +464,23 @@ AFRAME.registerComponent("ui-block", {
   },
 
   endSession: function () {
+    const orbsFound = window.__scavengerHunt
+      ? window.__scavengerHunt.foundPaintings.size
+      : 0;
     this.setActivePanel("thankYou");
-    this.logEvent("session_end");
+    this.logEvent("session_end", {
+      total_orbs_found: orbsFound,
+    });
 
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] SESSION COMPLETE!");
     console.log("[StudyUI] Both blocks finished");
+    console.log(`[StudyUI] Total orbs found: ${orbsFound}`); 
     console.log("[StudyUI] Thank you panel displayed");
     console.log("[StudyUI] ========================================");
   },
 
   bindUiListeners: function () {
-    // comfort buttons 1–5
     for (let i = 1; i <= 5; i++) {
       const btn = document.querySelector(`#comfortBtn${i}`);
       if (!btn) continue;
@@ -456,7 +490,6 @@ AFRAME.registerComponent("ui-block", {
       });
     }
 
-    // break prompt buttons
     const yesBtn = document.querySelector("#breakYesBtn");
     if (yesBtn)
       yesBtn.addEventListener("click", () => {
