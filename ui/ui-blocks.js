@@ -15,7 +15,11 @@ AFRAME.registerComponent("ui-block", {
   schema: {
     blockSeconds: { type: "number", default: DEBUG_MODE ? 60 : 900 },
     checkInAtSec: { type: "number", default: DEBUG_MODE ? 10 : 300 },
+<<<<<<< HEAD
     defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 15 : 540 },
+=======
+    defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 20 : 540 },
+>>>>>>> parent of ceff32c (data update for logging)
     promptTimeoutSec: { type: "number", default: 20 },
   },
 
@@ -208,7 +212,10 @@ AFRAME.registerComponent("ui-block", {
 
   resetBlockState: function () {
     this.blockStartMs = performance.now();
+<<<<<<< HEAD
     this.blockWallStart = Date.now();
+=======
+>>>>>>> parent of ceff32c (data update for logging)
     this.checkInDone = false;
     this.checkInShown = false;
     this.breakPromptShown = false;
@@ -216,6 +223,7 @@ AFRAME.registerComponent("ui-block", {
     this.adjustedBreakAtSec = this.data.defaultBreakAtSec;
     this._ended = false;
     this.breakPromptTimer = null;
+<<<<<<< HEAD
     this.firstInteractionMs = null;
   },
 
@@ -224,6 +232,8 @@ AFRAME.registerComponent("ui-block", {
     this.firstInteractionMs = performance.now();
     const t = Math.round((this.firstInteractionMs - this.blockStartMs) / 1000);
     this.logEvent("first_interaction", { t_sec_into_block: t });
+=======
+>>>>>>> parent of ceff32c (data update for logging)
   },
 
   tick: function () {
@@ -289,6 +299,7 @@ AFRAME.registerComponent("ui-block", {
 
   setActivePanel: function (panelName) {
     this.hideAllPanels();
+
     if (panelName === "checkIn" && this.checkInPanel) {
       this.checkInPanel.setAttribute("visible", true);
     } else if (panelName === "breakPrompt" && this.breakPromptPanel) {
@@ -310,11 +321,16 @@ AFRAME.registerComponent("ui-block", {
   },
 
   onComfort: function (rating) {
+<<<<<<< HEAD
     this.recordFirstInteraction();
+=======
+>>>>>>> parent of ceff32c (data update for logging)
     this.checkInDone = true;
     this.setActivePanel(null);
+    this.logEvent("comfort_rating", { value: rating });
 
     this.adjustedBreakAtSec = this.computeBreakTime(rating);
+<<<<<<< HEAD
     const adjustment = this.adjustedBreakAtSec - this.data.defaultBreakAtSec;
 
     this.logEvent("comfort_rating", {
@@ -323,12 +339,13 @@ AFRAME.registerComponent("ui-block", {
       direction:
         adjustment > 0 ? "later" : adjustment < 0 ? "earlier" : "unchanged",
       break_scheduled_at_sec: this.adjustedBreakAtSec,
+=======
+    this.logEvent("break_prompt_scheduled", {
+      at_sec: this.adjustedBreakAtSec,
+>>>>>>> parent of ceff32c (data update for logging)
     });
 
     console.log(`[StudyUI] Comfort rating: ${rating}`);
-    console.log(
-      `[StudyUI] Break adjustment: ${adjustment > 0 ? "+" : ""}${adjustment}s`,
-    );
     console.log(
       `[StudyUI] Break prompt scheduled for: ${this.adjustedBreakAtSec}s`,
     );
@@ -338,6 +355,7 @@ AFRAME.registerComponent("ui-block", {
     const base = this.data.defaultBreakAtSec;
     const delta = { 5: 90, 4: 45, 3: 0, 2: -45, 1: -90 };
     const t = base + (delta[rating] || 0);
+
     const minT = this.data.checkInAtSec + 2;
     const maxT = Math.max(minT, this.data.blockSeconds - 1);
     return Math.max(minT, Math.min(t, maxT));
@@ -346,6 +364,7 @@ AFRAME.registerComponent("ui-block", {
   showBreakPrompt: function () {
     this.breakPromptShown = true;
     this.breakPromptClosed = false;
+
     this.setActivePanel("breakPrompt");
     this.logEvent("break_prompt_shown");
     console.log("[StudyUI] Break prompt shown");
@@ -353,6 +372,7 @@ AFRAME.registerComponent("ui-block", {
     this.clearBreakPromptTimer();
     this.breakPromptTimer = setTimeout(() => {
       if (this._ended || !this.el) return;
+
       if (
         this.breakPromptPanel &&
         this.breakPromptPanel.getAttribute("visible")
@@ -366,7 +386,10 @@ AFRAME.registerComponent("ui-block", {
   },
 
   takeBreak: function () {
+<<<<<<< HEAD
     this.recordFirstInteraction();
+=======
+>>>>>>> parent of ceff32c (data update for logging)
     this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel("breakMessage");
@@ -375,7 +398,10 @@ AFRAME.registerComponent("ui-block", {
   },
 
   declineBreak: function () {
+<<<<<<< HEAD
     this.recordFirstInteraction();
+=======
+>>>>>>> parent of ceff32c (data update for logging)
     this.clearBreakPromptTimer();
     this.breakPromptClosed = true;
     this.setActivePanel(null);
@@ -396,6 +422,7 @@ AFRAME.registerComponent("ui-block", {
     this.clearBreakPromptTimer();
     this.hideAllPanels();
 
+<<<<<<< HEAD
     const orbsFound = window.__scavengerHunt
       ? window.__scavengerHunt.foundPaintings.size
       : 0;
@@ -410,14 +437,19 @@ AFRAME.registerComponent("ui-block", {
       actual_duration_sec: actualDurationSec,
       wall_duration_sec: wallDurationSec,
       orbs_found_total: orbsFound,
+=======
+    this.logEvent("block_end", {
+      block: this.blockIndex + 1,
+      condition: this.condition,
+>>>>>>> parent of ceff32c (data update for logging)
     });
 
     console.log("[StudyUI] ========================================");
     console.log(`[StudyUI] BLOCK ${this.blockIndex + 1} ENDED`);
     console.log(`[StudyUI] Condition was: ${this.condition}`);
-    console.log(`[StudyUI] Orbs found so far: ${orbsFound}`);
     console.log("[StudyUI] ========================================");
 
+    // check if there's another block
     if (this.blockIndex < this.order.length - 1) {
       this.showBlockTransition();
     } else {
@@ -473,23 +505,22 @@ AFRAME.registerComponent("ui-block", {
   },
 
   endSession: function () {
-    const orbsFound = window.__scavengerHunt
-      ? window.__scavengerHunt.foundPaintings.size
-      : 0;
     this.setActivePanel("thankYou");
-    this.logEvent("session_end", {
-      total_orbs_found: orbsFound,
-    });
+    this.logEvent("session_end");
 
     console.log("[StudyUI] ========================================");
     console.log("[StudyUI] SESSION COMPLETE!");
     console.log("[StudyUI] Both blocks finished");
+<<<<<<< HEAD
     console.log(`[StudyUI] Total orbs found: ${orbsFound}`);
+=======
+>>>>>>> parent of ceff32c (data update for logging)
     console.log("[StudyUI] Thank you panel displayed");
     console.log("[StudyUI] ========================================");
   },
 
   bindUiListeners: function () {
+    // comfort buttons 1–5
     for (let i = 1; i <= 5; i++) {
       const btn = document.querySelector(`#comfortBtn${i}`);
       if (!btn) continue;
@@ -499,6 +530,7 @@ AFRAME.registerComponent("ui-block", {
       });
     }
 
+    // break prompt buttons
     const yesBtn = document.querySelector("#breakYesBtn");
     if (yesBtn)
       yesBtn.addEventListener("click", () => {
