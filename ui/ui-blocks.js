@@ -6,12 +6,16 @@
  * no nudge: no set break or prompts, participants may take off heaset as a break when they wish
  ***/
 
-const DEV_MODE = false;
+// false = actual session, true = test
+const DEBUG_MODE = true;
+// false = actual session, true = test
+const DEV_MODE = true;
+
 AFRAME.registerComponent("ui-block", {
   schema: {
-    blockSeconds: { type: "number", default: 900 }, // 15 minutes
-    checkInAtSec: { type: "number", default: 300 }, // 5 minutes
-    defaultBreakAtSec: { type: "number", default: 540 }, // 9 minutes
+    blockSeconds: { type: "number", default: DEBUG_MODE ? 60 : 900 },
+    checkInAtSec: { type: "number", default: DEBUG_MODE ? 10 : 300 },
+    defaultBreakAtSec: { type: "number", default: DEBUG_MODE ? 20 : 540 },
     promptTimeoutSec: { type: "number", default: 20 },
   },
 
@@ -194,8 +198,6 @@ AFRAME.registerComponent("ui-block", {
     console.log("[StudyUI] Block 1 condition:", this.condition);
   },
 
-  
-
   resetBlockState: function () {
     this.blockStartMs = performance.now();
     this.checkInDone = false;
@@ -208,7 +210,6 @@ AFRAME.registerComponent("ui-block", {
   },
 
   tick: function () {
-
     if (this._ended || this.inTransition) return;
 
     const tSec = this.elapsedSec();
@@ -515,11 +516,14 @@ AFRAME.registerComponent("ui-block", {
 
     if (DEV_MODE) return;
 
-    fetch("https://script.google.com/macros/s/AKfycbx3XEIMHlsel1Xf-Om09ToUGWdLpKgSbN1qtkKpHAPU_cqSoSocu9i3lwcyosvlXLeV/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }).catch((err) => console.warn("[LOG] Failed to send:", err));
+    fetch(
+      "https://script.google.com/macros/s/AKfycbx3XEIMHlsel1Xf-Om09ToUGWdLpKgSbN1qtkKpHAPU_cqSoSocu9i3lwcyosvlXLeV/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      },
+    ).catch((err) => console.warn("[LOG] Failed to send:", err));
   },
 });
