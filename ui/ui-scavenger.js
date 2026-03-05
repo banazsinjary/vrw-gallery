@@ -43,8 +43,6 @@
       // spawn first orb
       this.updateCurrentOrb();
 
-      // start proximity checking
-      this.startProximityCheck();
 
       console.log(
         "[UIScavenger] Initialized - Hunt progress:",
@@ -52,61 +50,6 @@
       );
     },
 
-    startProximityCheck() {
-      const scene = document.querySelector("a-scene");
-      if (!scene) {
-        console.warn("[UIScavenger] Scene not found for proximity check");
-        return;
-      }
-
-      // wait for scene to be ready
-      if (scene.hasLoaded) {
-        this.setupProximityTick();
-      } else {
-        scene.addEventListener("loaded", () => {
-          this.setupProximityTick();
-        });
-      }
-    },
-
-    setupProximityTick() {
-      this.camera =
-        document.querySelector("#rig") || document.querySelector("a-camera");
-      if (!this.camera) {
-        console.warn("[UIScavenger] Camera not found for proximity check");
-        return;
-      }
-
-      console.log("[UIScavenger] Proximity check enabled");
-
-      // check distance on every tick
-      const checkProximity = () => {
-        this.checkOrbProximity();
-        requestAnimationFrame(checkProximity);
-      };
-
-      checkProximity();
-    },
-
-    checkOrbProximity() {
-      if (!this.currentOrb || !this.currentOrbPainting || !this.camera) return;
-
-      // get positions
-      const rigPos = this.camera.getAttribute("position");
-      const cameraPos = new THREE.Vector3(rigPos.x, rigPos.y, rigPos.z);  
-
-      const paintingPos = new THREE.Vector3();
-      this.currentOrbPainting.object3D.getWorldPosition(paintingPos);
-
-      // calculate distance
-      const distance = cameraPos.distanceTo(paintingPos);
-
-      // show orb if within 20 meters, hide if further
-      const showDistance = 30.0;
-      const isVisible = distance <= showDistance;
-
-      this.currentOrb.setAttribute("visible", isVisible);
-    },
 
     getScavengerClues() {
       return [
@@ -430,26 +373,20 @@
       if (this.currentOrb && this.currentOrb.parentNode) {
         this.currentOrb.parentNode.removeChild(this.currentOrb);
         this.currentOrb = null;
+        this.currentOrbPainting = null;
       }
+    },
 
+    onPlaqueClick(paintingId) {
+      console.log("[UIScavenger] Plaque clicked:", paintingId);
       const currentClue = this.getCurrentClue();
-      if (!currentClue) {
-        console.log("[UIScavenger] Hunt complete! No more orbs to spawn.");
-        return;
-      }
+      console.log("[UIScavenger] Current clue:", currentClue ? currentClue.id : "none");
+      if (!currentClue || paintingId !== currentClue.id) return;
 
-      // find the painting
-      const painting = document.querySelector(
-        `[data-art-id="${currentClue.id}"]`,
-      );
-      if (!painting) {
-        console.warn(
-          `[UIScavenger] Could not find painting: ${currentClue.id}`,
-        );
-        return;
-      }
+      // correct painting clicked - spawn visible orb
+      const painting = document.querySelector(`[data-art-id="${paintingId}"]`);
+      if (!painting) return;
 
-      // create golden orb
       const orb = document.createElement("a-sphere");
       orb.setAttribute("radius", 0.15);
       orb.setAttribute("position", "0 0 0.3");
@@ -457,27 +394,20 @@
         "material",
         "color:#FFD700; metalness:0.8; roughness:0.2; emissive:#FFD700; emissiveIntensity:0.5;",
       );
-      orb.setAttribute("visible", false); // start hidden
-      orb.classList.add("clickable");
-      orb.classList.add("scavenger-orb");
-
-      // pulsing animation
       orb.setAttribute(
         "animation",
         "property: scale; to: 1.2 1.2 1.2; dur: 1000; loop: true; dir: alternate; easing: easeInOutQuad",
       );
+      orb.classList.add("clickable");
 
-      // click handler
       orb.addEventListener("click", (e) => {
         e.stopPropagation();
-        this.collectOrb(currentClue.id);
+        this.collectOrb(paintingId);
       });
 
       painting.appendChild(orb);
       this.currentOrb = orb;
       this.currentOrbPainting = painting;
-
-      console.log(`[UIScavenger] Golden orb spawned on: ${currentClue.id}`);
     },
 
     collectOrb(paintingId) {

@@ -542,7 +542,10 @@
 
         // details button (bottom right corner, outside painting, top position)
         const detailsButton = document.createElement("a-entity");
-        detailsButton.setAttribute("position", `${w / 2 + 0.55} ${-h / 2 + 0.35} 0.05`);
+        detailsButton.setAttribute(
+          "position",
+          `${w / 2 + 0.55} ${-h / 2 + 0.35} 0.05`,
+        );
         detailsButton.classList.add("clickable");
 
         const detailsBg = document.createElement("a-plane");
@@ -784,6 +787,15 @@
           baseline: "top",
         });
         wrap.appendChild(textEl);
+
+        // notify scavenger hunt when plaque is clicked
+        frame.classList.add("clickable");
+        frame.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (window.UIScavenger) {
+            window.UIScavenger.onPlaqueClick(id);
+          }
+        });
 
         return wrap;
       }
