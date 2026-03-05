@@ -271,7 +271,7 @@
         rotation="-45 35 0"
       ></a-entity>
       <a-entity
-        light="type: hemisphere; skyColor: #FFFFFF; groundColor: #2B2B2B; intensity: 0.35"
+        light="type: hemisphere; color: #FFFFFF; groundColor: #2B2B2B; intensity: 0.35"
       ></a-entity>
 
       <!-- FLOOR -->
@@ -491,40 +491,6 @@
           const EAST = { xMin: 10, xMax: 34, zMin: -9, zMax: 9 };
           const WEST = { xMin: -34, xMax: -10, zMin: -9, zMax: 9 };
           const NE = { xMin: 10, xMax: 30, zMin: -32, zMax: -9 };
-
-          // ----------------------------
-          // AMBIENT AUDIO ZONES
-          // ----------------------------
-          function createAudioZone(x, z, radius, audioSrc) {
-            const zone = document.createElement("a-entity");
-            zone.setAttribute("position", `${x} 1.6 ${z}`);
-            zone.setAttribute(
-              "sound",
-              `src: ${audioSrc}; loop: true; volume: 0.3; positional: true; refDistance: ${radius}; rolloffFactor: 1;`,
-            );
-            world.appendChild(zone);
-            return zone;
-          }
-
-          // Hub - Neutral ambient
-          createAudioZone(0, 0, 15, "url()");
-
-          // North wing - Classical strings
-          createAudioZone(0, -22, 15, "url()");
-
-          // South wing - Modern minimal
-          createAudioZone(0, 22, 15, "url()");
-
-          // East wing - Soft piano
-          createAudioZone(22, 0, 15, "url()");
-
-          // West wing - Orchestral/medieval
-          createAudioZone(-22, 0, 15, "url()");
-
-          // NE wing - Nature sounds
-          createAudioZone(20, -20, 15, "url()");
-
-          console.log("[Gallery] Ambient audio zones created");
 
           // ----------------------------
           // PAINTINGS
@@ -884,6 +850,7 @@
       </a-entity>
 
       <a-entity ui-block></a-entity>
+
     </a-scene>
   </body>
 </html>
