@@ -92,8 +92,8 @@
       if (!this.currentOrb || !this.currentOrbPainting || !this.camera) return;
 
       // get positions
-      const cameraPos = new THREE.Vector3();
-      this.camera.object3D.getWorldPosition(cameraPos);
+      const rigPos = this.camera.getAttribute("position");
+      const cameraPos = new THREE.Vector3(rigPos.x, rigPos.y, rigPos.z);  
 
       const paintingPos = new THREE.Vector3();
       this.currentOrbPainting.object3D.getWorldPosition(paintingPos);
