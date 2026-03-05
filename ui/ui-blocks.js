@@ -7,9 +7,9 @@
  ***/
 
 // false = actual session, true = test
-const DEBUG_MODE = true;
+const DEBUG_MODE = false;
 // false = actual session, true = test
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 AFRAME.registerComponent("ui-block", {
   schema: {
