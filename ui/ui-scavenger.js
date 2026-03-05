@@ -70,7 +70,8 @@
     },
 
     setupProximityTick() {
-      this.camera = document.querySelector("a-camera");
+      this.camera =
+        document.querySelector("#rig") || document.querySelector("a-camera");
       if (!this.camera) {
         console.warn("[UIScavenger] Camera not found for proximity check");
         return;
