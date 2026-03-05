@@ -102,7 +102,7 @@
       const distance = cameraPos.distanceTo(paintingPos);
 
       // show orb if within 20 meters, hide if further
-      const showDistance = 20.0;
+      const showDistance = 30.0;
       const isVisible = distance <= showDistance;
 
       this.currentOrb.setAttribute("visible", isVisible);
