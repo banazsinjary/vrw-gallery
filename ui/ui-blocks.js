@@ -7,7 +7,7 @@
  ***/
 
 // false = actual session, true = test
-const DEBUG_MODE = false;
+const DEBUG_MODE = true;
 // false = actual session, true = test
 const DEV_MODE = false;
 
